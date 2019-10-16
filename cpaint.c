@@ -8,17 +8,18 @@
 #define AUTHOR2 "Marcell Santana de Deus"
 #define EMAIL2  "marcellsantana@hotmail.com"
 
-#define TAM_MAX_CMD 100         // tamanho maximo do comando (em caracteres)
-#define NUM_MAX_PRM 20          // número máximo de parametros
-#define INC_LINHAS 20           // incremento de linhas do arquivo (20 em 20)
-
 // largua e altura padrao da imagem
 #define LARG 50
 #define ALT 50
 
+#define TAM_MAX_CMD 100         // tamanho maximo do comando (em caracteres)
+#define NUM_MAX_PRM 20          // número máximo de parametros
+#define INC_LINHAS LARG*ALT     // incremento de linhas do arquivo
+
+
 // variáveis globais - serão utilizadas em praticamente todas as funções
 char** comand_list;      // string contendo todas as linhas do 'arquivo'
-int linha = 0;            // linha (posição do vetor) em que o 'arquivo' se encontra
+int linha = 0;           // linha (posição do vetor) em que o 'arquivo' se encontra
 
 // define o tipo booleano
 typedef enum bool_t {
@@ -33,6 +34,12 @@ typedef struct cor_t {
     int b;
  } cor;
 
+// struct tela com a matriz de cores (ex. tela->rgb[0][0].r = 255; tela->rgb[0][0].g = 0; tela->rgb[0][0].b = 0; )
+typedef struct tela_t {
+    int larg;
+    int alt;
+    cor** rgb;
+} tela;
 
 /* funcoes graficas */
 // por equanto, todas as funções retornam void até que se decida o contrário
