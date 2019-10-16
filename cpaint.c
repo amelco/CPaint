@@ -105,6 +105,7 @@ void help() {
     printf("save\tSalva arquivo de image\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
     printf("open\tAbre um arquivo de imagem\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
     printf("list\tMostra conteúdo do arquivo de imagem\n");
+    printf("quit\tSai do programa\n");
     printf("\n");
 }
 
