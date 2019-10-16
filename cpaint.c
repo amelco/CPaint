@@ -117,7 +117,7 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
     strcpy(comando, cmd[0]);
     if (strcmp(comando, "quit") == 0) {
         printf("\nAté!\n\n");
-        exit(1);
+        exit(0);
     } 
     else if (strcmp(comando, "help") == 0) {
         // printf("Help List\n");
