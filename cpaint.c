@@ -1,4 +1,4 @@
-#include <stdio.h>
+ #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -10,6 +10,11 @@
 
 #define TAM_MAX_CMD 100         // tamanho maximo do comando (em caracteres)
 #define NUM_MAX_PRM 20          // número máximo de parametros
+#define INC_LINHAS 20           // incremento de linhas do arquivo (20 em 20)
+
+// largua e altura padrao da imagem
+#define LARG 50
+#define ALT 50
 
 // variáveis globais - serão utilizadas em praticamente todas as funções
 char** comand_list;      // string contendo todas as linhas do 'arquivo'
@@ -73,6 +78,10 @@ void t_comando(char comando[TAM_MAX_CMD], char cmd[NUM_MAX_PRM][TAM_MAX_CMD], in
         i++;
     }
     *np = ic;   
+    // preenche todos as posiçoes restantes do vetor com a string "NULL"
+    for (int i=ic+1; i<=NUM_MAX_PRM; i++) {
+        strcpy(cmd[i], "NULL");
+    }
 }
 
 // mostra comandos disponíveis e pequena documentação
@@ -110,6 +119,20 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
     else if (strcmp(comando, "list") == 0) {
         list();
     }
+    else if (strcmp(comando, "image") == 0) {
+        int larg, alt;
+
+        if (strcmp(cmd[1], "NULL") == 0) 
+            larg = LARG;
+        else 
+            larg = atoi(cmd[1]);    // atoi() string to integer
+        if (strcmp(cmd[2], "NULL") == 0) 
+            alt = ALT;
+        else 
+            alt = atoi(cmd[2]);
+        
+        image(larg, alt);
+    }
     else {
         printf("Comando inválido.\n");
     }
@@ -131,8 +154,8 @@ void list() {
 }
 
 int main() {
-    comand_list = malloc(NUM_MAX_PRM * sizeof(char*));      // primeiramente, aloca NUM_MAX_PRM linhas. Realoca caso necessário.
-    for (int i=0; i<NUM_MAX_PRM; i++) {
+    comand_list = malloc(INC_LINHAS * sizeof(char*));      // primeiramente, aloca INC_LINHAS linhas. Adiciona + INC_LINHAS caso necessário.
+    for (int i=0; i<INC_LINHAS; i++) {
         comand_list[i] = malloc(TAM_MAX_CMD * sizeof(char*));
     }
     
