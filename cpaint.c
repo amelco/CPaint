@@ -14,7 +14,7 @@
 
 #define TAM_MAX_CMD 100         // tamanho maximo do comando (em caracteres)
 #define NUM_MAX_PRM 20          // número máximo de parametros
-#define INC_LINHAS LARG*ALT+3   // incremento de linhas do arquivo
+#define INC_LINHAS 12   // incremento de linhas do arquivo
 
 
 // define o tipo booleano
@@ -41,6 +41,7 @@ typedef struct matriz_t {
 char** comand_list;      // string contendo todas as linhas do 'arquivo'
 int ultima_linha;        // número da ultima linha do arquivo
 matriz* tela;
+// char comand_list[INC_LINHAS][TAM_MAX_CMD];
 
 
 /* funcoes graficas */
@@ -186,8 +187,11 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
 // atualiza os dados do comand_list com o que está na matriz
 void update() {
     int linha = 3;
+    // printf("MAX.LINHAS: %d\n", INC_LINHAS);
     for (int i=0; i<tela->larg; i++) {
         for (int j=0; j<tela->alt; j++) {
+            // printf("l %d: %d %d: %d %d %d\n", linha, i,j, tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
+
             sprintf(comand_list[linha], "%d %d %d\n", tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
             linha++;
         }
@@ -199,9 +203,9 @@ void update() {
 
 // cria o cabeçalho da imagem
 void image(int larg, int alt) {
-    comand_list[0] = "P3\n";
+    strcpy(comand_list[0], "P3\n");
     sprintf(comand_list[1], "%d %d\n", larg, alt);
-    comand_list[2] = "255\n";
+    strcpy(comand_list[2], "255\n");
     ultima_linha = 2;
     cor branco;
     branco.r = 255;
@@ -224,6 +228,7 @@ void list(bool line_num) {
 void clear(cor* c) {
     for (int i=0; i<tela->larg; i++) {
         for (int j=0; j<tela->alt; j++) {
+            // printf("%d\n", tela->rgb[i][j].r);
             tela->rgb[i][j].r = c->r; 
             tela->rgb[i][j].g = c->g;
             tela->rgb[i][j].b = c->b;
@@ -235,15 +240,17 @@ void clear(cor* c) {
 
 // libera memoria alocada e sai do programa
 void quit() {
-    for (int i=0; i<INC_LINHAS; i++) {
-        free(comand_list[i]);
-    }
-    free(comand_list);
-    
     for (int i=0; i<LARG; i++) {
         free(tela->rgb[i]);
     }
     free(tela->rgb);
+    free(tela);
+    
+    for (int i=0; i<INC_LINHAS; i++) {
+        // printf("%d\n", i);
+        free(comand_list[i]);
+    }
+    free(comand_list);  
 
     printf("\nAté!\n\n");
     exit(0);
@@ -254,17 +261,32 @@ int main() {
     /*** Inicialização ***/
     comand_list = malloc(INC_LINHAS * sizeof(char*));      // primeiramente, aloca INC_LINHAS linhas. Adiciona + INC_LINHAS caso necessário.
     for (int i=0; i<INC_LINHAS; i++) {
+        // printf("%d\n", i);
         comand_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
+    }
+    // inicializa ponteiro
+    for (int i=0; i<LARG; i++) {
+        for (int j=0; j<ALT; j++) {
+            comand_list[i][j] = '\0';
+        }
     }
 
     tela = malloc(sizeof(matriz));
     tela->larg = LARG;
     tela->alt = ALT;
-    tela->rgb = malloc(LARG * sizeof(int*));
+    tela->rgb = malloc(LARG * sizeof(cor));
     for (int i=0; i<LARG; i++) {
-        tela->rgb[i] = malloc(ALT * sizeof(int));
+        tela->rgb[i] = malloc(ALT * sizeof(cor));
     }
-    printf("!!!!!\n");
+    // inicializa ponteiro
+    for (int i=0; i<LARG; i++) {
+        for (int j=0; j<ALT; j++) {
+            tela->rgb[i][j].r = 0;
+            tela->rgb[i][j].g = 0;
+            tela->rgb[i][j].b = 0;
+        }
+    }
+    
     cor cor_atual;
     cor_atual.r = 0;
     cor_atual.g = 0;
@@ -285,5 +307,7 @@ int main() {
         interpreta(num_param, cmd);
         // print_matriz_tela();
     }
+    
+    // quit();
     return 0;
 }
