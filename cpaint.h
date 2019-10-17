@@ -1,6 +1,7 @@
 /*** funcoes do programa ***/
 #ifndef cpaint_h
 #define cpaint_h
+
 #include "globals.h"
 
 void msg_inicial();

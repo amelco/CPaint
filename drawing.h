@@ -1,7 +1,7 @@
 /* funcoes graficas */
-
 #ifndef drawing_h
 #define drawing_h
+
 
 // define o tipo booleano
 typedef enum bool_t {

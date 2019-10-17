@@ -1,5 +1,7 @@
+/*** variáveis globais ***/
 #ifndef globals_h
 #define globals_h
+
 
 #define VERSION "0.1"
 #define AUTHOR1 "Andre Herman Freire Bezerra"
@@ -26,6 +28,6 @@ typedef struct matriz_t {
 char** comand_list;      // string contendo todas as linhas do 'arquivo'
 int ultima_linha;        // número da ultima linha do arquivo
 matriz* tela;
-// char comand_list[INC_LINHAS][TAM_MAX_CMD];
+// bool init = true;
 
 #endif

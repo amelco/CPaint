@@ -46,7 +46,8 @@ int main() {
     
     /*** Início do programa ***/
     msg_inicial();
-
+    // init = false;       // programa já inicializou
+    
     while (1) {
         char comando[TAM_MAX_CMD];
         char cmd[NUM_MAX_PRM][TAM_MAX_CMD];
