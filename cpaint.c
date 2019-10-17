@@ -1,30 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include "globals.h"
+#include "cpaint.h"
 #include "drawing.h"
-
-/*** funcoes do programa ***/
-void msg_inicial();
-void t_comando(char comando[TAM_MAX_CMD], char cmd[NUM_MAX_PRM][TAM_MAX_CMD], int* np);
-void help();
-void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]);
-void quit();
-
-/** funcoes debug **/
-void print_matriz_tela() {
-    for (int i=0; i<tela->larg; i++) {
-        printf("|");
-        for (int j=0; j<tela->alt; j++) {
-            printf("%3d %3d %3d, ", tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
-        }
-        printf("\b\b|\n");
-    }
-
-}
-
-/*************************************************************************/
 
 // Apresentação do programa
 void msg_inicial() {
@@ -58,24 +36,6 @@ void t_comando(char comando[TAM_MAX_CMD], char cmd[NUM_MAX_PRM][TAM_MAX_CMD], in
     for (int i=ic+1; i<=NUM_MAX_PRM; i++) {
         strcpy(cmd[i], "NULL");
     }
-}
-
-// mostra comandos disponíveis e pequena documentação
-void help() {
-    printf("Ajuda do CPaint %s:\n\n", VERSION);
-    printf("COMANDO [parâmetro_1 parâmetro_2 ...]\n\nCOMANDOS:\n");
-    printf("image\tCria uma nova imagem em branco\n\tParâmetros: [largura INT], [altura INT]\n");
-    printf("color\tMuda a cor atual\n\tParâmetros: [vermelho INT], [verde INT], [azul INT]\n");
-    printf("clear\tLimpa a imagem com a cor especificada\n\tParâmetros (opcional): [vermelho INT], [verde INT], [azul INT]\n");
-    printf("rect\tDesenha um retângulo\n\tParâmetros: [x INT], [y INT], [largura INT], [altura INT]\n");
-    printf("circle\tDesenha um círculo\n\tParâmetros: [x INT], [y INT], [raio INT]\n");
-    printf("poligon\tDesenha um polígono fechado\n\tParâmetros: [x1 INT], [y1 INT], [x2 INT], [y2 INT] ... [xn INT], [yn INT]. (1 < n < 21)\n");
-    printf("fill\tPinta área interna ou externa de um polígono\n\tParâmetros: [x INT], [y INT]\n");
-    printf("save\tSalva arquivo de image\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
-    printf("open\tAbre um arquivo de imagem\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
-    printf("list\tMostra conteúdo do arquivo de imagem\n\tParâmetro (opcional): [remove_line_num BOOL]\n");
-    printf("quit\tSai do programa\n");
-    printf("\n");
 }
 
 // interpretador de comandos
@@ -130,9 +90,23 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
     }
 }
 
-
-
-/*************************************************************************/
+// mostra comandos disponíveis e pequena documentação
+void help() {
+    printf("Ajuda do CPaint %s:\n\n", VERSION);
+    printf("COMANDO [parâmetro_1 parâmetro_2 ...]\n\nCOMANDOS:\n");
+    printf("image\tCria uma nova imagem em branco\n\tParâmetros: [largura INT], [altura INT]\n");
+    printf("color\tMuda a cor atual\n\tParâmetros: [vermelho INT], [verde INT], [azul INT]\n");
+    printf("clear\tLimpa a imagem com a cor especificada\n\tParâmetros (opcional): [vermelho INT], [verde INT], [azul INT]\n");
+    printf("rect\tDesenha um retângulo\n\tParâmetros: [x INT], [y INT], [largura INT], [altura INT]\n");
+    printf("circle\tDesenha um círculo\n\tParâmetros: [x INT], [y INT], [raio INT]\n");
+    printf("poligon\tDesenha um polígono fechado\n\tParâmetros: [x1 INT], [y1 INT], [x2 INT], [y2 INT] ... [xn INT], [yn INT]. (1 < n < 21)\n");
+    printf("fill\tPinta área interna ou externa de um polígono\n\tParâmetros: [x INT], [y INT]\n");
+    printf("save\tSalva arquivo de image\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
+    printf("open\tAbre um arquivo de imagem\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
+    printf("list\tMostra conteúdo do arquivo de imagem\n\tParâmetro (opcional): [remove_line_num BOOL]\n");
+    printf("quit\tSai do programa\n");
+    printf("\n");
+}
 
 // libera memoria alocada e sai do programa
 void quit() {
@@ -152,58 +126,14 @@ void quit() {
     exit(0);
 }
 
-int main() {
-    
-    /*** Inicialização ***/
-    comand_list = malloc(INC_LINHAS * sizeof(char*));      // primeiramente, aloca INC_LINHAS linhas. Adiciona + INC_LINHAS caso necessário.
-    for (int i=0; i<INC_LINHAS; i++) {
-        // printf("%d\n", i);
-        comand_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
-    }
-    // inicializa ponteiro
-    for (int i=0; i<LARG; i++) {
-        for (int j=0; j<ALT; j++) {
-            comand_list[i][j] = '\0';
+/** funcoes debug **/
+void print_matriz_tela() {
+    for (int i=0; i<tela->larg; i++) {
+        printf("|");
+        for (int j=0; j<tela->alt; j++) {
+            printf("%3d %3d %3d, ", tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
         }
+        printf("\b\b|\n");
     }
 
-    tela = malloc(sizeof(matriz));
-    tela->larg = LARG;
-    tela->alt = ALT;
-    tela->rgb = malloc(LARG * sizeof(cor));
-    for (int i=0; i<LARG; i++) {
-        tela->rgb[i] = malloc(ALT * sizeof(cor));
-    }
-    // inicializa ponteiro
-    for (int i=0; i<LARG; i++) {
-        for (int j=0; j<ALT; j++) {
-            tela->rgb[i][j].r = 0;
-            tela->rgb[i][j].g = 0;
-            tela->rgb[i][j].b = 0;
-        }
-    }
-    
-    cor cor_atual;
-    cor_atual.r = 0;
-    cor_atual.g = 0;
-    cor_atual.b = 0;
-    image(LARG, ALT);       // chama a função para definir um cabeçalho padrão
-    
-    /*** Início do programa ***/
-    msg_inicial();
-
-    while (1) {
-        char comando[TAM_MAX_CMD];
-        char cmd[NUM_MAX_PRM][TAM_MAX_CMD];
-        int num_param = 0;
-
-        printf(">> ");
-        scanf(" %[^\n]", &comando);
-        t_comando(comando, cmd, &num_param);
-        interpreta(num_param, cmd);
-        // print_matriz_tela();
-    }
-    
-    // quit();
-    return 0;
 }
