@@ -1,5 +1,5 @@
 #!/bin/bash
 
-gcc -c drawing.c
-gcc -c globals.c
-gcc -c cpaint.c
+gcc -c -g -O0 drawing.c
+gcc -c -g -O0 globals.c
+gcc -c -g -O0 cpaint.c
