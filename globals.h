@@ -17,6 +17,19 @@
 #define NUM_MAX_PRM 20          // número máximo de parametros
 #define INC_LINHAS 12           // incremento de linhas do arquivo
 
+// define o tipo booleano
+typedef enum bool_t {
+    false=0,
+    true
+} bool;
+
+// define tipo "cor" com os valores de vermelho (r), verde (g) e azul (b)
+typedef struct cor_t {
+    int r;
+    int g;
+    int b;
+ } cor;
+
 // struct tela com a matriz de cores (ex. tela->rgb[0][0].r = 255; tela->rgb[0][0].g = 0; tela->rgb[0][0].b = 0; )
 typedef struct matriz_t {
     int larg;
@@ -28,6 +41,6 @@ typedef struct matriz_t {
 char** comand_list;      // string contendo todas as linhas do 'arquivo'
 int ultima_linha;        // número da ultima linha do arquivo
 matriz* tela;
-// bool init = true;
+cor cor_atual;
 
 #endif

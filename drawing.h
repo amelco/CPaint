@@ -2,19 +2,7 @@
 #ifndef drawing_h
 #define drawing_h
 
-
-// define o tipo booleano
-typedef enum bool_t {
-    false=0,
-    true
-} bool;
-
-// define tipo "cor" com os valores de vermelho (r), verde (g) e azul (b)
-typedef struct cor_t {
-    int r;
-    int g;
-    int b;
- } cor;
+#include "globals.h"
 
 // por equanto, todas as funções retornam void até que se decida o contrário
 void image(int larg, int alt);

@@ -38,7 +38,6 @@ int main() {
         }
     }
     
-    cor cor_atual;
     cor_atual.r = 0;
     cor_atual.g = 0;
     cor_atual.b = 0;
@@ -46,7 +45,6 @@ int main() {
     
     /*** Início do programa ***/
     msg_inicial();
-    // init = false;       // programa já inicializou
     
     while (1) {
         char comando[TAM_MAX_CMD];

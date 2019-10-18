@@ -9,42 +9,13 @@
 // realoca matriz tela e command list
 void image(int larg, int alt) {
     int num_linhas = larg*alt;
-    // if (!init) {
-    //     comand_list = realloc(comand_list, num_linhas * sizeof(char*));      // primeiramente, aloca INC_LINHAS linhas. Adiciona + INC_LINHAS caso necessário.
-    //     for (int i=0; i<num_linhas; i++) {
-    //         comand_list[i] = realloc(comand_list[i], TAM_MAX_CMD * sizeof(char));
-    //     }
-    //     // preenche com '\0'
-    //     for (int i=0; i<larg; i++) {
-    //         for (int j=0; j<alt; j++) {
-    //             comand_list[i][j] = '\0';
-    //         }
-    //     }
-
-    //     tela->larg = larg;
-    //     tela->alt = alt;
-    //     tela->rgb = realloc(tela->rgb, larg * sizeof(cor));
-    //     for (int i=0; i<larg; i++) {
-    //         tela->rgb[i] = realloc(tela->rgb[i], alt * sizeof(cor));
-    //     }
-    //     // preenche pixels com preto
-    //     for (int i=0; i<larg; i++) {
-    //         for (int j=0; j<alt; j++) {
-    //             tela->rgb[i][j].r = 0;
-    //             tela->rgb[i][j].g = 0;
-    //             tela->rgb[i][j].b = 0;
-    //         }
-    //     }
-    // }
+    
     strcpy(comand_list[0], "P3\n");
     sprintf(comand_list[1], "%d %d\n", larg, alt);
     strcpy(comand_list[2], "255\n");
     ultima_linha = 2;
-    cor branco;
-    branco.r = 255;
-    branco.g = 0;
-    branco.b = 255;
-    clear(&branco);
+
+    // clear(&cor_atual);
 }
 
 // limpa a tela com uma cor especificada
@@ -78,7 +49,6 @@ void update() {
     for (int i=0; i<tela->larg; i++) {
         for (int j=0; j<tela->alt; j++) {
             // printf("l %d: %d %d: %d %d %d\n", linha, i,j, tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
-
             sprintf(comand_list[linha], "%d %d %d\n", tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
             linha++;
         }
