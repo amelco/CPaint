@@ -10,9 +10,10 @@
 int main() {
     
     /*** Inicialização ***/
-    comand_list = malloc(INC_LINHAS * sizeof(char*));      // primeiramente, aloca INC_LINHAS linhas. Adiciona + INC_LINHAS caso necessário.
-    for (int i=0; i<INC_LINHAS; i++) {
-        // printf("%d\n", i);
+    num_linhas = LARG * ALT + 3;
+    comand_list = malloc(num_linhas * sizeof(char*));      // primeiramente, aloca INC_LINHAS linhas. Adiciona + INC_LINHAS caso necessário.
+    for (int i=0; i<num_linhas; i++) {
+        printf("%d\n", i);
         comand_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
     }
     // inicializa ponteiro
@@ -42,6 +43,7 @@ int main() {
     cor_atual.g = 0;
     cor_atual.b = 0;
     image(LARG, ALT);       // chama a função para definir um cabeçalho padrão
+    clear(&cor_atual);
     
     /*** Início do programa ***/
     msg_inicial();

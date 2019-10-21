@@ -55,7 +55,7 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
     else if (strcmp(comando, "list") == 0) {
         bool line_num = true;
         if (strcmp(cmd[1],"NULL") != 0) line_num = false;
-        list(line_num);
+        list();
     }
     else if (strcmp(comando, "image") == 0) {
         int larg, alt;

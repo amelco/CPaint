@@ -39,7 +39,7 @@ typedef struct matriz_t {
 
 // variáveis globais - serão utilizadas em praticamente todas as funções
 char** comand_list;      // string contendo todas as linhas do 'arquivo'
-int ultima_linha;        // número da ultima linha do arquivo
+int num_linhas;          // número de linhas do arquivo (larg * alt)
 matriz* tela;
 cor cor_atual;
 

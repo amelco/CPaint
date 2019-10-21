@@ -8,12 +8,12 @@
 // cria o cabeçalho da imagem
 // realoca matriz tela e command list
 void image(int larg, int alt) {
-    int num_linhas = larg*alt;
+    num_linhas = larg*alt + 3;
     
     strcpy(comand_list[0], "P3\n");
     sprintf(comand_list[1], "%d %d\n", larg, alt);
     strcpy(comand_list[2], "255\n");
-    ultima_linha = 2;
+    // ultima_linha = 2;
 
     // clear(&cor_atual);
 }
@@ -33,10 +33,9 @@ void clear(cor* c) {
 }
 
 // mostra o conteudo da lista de comandos
-void list(bool line_num) {
-    printf("\n");
-    for (int i=0; i<=ultima_linha; i++) {
-        if (line_num) printf("%3d: ", i+1);
+void list() {
+    printf("%d\n", num_linhas);
+    for (int i=0; i<num_linhas; i++) {
         printf("%s", comand_list[i]);
     }
     printf("\n");
@@ -53,5 +52,5 @@ void update() {
             linha++;
         }
     }
-    ultima_linha = linha-1;
+    // ultima_linha = linha-1;
 }

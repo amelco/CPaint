@@ -14,7 +14,7 @@ void poligon();     // Ainda nao sei como implementar essa assinatura. Provavelm
 void fill(int x, int y);
 void save(char* arq);
 void open(char* arq);
-void list(bool line_num);
+void list();
 void update();      // atualiza 'arquivo'. Passa as informações da matriz tela para a matriz do arquivo. É chamada sempre que a matriz for alterada
 
 #endif
