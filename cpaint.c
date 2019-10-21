@@ -85,6 +85,18 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
         c.b = atoi(cmd[3]);
         clear(&c);
     }
+    else if (strcmp(comando, "color") == 0) {
+        if (strcmp(cmd[1], "NULL") == 0 || strcmp(cmd[2], "NULL") == 0 || strcmp(cmd[3], "NULL") == 0) {
+            printf("Falta argumentos no comando. Veja ajuda.\n");
+        } else {
+            cor c;
+            c.r = atoi(cmd[1]);
+            c.g = atoi(cmd[2]);
+            c.b = atoi(cmd[3]);
+            color(&c);
+            printf("Cor alterada\n");
+        }
+    }
     else {
         printf("Comando inválido.\n");
     }

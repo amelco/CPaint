@@ -8,6 +8,7 @@
 void image(int larg, int alt);
 void color(cor* c);
 void clear(cor* c);
+void point(int x, int y);
 void rect(int x, int y, int tam_x, int tam_y);
 void circle(int x, int y, int r);
 void poligon();     // Ainda nao sei como implementar essa assinatura. Provavelmente função recursiva.

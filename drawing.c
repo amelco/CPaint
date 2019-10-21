@@ -31,6 +31,13 @@ void clear(cor* c) {
     update();
 }
 
+// muda a cor atual
+void color(cor* c) {
+    cor_atual.r = c->r;
+    cor_atual.g = c->g;
+    cor_atual.b = c->b;
+}
+
 // mostra o conteudo da lista de comandos
 void list() {
     // printf("total: %d\n", num_linhas);

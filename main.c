@@ -29,6 +29,7 @@ int main() {
         int num_param = 0;
 
         printf(">> ");
+        /** Para ler de um arquivo, basta mudar essa linha e ler do arquivo ao inves do teclado **/
         scanf(" %[^\n]", &comando);
         t_comando(comando, cmd, &num_param);
         interpreta(num_param, cmd);
