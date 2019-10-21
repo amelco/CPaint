@@ -42,5 +42,6 @@ char** comand_list;      // string contendo todas as linhas do 'arquivo'
 int num_linhas;          // número de linhas do arquivo (larg * alt)
 matriz* tela;
 cor cor_atual;
+bool isInit;
 
 #endif

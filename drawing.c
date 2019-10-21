@@ -4,18 +4,17 @@
 
 #include "drawing.h"
 #include "globals.h"
+#include "cpaint.h"
 
 // cria o cabeçalho da imagem
 // realoca matriz tela e command list
 void image(int larg, int alt) {
-    num_linhas = larg*alt + 3;
-    
+    // num_linhas = larg*alt + 3;
+    aloca_imagem(larg, alt);
     strcpy(comand_list[0], "P3\n");
     sprintf(comand_list[1], "%d %d\n", larg, alt);
     strcpy(comand_list[2], "255\n");
-    // ultima_linha = 2;
-
-    // clear(&cor_atual);
+    clear(&cor_atual);
 }
 
 // limpa a tela com uma cor especificada
@@ -34,8 +33,9 @@ void clear(cor* c) {
 
 // mostra o conteudo da lista de comandos
 void list() {
-    printf("%d\n", num_linhas);
+    // printf("total: %d\n", num_linhas);
     for (int i=0; i<num_linhas; i++) {
+        // printf("%d\n", i);
         printf("%s", comand_list[i]);
     }
     printf("\n");
@@ -44,7 +44,7 @@ void list() {
 // atualiza os dados do comand_list com o que está na matriz
 void update() {
     int linha = 3;
-    // printf("MAX.LINHAS: %d\n", INC_LINHAS);
+    
     for (int i=0; i<tela->larg; i++) {
         for (int j=0; j<tela->alt; j++) {
             // printf("l %d: %d %d: %d %d %d\n", linha, i,j, tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
@@ -52,5 +52,4 @@ void update() {
             linha++;
         }
     }
-    // ultima_linha = linha-1;
 }

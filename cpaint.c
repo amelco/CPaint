@@ -90,6 +90,69 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
     }
 }
 
+void aloca_imagem(int larg, int alt) {
+    int new_num_linhas = larg * alt + 3;
+    if (isInit) {
+        // aloca command_list
+        comand_list = malloc(new_num_linhas * sizeof(char*));      // primeiramente, aloca INC_LINHAS linhas. Adiciona + INC_LINHAS caso necessário.
+        for (int i=0; i<new_num_linhas; i++) {
+            comand_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
+        }
+        // inicializa ponteiro
+        for (int i=0; i<larg; i++) {
+            for (int j=0; j<alt; j++) {
+                comand_list[i][j] = '\0';
+            }
+        }
+        // aloca matriz tela
+        tela = malloc(sizeof(matriz));
+        tela->larg = larg;
+        tela->alt = alt;
+        tela->rgb = malloc(larg * sizeof(cor));
+        for (int i=0; i<larg; i++) {
+            tela->rgb[i] = malloc(alt * sizeof(cor));
+        }
+        // inicializa ponteiro
+        for (int i=0; i<larg; i++) {
+            for (int j=0; j<alt; j++) {
+                tela->rgb[i][j].r = 0;
+                tela->rgb[i][j].g = 0;
+                tela->rgb[i][j].b = 0;
+            }
+        }
+    } else {
+        /*** Realoca memória ***/
+        comand_list = realloc(comand_list, new_num_linhas * sizeof(char*));      // primeiramente, aloca INC_LINHAS linhas. Adiciona + INC_LINHAS caso necessário.
+        for (int i=0; i<new_num_linhas; i++) {
+            // printf("realloc linha=%d\n", i);
+            comand_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
+        }
+        // inicializa ponteiro
+        for (int i=tela->larg; i<larg; i++) {
+            for (int j=tela->alt; j<alt; j++) {
+                comand_list[i][j] = '\0';
+            }
+        }
+        // aloca matriz tela
+        // tela = realloc(tela, sizeof(matriz));
+        tela->rgb = realloc(tela->rgb, larg * sizeof(cor));
+        for (int i=0; i<larg; i++) {
+            tela->rgb[i] = malloc(alt * sizeof(cor));
+        }
+        // inicializa ponteiro
+        for (int i=tela->larg; i<larg; i++) {
+            for (int j=tela->alt; j<alt; j++) {
+                tela->rgb[i][j].r = 0;
+                tela->rgb[i][j].g = 0;
+                tela->rgb[i][j].b = 0;
+            }
+        }
+        tela->larg = larg;
+        tela->alt = alt;
+    }
+    num_linhas = new_num_linhas;
+}
+
 // mostra comandos disponíveis e pequena documentação
 void help() {
     printf("Ajuda do CPaint %s:\n\n", VERSION);
@@ -110,13 +173,14 @@ void help() {
 
 // libera memoria alocada e sai do programa
 void quit() {
-    for (int i=0; i<LARG; i++) {
+    int n = tela->alt * tela->larg;
+    for (int i=0; i<tela->larg; i++) {
         free(tela->rgb[i]);
     }
     free(tela->rgb);
     free(tela);
     
-    for (int i=0; i<INC_LINHAS; i++) {
+    for (int i=0; i<n; i++) {
         // printf("%d\n", i);
         free(comand_list[i]);
     }

@@ -10,5 +10,6 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]);
 void help();
 void quit();
 void print_matriz_tela(); // para debug
+void aloca_imagem(int larg, int alt);
 
 #endif
