@@ -111,6 +111,29 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             }
         }
     }
+    else if (strcmp(comando, "line") == 0) {
+        if (strcmp(cmd[1], "NULL") == 0 || strcmp(cmd[2], "NULL") == 0 || strcmp(cmd[3], "NULL") == 0 || strcmp(cmd[4], "NULL") == 0) {
+            printf("Falta argumentos no comando. Veja ajuda.\n");
+        } else {
+            int x1 = atoi(cmd[1]);
+            int y1 = atoi(cmd[2]);
+            int x2 = atoi(cmd[3]);
+            int y2 = atoi(cmd[4]);
+            if (x1>tela->larg || y1>tela->alt || x2>tela->larg || y2>tela->alt) {
+                printf("Pontos x ou y fora do canvas.\n");
+                printf("Verifique o comando.\n");
+            } else {
+                line(x1, y1, x2, y2);
+            }
+        }
+    }
+    else if (strcmp(comando, "save") == 0) {
+        if (strcmp(cmd[1], "NULL") == 0) {
+            printf("Falta argumentos no comando. Veja ajuda.\n");
+        } else {
+            save(cmd[1]);
+        }
+    }
     else {
         printf("Comando inválido.\n");
     }

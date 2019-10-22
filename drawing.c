@@ -38,16 +38,41 @@ void color(cor* c) {
     cor_atual.b = c->b;
 }
 
+// desenha um ponto com a cor cor_atual
 void point(int x, int y) {
     tela->rgb[x][y] = cor_atual;
     update();
 }
 
+// desenha uma reta entre 2 pontos
+//   retirado de: https://www.thecrazyprogrammer.com/2017/01/dda-line-drawing-algorithm-c-c.html
+void line(int x1, int y1, int x2, int y2) {
+    float dx, dy, step, x, y;
+    
+    dx = abs(x2 - x1);
+    dy = abs(y2 - y1);
+    //printf("%d %d\n", dx, dy);
+    if (dx>=dy) step = dx;
+    else step = dy;
+    dx = dx/step;
+    dy = dy/step;
+    x = x1;
+    y = y1;
+    
+    int i = 0;
+    while(i<=step) {
+        //printf("%d %d %d %d\n", i, step, x, y);
+        point(x, y);
+        x+=dx;
+        y+=dy;
+        i++;
+    }
+}
+
 // mostra o conteudo da lista de comandos
 void list() {
-    // printf("total: %d\n", num_linhas);
+    printf("Cor atual: [%3d][%3d][%3d]\n\n", cor_atual.r, cor_atual.g, cor_atual.b);
     for (int i=0; i<num_linhas; i++) {
-        // printf("%d\n", i);
         printf("%s", comand_list[i]);
     }
     printf("\n");
@@ -64,4 +89,15 @@ void update() {
             linha++;
         }
     }
+}
+
+void save (char nome[]) {
+    FILE* arq;
+    arq = fopen(nome, "w");
+
+    for (int i=0; i<num_linhas; i++) {
+        printf("%s", comand_list[i]);
+        fprintf(arq, "%s", comand_list[i]);
+    }
+    fclose(arq);
 }
