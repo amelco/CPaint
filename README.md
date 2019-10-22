@@ -10,7 +10,8 @@ Funcionalidades (não)implementadas
 * [x] Função clear()
 * [x] Função image() com alocação dinâmica
 * [x] Função color()
-* [ ] Função point()
+* [x] Função point()
+* [ ] Função line()
 * [ ] Função rect()
 * [ ] Função circle()
 * [ ] Função poligon()
