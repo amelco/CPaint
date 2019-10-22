@@ -3,8 +3,7 @@
 Software de primitivas gráficas feito em C.
 
 ## TODO
-[Vundle] is a work in progress, so any ideas and patches are appreciated.
-
+Funcionalidades (não)implementadas
 * [x] Implementado
 * [ ] Não impĺementado
 
