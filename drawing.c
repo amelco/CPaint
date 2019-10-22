@@ -38,6 +38,11 @@ void color(cor* c) {
     cor_atual.b = c->b;
 }
 
+void point(int x, int y) {
+    tela->rgb[x][y] = cor_atual;
+    update();
+}
+
 // mostra o conteudo da lista de comandos
 void list() {
     // printf("total: %d\n", num_linhas);

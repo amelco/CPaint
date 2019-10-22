@@ -13,11 +13,19 @@ int main() {
 
     aloca_imagem(LARG, ALT);
     
+    // preto
     cor_atual.r = 0;
     cor_atual.g = 0;
     cor_atual.b = 0;
+
     image(LARG, ALT);       // chama a função para definir um cabeçalho padrão
     clear(&cor_atual);
+
+    // branco
+    cor_atual.r = 255;
+    cor_atual.g = 255;
+    cor_atual.b = 255;
+
     isInit = false;
     
     /*** Início do programa ***/

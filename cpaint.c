@@ -97,6 +97,20 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             printf("Cor alterada\n");
         }
     }
+    else if (strcmp(comando, "point") == 0) {
+        if (strcmp(cmd[1], "NULL") == 0 || strcmp(cmd[2], "NULL") == 0) {
+            printf("Falta argumentos no comando. Veja ajuda.\n");
+        } else {
+            int x = atoi(cmd[1]);
+            int y = atoi(cmd[2]);
+            if (x>tela->larg || y>tela->alt) {
+                printf("Ponto x ou y fora do canvas.\n");
+                printf("Verifique o comando.\n");
+            } else {
+                point(x, y);
+            }
+        }
+    }
     else {
         printf("Comando inválido.\n");
     }
