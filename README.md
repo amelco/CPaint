@@ -19,6 +19,11 @@ Funcionalidades (não)implementadas
 * [ ] Função save()
 * [ ] Função open()
 
+### Opcional
+* [ ] Visualizar primitivas na tela após executar comando
+* [x] Utilizar git
+* [x] Utilizar valgrind
+
 *Projeto de ITP 2019.2*.  
 *Professor Júlio César*.  
 *Grupo: Andre Herman e Marcell Santana*
