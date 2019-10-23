@@ -12,7 +12,7 @@ Funcionalidades (não)implementadas
 * [x] Função color()
 * [x] Função point()
 * [x] Função line()
-* [ ] Função rect()
+* [x] Função rect()
 * [ ] Função circle()
 * [ ] Função poligon()
 * [ ] Função fill()
