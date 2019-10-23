@@ -4,3 +4,4 @@ cpaint
 *.swp
 *.swm
 *.swo
+.drawing.*
