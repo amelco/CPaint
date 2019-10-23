@@ -45,61 +45,58 @@ void point(int x, int y) {
 }
 
 // desenha uma reta entre 2 pontos
-//   retirado de: https://www.thecrazyprogrammer.com/2017/01/dda-line-drawing-algorithm-c-c.html
-void line(int x1, int y1, int x2, int y2) {
-    int dx, dy, p, twoDyDx, twoDy, x, y, xend;
+//retirado de: http://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#Line_equation
+void linha_oct(int x0, int y0, int x1, int y1, char o) {
+    int dx, dy, xi, yi, x, y, D;
+
+    dx = x1 - x0;
+    dy = y1 - y0;
     
-    dx = abs(x1-x2);
-    dy = abs(y1-y2);
-    p = 2*dy - dx;
-    twoDy = 2 * dy;
-    twoDyDx = 2 * (dy-dx);
-    
-    if (x1 > x2) {
-        x = x2;
-        y = y2;
-        xend = x1;
-    } else {
-        x = x1;
-        y = y1;
-        xend = x2;
-    }
-    
-    point(x ,y);
-    
-    while(x < xend) {
-        x++;
-        if (p < 0) 
-            p += twoDy;
-        else {
-            y++;
-            p += twoDyDx;
+    if (o == 'b') { // baixo
+        yi = 1;
+        if (dy < 0) {
+            yi = -1;
+            dy = -dy;
         }
-        point(x, y);
+        D = 2*dy - dx;
+        y = y0;
+        for (x = x0; x<=x1; x++) {
+            point(x, y);
+            if (D > 0) {
+                y = y + yi;
+                D = D - 2*dx;
+            }
+            D = D + 2*dy;
+        }
+    }
+    else {         //alto
+        xi = 1;
+        if (dx < 0) {
+            xi = -1;
+            dx = -dx;
+        }
+        D = 2*dx - dy;
+        x = x0;
+        for (y = y0; y<=y1; y++) {
+            point(x, y);
+            if (D > 0) {
+                x = x + xi;
+                D = D - 2*dy;
+            }
+            D = D + 2*dx;
+        }
     }
 }
-//void line(int x1, int y1, int x2, int y2) {
-//    float dx, dy, step, x, y;
-//    
-//    dx = abs(x2 - x1);
-//    dy = abs(y2 - y1);
-//    //printf("%d %d\n", dx, dy);
-//    if (dx>=dy) step = dx;
-//    else step = dy;
-//    dx = dx/step;
-//    dy = dy/step;
-//    x = x1;
-//    y = y1;
-//    
-//    int i = 0;
-//    while(i<=step) {
-//        //printf("%d %d %d %d\n", i, step, x, y);
-//        point(x, y);
-//        x+=dx;
-//        y+=dy;
-//        i++;
-//    }
-//}
+
+void line(int x0, int y0, int x1, int y1) {
+    if (abs(y1 - y0) < abs(x1 - x0)) {
+        if (x0 >  x1) linha_oct(x1, y1, x0, y0, 'b');
+        else          linha_oct(x0, y0, x1, y1, 'b');
+    } else {
+        if (y0 >  y1) linha_oct(x1, y1, x0, y0, 'a');
+        else          linha_oct(x0, y0, x1, y1, 'a');
+    }
+}
 
 // mostra o conteudo da lista de comandos
 void list() {
