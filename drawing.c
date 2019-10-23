@@ -47,27 +47,59 @@ void point(int x, int y) {
 // desenha uma reta entre 2 pontos
 //   retirado de: https://www.thecrazyprogrammer.com/2017/01/dda-line-drawing-algorithm-c-c.html
 void line(int x1, int y1, int x2, int y2) {
-    float dx, dy, step, x, y;
+    int dx, dy, p, twoDyDx, twoDy, x, y, xend;
     
-    dx = abs(x2 - x1);
-    dy = abs(y2 - y1);
-    //printf("%d %d\n", dx, dy);
-    if (dx>=dy) step = dx;
-    else step = dy;
-    dx = dx/step;
-    dy = dy/step;
-    x = x1;
-    y = y1;
+    dx = abs(x1-x2);
+    dy = abs(y1-y2);
+    p = 2*dy - dx;
+    twoDy = 2 * dy;
+    twoDyDx = 2 * (dy-dx);
     
-    int i = 0;
-    while(i<=step) {
-        //printf("%d %d %d %d\n", i, step, x, y);
+    if (x1 > x2) {
+        x = x2;
+        y = y2;
+        xend = x1;
+    } else {
+        x = x1;
+        y = y1;
+        xend = x2;
+    }
+    
+    point(x ,y);
+    
+    while(x < xend) {
+        x++;
+        if (p < 0) 
+            p += twoDy;
+        else {
+            y++;
+            p += twoDyDx;
+        }
         point(x, y);
-        x+=dx;
-        y+=dy;
-        i++;
     }
 }
+//void line(int x1, int y1, int x2, int y2) {
+//    float dx, dy, step, x, y;
+//    
+//    dx = abs(x2 - x1);
+//    dy = abs(y2 - y1);
+//    //printf("%d %d\n", dx, dy);
+//    if (dx>=dy) step = dx;
+//    else step = dy;
+//    dx = dx/step;
+//    dy = dy/step;
+//    x = x1;
+//    y = y1;
+//    
+//    int i = 0;
+//    while(i<=step) {
+//        //printf("%d %d %d %d\n", i, step, x, y);
+//        point(x, y);
+//        x+=dx;
+//        y+=dy;
+//        i++;
+//    }
+//}
 
 // mostra o conteudo da lista de comandos
 void list() {
