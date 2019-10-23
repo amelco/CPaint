@@ -2,6 +2,14 @@
 
 Software de primitivas gráficas feito em C.
 
+### Compilação
+Para compilar execute os scripts:
+```bash
+./gen_obj
+./compile
+```
+e execute com `./cpaint`.
+
 ## TODO
 Funcionalidades (não)implementadas
 * [x] Interpretador de comandos
