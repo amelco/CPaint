@@ -24,7 +24,7 @@ Funcionalidades (não)implementadas
 * [ ] Função circle()
 * [ ] Função poligon()
 * [ ] Função fill()
-* [ ] Função save()
+* [x] Função save()
 * [ ] Função open()
 
 ### Opcional
