@@ -119,12 +119,35 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             int y1 = atoi(cmd[2]);
             int x2 = atoi(cmd[3]);
             int y2 = atoi(cmd[4]);
-            if (x1>tela->larg || y1>tela->alt || x2>tela->larg || y2>tela->alt) {
+            if (x1>tela->larg || y1>tela->alt || x2>tela->larg || y2>tela->alt ||
+                x1<0          || y1<0         || x2<0          || y2<0           ) {
                 printf("Pontos x ou y fora do canvas.\n");
                 printf("Verifique o comando.\n");
             } else {
                 line(x1, y1, x2, y2);
             }
+        }
+    }
+    else if (strcmp(comando, "rect") == 0) {
+        if (strcmp(cmd[1], "NULL") == 0 || strcmp(cmd[2], "NULL") == 0 || strcmp(cmd[3], "NULL") == 0 || strcmp(cmd[4], "NULL") == 0) {
+            printf("Falta argumentos no comando. Veja ajuda.\n");
+        } 
+        else {
+            int x  = atoi(cmd[1]);
+            int y  = atoi(cmd[2]);
+            int tx = atoi(cmd[3]);
+            int ty = atoi(cmd[4]);
+            if (x>tela->larg || y>tela->alt || x+tx>tela->larg || y+ty>tela->alt ||
+                x<0          || y<0  ) {
+                printf("x: %d y: %d\n", x, y);
+                printf("x+tx: %d y+ty: %d\n", x+tx, y+ty);
+                printf("larg: %d alt: %d\n", tela->larg, tela->alt);
+                printf("Retângulo fora do canvas.\n");
+                printf("Verifique o comando.\n");
+            } else {
+                rect(x, y, ty, tx);
+            }
+                
         }
     }
     else if (strcmp(comando, "save") == 0) {

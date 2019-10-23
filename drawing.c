@@ -98,6 +98,13 @@ void line(int x0, int y0, int x1, int y1) {
     }
 }
 
+void rect(int x, int y, int tam_x, int tam_y) {
+   line(x        , y        , x + tam_x, y        );
+   line(x + tam_x, y        , x + tam_x, y + tam_y);
+   line(x + tam_x, y + tam_y, x        , y + tam_y);
+   line(x        , y + tam_y, x        , y        );
+}
+
 // mostra o conteudo da lista de comandos
 void list() {
     printf("Cor atual: [%3d][%3d][%3d]\n\n", cor_atual.r, cor_atual.g, cor_atual.b);
