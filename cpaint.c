@@ -150,6 +150,41 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
                 
         }
     }
+    else if (strcmp(comando, "poligon") == 0) {
+        if (strcmp(cmd[1], "NULL") == 0 || strcmp(cmd[2], "NULL") == 0 || strcmp(cmd[3], "NULL") == 0 || strcmp(cmd[4], "NULL") == 0) {
+            printf("Falta argumentos no comando. Veja ajuda.\n");
+        } 
+        else {
+            int n = atoi(cmd[1]) * 4;
+            ponto pts[n][2];
+            int i=2;
+            while (i<=10) {
+                printf("n=%d => %s\n", i, cmd[i]);
+                i++;
+            }
+            int ip=0;
+            for (int i=0; i<n; i+=4) {
+                printf("!!!i=%d  n=%d\n", i, n);
+                pts[ip][0].x = atoi(cmd[i+2]);
+                printf("i=%d\n", i+2);
+                pts[ip][0].y = atoi(cmd[i+3]);
+                printf("i=%d\n", i+3);
+                pts[ip][1].x = atoi(cmd[i+4]);
+                printf("i=%d\n", i+4);
+                pts[ip][1].y = atoi(cmd[i+5]);
+                ip++;
+                printf("i=%d\n", i+5);
+                printf("cmd[%d]=%s\ncmd[%d]=%s\ncmd[%d]=%s\ncmd[%d]=%s\n",
+                        i+2,cmd[i+2], 
+                        i+3,cmd[i+3], 
+                        i+4,cmd[i+4], 
+                        i+5,cmd[i+5] 
+                        );
+            }
+            printf("SAIU\n");
+            poligon(n, pts);
+        }
+    }
     else if (strcmp(comando, "save") == 0) {
         if (strcmp(cmd[1], "NULL") == 0) {
             printf("Falta argumentos no comando. Veja ajuda.\n");
@@ -234,7 +269,7 @@ void help() {
     printf("clear\tLimpa a imagem com a cor especificada\n\tParâmetros (opcional): [vermelho INT], [verde INT], [azul INT]\n");
     printf("rect\tDesenha um retângulo\n\tParâmetros: [x INT], [y INT], [largura INT], [altura INT]\n");
     printf("circle\tDesenha um círculo\n\tParâmetros: [x INT], [y INT], [raio INT]\n");
-    printf("poligon\tDesenha um polígono fechado\n\tParâmetros: [x1 INT], [y1 INT], [x2 INT], [y2 INT] ... [xn INT], [yn INT]. (1 < n < 21)\n");
+    printf("poligon\tDesenha um polígono fechado\n\tParâmetros: [n INT] [x1 INT], [y1 INT], [x2 INT], [y2 INT] ... [xn INT], [yn INT]. (1 < n < 21)\n");
     printf("fill\tPinta área interna ou externa de um polígono\n\tParâmetros: [x INT], [y INT]\n");
     printf("save\tSalva arquivo de image\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
     printf("open\tAbre um arquivo de imagem\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
