@@ -126,6 +126,57 @@ void update() {
         }
     }
 }
+void open(char nome[]){
+    FILE* arquivo;
+    arquivo = fopen(nome, "r");
+
+    int nlin, ncol;
+    char str1[TAM_MAX_CMD];
+    char str2[TAM_MAX_CMD];
+    char dum[TAM_MAX_CMD];
+    
+    fgets(str1,TAM_MAX_CMD,arquivo);
+    fscanf(arquivo, "%d %d", &nlin, &ncol);
+    fgets(str2,TAM_MAX_CMD,arquivo);
+    
+    char Linha[nlin*ncol+3][TAM_MAX_CMD];
+    char scol[TAM_MAX_CMD];
+    char slin[TAM_MAX_CMD];
+    
+    sprintf(scol,"%d", ncol);
+    sprintf(slin,"%d", nlin);
+
+    strcpy(Linha[0], str1);
+    sprintf(Linha[1],"%s %s", slin, scol);
+    strcpy(Linha[2], str2);
+    
+    
+    for (int i = 3; i < nlin*ncol+3; i++) {
+        fgets(Linha[i],TAM_MAX_CMD,arquivo);
+    }
+
+    aloca_imagem(ncol, nlin);
+    
+    for (int i = 0; i < nlin*ncol+3; i++) {
+        strcpy(comand_list[i], Linha[i]);
+    }
+
+    fseek( arquivo, 0, SEEK_SET);
+    fgets(dum,TAM_MAX_CMD,arquivo); //Dummy read
+    fgets(dum,TAM_MAX_CMD,arquivo);
+    fgets(dum,TAM_MAX_CMD,arquivo);
+
+    for (int i = 0; i < nlin; i++) {
+        for (int j = 0; j < ncol; j++) {
+            fscanf(arquivo, "%d %d %d", &tela->rgb[i][j].r, &tela->rgb[i][j].g, &tela->rgb[i][j].b);
+        }
+    }
+
+    fclose(arquivo);
+}
+
+
+
 
 void save (char nome[]) {
     FILE* arq;

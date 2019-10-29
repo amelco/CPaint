@@ -11,5 +11,6 @@ void help();
 void quit();
 void print_matriz_tela(); // para debug
 void aloca_imagem(int larg, int alt);
+void open(char nome[]);
 
 #endif

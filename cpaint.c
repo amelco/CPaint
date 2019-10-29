@@ -157,6 +157,13 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             save(cmd[1]);
         }
     }
+    else if(strcmp(comando, "open") == 0) {
+        if (strcmp(cmd[1], "NULL") == 0) {
+            printf("Falta argumentos no comando. Veja ajuda.\n");
+        } else {
+            open(cmd[1]);
+        }
+    }
     else {
         printf("Comando inválido.\n");
     }
