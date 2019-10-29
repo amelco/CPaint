@@ -158,28 +158,29 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             int n = atoi(cmd[1]) * 4;
             ponto pts[n][2];
             int i=2;
-            while (i<=10) {
-                printf("n=%d => %s\n", i, cmd[i]);
-                i++;
-            }
+            //while (i<=14) {
+            //    printf("n=%d => %s\n", i, cmd[i]);
+            //    i++;
+            //}
             int ip=0;
             for (int i=0; i<n; i+=4) {
-                printf("!!!i=%d  n=%d\n", i, n);
                 pts[ip][0].x = atoi(cmd[i+2]);
-                printf("i=%d\n", i+2);
                 pts[ip][0].y = atoi(cmd[i+3]);
-                printf("i=%d\n", i+3);
                 pts[ip][1].x = atoi(cmd[i+4]);
-                printf("i=%d\n", i+4);
                 pts[ip][1].y = atoi(cmd[i+5]);
+                //printf("pts[%d][0]=%d\npts[%d][0]=%d\npts[%d][0]=%d\npts[%d][0]=%d\n",
+                //        ip,pts[ip][0].x, 
+                //        ip,pts[ip][0].y, 
+                //        ip,pts[ip][1].x, 
+                //        ip,pts[ip][1].y 
+                //        );
+                //printf("cmd[%d]=%s\ncmd[%d]=%s\ncmd[%d]=%s\ncmd[%d]=%s\n",
+                //        i+2,cmd[i+2], 
+                //        i+3,cmd[i+3], 
+                //        i+4,cmd[i+4], 
+                //        i+5,cmd[i+5] 
+                //        );
                 ip++;
-                printf("i=%d\n", i+5);
-                printf("cmd[%d]=%s\ncmd[%d]=%s\ncmd[%d]=%s\ncmd[%d]=%s\n",
-                        i+2,cmd[i+2], 
-                        i+3,cmd[i+3], 
-                        i+4,cmd[i+4], 
-                        i+5,cmd[i+5] 
-                        );
             }
             printf("SAIU\n");
             poligon(n, pts);

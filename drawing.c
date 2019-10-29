@@ -109,7 +109,7 @@ void poligon(int n, ponto pts[n][2]){
     int i;
     
     printf("POLIGON\n");
-    for (i=0; i<n; i++) {
+    for (i=0; i<n/4; i++) {
         printf("i=%d\n", i);
         line(pts[i][0].x, pts[i][0].y, pts[i][1].x, pts[i][1].y);
         printf("%d %d %d %d\n", pts[i][0].x, pts[i][0].y, pts[i][1].x, pts[i][1].y);
@@ -118,11 +118,11 @@ void poligon(int n, ponto pts[n][2]){
 
 // mostra o conteudo da lista de comandos
 void list() {
-    printf("Cor atual: [%3d][%3d][%3d]\n\n", cor_atual.r, cor_atual.g, cor_atual.b);
     for (int i=0; i<num_linhas; i++) {
         printf("%s", comand_list[i]);
     }
     printf("\n");
+    printf("Cor atual: [%3d][%3d][%3d]\n\n", cor_atual.r, cor_atual.g, cor_atual.b);
 }
 
 // atualiza os dados do comand_list com o que está na matriz
