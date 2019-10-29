@@ -182,7 +182,7 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
                 //        );
                 ip++;
             }
-            printf("SAIU\n");
+            //printf("SAIU\n");
             poligon(n, pts);
         }
     }
