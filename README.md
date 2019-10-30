@@ -25,7 +25,7 @@ Funcionalidades (não)implementadas
 * [x] Função poligon()
 * [ ] Função fill()
 * [x] Função save()
-* [ ] Função open()
+* [x] Função open()
 
 ### Opcional
 * [ ] Visualizar primitivas na tela após executar comando
