@@ -105,13 +105,37 @@ void rect(int x, int y, int tam_x, int tam_y) {
    line(x        , y + tam_y, x        , y        );
 }
 
+// desenha um poligono
+//   entradas: n   -> número de lados
+//             pts -> vetor de par de pontos iniciais e finais 
+void poligon(int n, ponto pts[n][2]){
+    int i;
+    ponto p_ini;
+    p_ini.x = pts[0][0].x;
+    p_ini.y = pts[0][0].y;
+    
+    printf("POLIGON\n");
+    for (i=0; i<n/4; i++) {
+        printf("i=%d\n", i);
+        line(pts[i][0].x, pts[i][0].y, pts[i][1].x, pts[i][1].y);
+        printf("%d %d %d %d\n", pts[i][0].x, pts[i][0].y, pts[i][1].x, pts[i][1].y);
+    }
+    printf("pts[%d][1].x = %d; p_ini.x = %d\n pts[%d][1].y = %d; p_ini.y = %d\n",
+            i-1, pts[i-1][1].x, p_ini.x, i-1, pts[i-1][1].y, p_ini.y);
+    // checa se o ultimoo ponto é igual ao primeiro
+    //  se não for, traca uma linha para fechar o poligono
+    if (pts[i-1][1].x != p_ini.x && pts[i-1][1].y != p_ini.y) {
+        line(pts[i-1][1].x, pts[i-1][1].y, p_ini.x, p_ini.y);
+    }
+}
+
 // mostra o conteudo da lista de comandos
 void list() {
-    printf("Cor atual: [%3d][%3d][%3d]\n\n", cor_atual.r, cor_atual.g, cor_atual.b);
     for (int i=0; i<num_linhas; i++) {
         printf("%s", comand_list[i]);
     }
     printf("\n");
+    printf("Cor atual: [%3d][%3d][%3d]\n\n", cor_atual.r, cor_atual.g, cor_atual.b);
 }
 
 // atualiza os dados do comand_list com o que está na matriz
@@ -183,7 +207,7 @@ void save (char nome[]) {
     arq = fopen(nome, "w");
 
     for (int i=0; i<num_linhas; i++) {
-        printf("%s", comand_list[i]);
+        //printf("%s", comand_list[i]);
         fprintf(arq, "%s", comand_list[i]);
     }
     fclose(arq);
