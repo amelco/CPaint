@@ -225,7 +225,7 @@ void aloca_imagem(int larg, int alt) {
         }
     } else {
         /*** Realoca memória ***/
-        comand_list = realloc(comand_list, new_num_linhas * sizeof(char*));      // primeiramente, aloca INC_LINHAS linhas. Adiciona + INC_LINHAS caso necessário.
+        comand_list = realloc(comand_list, new_num_linhas * sizeof(char*));
         for (int i=0; i<new_num_linhas; i++) {
             // printf("realloc linha=%d\n", i);
             comand_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
