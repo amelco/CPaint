@@ -22,7 +22,7 @@ Funcionalidades (não)implementadas
 * [x] Função line()
 * [x] Função rect()
 * [ ] Função circle()
-* [ ] Função poligon()
+* [x] Função poligon()
 * [ ] Função fill()
 * [x] Função save()
 * [ ] Função open()

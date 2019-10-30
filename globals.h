@@ -10,8 +10,8 @@
 #define EMAIL2  "marcellsantana@hotmail.com"
 
 // largua e altura padrao da imagem
-#define LARG 3
-#define ALT 3
+#define LARG 8
+#define ALT 8
 
 #define TAM_MAX_CMD 100         // tamanho maximo do comando (em caracteres)
 #define NUM_MAX_PRM 20          // número máximo de parametros
@@ -36,6 +36,11 @@ typedef struct matriz_t {
     int alt;
     struct cor_t** rgb;
 } matriz;
+
+typedef struct ponto_t {
+    int x;
+    int y;
+} ponto;
 
 // variáveis globais - serão utilizadas em praticamente todas as funções
 char** comand_list;      // string contendo todas as linhas do 'arquivo'
