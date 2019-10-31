@@ -3,6 +3,7 @@
 #include <string.h>
 #include "cpaint.h"
 #include "drawing.h"
+#include "globals.h"
 
 // Apresentação do programa
 void msg_inicial() {
@@ -144,7 +145,8 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
                 printf("larg: %d alt: %d\n", tela->larg, tela->alt);
                 printf("Retângulo fora do canvas.\n");
                 printf("Verifique o comando.\n");
-            } else {
+            } 
+            else {
                 rect(x, y, ty, tx);
             }
         }
@@ -155,7 +157,17 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
         } 
         else {
             // le arquivo de comandos
-            le_arquivo(cmd[1]);
+            //le_arquivo(cmd[1]);
+            modo_leitura = true;
+            arq_ent = fopen(cmd[1], "r");
+            if (arq_ent == NULL) {
+                printf("Arquivo não existe");
+            }
+            else {
+                fscanf(arq_ent, "%d", &num_linhas_arq_ent);
+                linha_atual_arq_ent = 2;
+            }
+            
         }
     }
     else if (strcmp(comando, "poligon") == 0) {
@@ -189,9 +201,9 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
     }
 }
 
-void le_arquivo(char arquivo[50]) {
-    printf("FUNCAO LEITURA COMANDOS: %s\n", arquivo);
-}
+//void le_arquivo(char arquivo[50]) {
+//    printf("FUNCAO LEITURA COMANDOS: %s\n", arquivo);
+//}
 
 void aloca_imagem(int larg, int alt) {
     int new_num_linhas = larg * alt + 3;

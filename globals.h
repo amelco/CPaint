@@ -2,6 +2,7 @@
 #ifndef globals_h
 #define globals_h
 
+#include <stdio.h>
 
 #define VERSION "0.1"
 #define AUTHOR1 "Andre Herman Freire Bezerra"
@@ -48,5 +49,9 @@ int num_linhas;          // número de linhas do arquivo (larg * alt)
 matriz* tela;
 cor cor_atual;
 bool isInit;
+bool modo_leitura;      // modo leitura de arquivo (sem interação do usuário)
+FILE* arq_ent;
+int num_linhas_arq_ent;
+int linha_atual_arq_ent
 
 #endif
