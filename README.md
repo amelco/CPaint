@@ -36,6 +36,7 @@ Funcionalidades (não)implementadas
 * [ ] Visualizar primitivas na tela após executar comando
 * [x] Utilizar git
 * [x] Utilizar valgrind
+* [ ] Aumentar espessura da linha
 
 *Projeto de ITP 2019.2*.  
 *Professor Júlio César*.  
