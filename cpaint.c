@@ -3,6 +3,7 @@
 #include <string.h>
 #include "cpaint.h"
 #include "drawing.h"
+#include "globals.h"
 
 // Apresentação do programa
 void msg_inicial() {
@@ -144,10 +145,19 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
                 printf("larg: %d alt: %d\n", tela->larg, tela->alt);
                 printf("Retângulo fora do canvas.\n");
                 printf("Verifique o comando.\n");
-            } else {
+            } 
+            else {
                 rect(x, y, ty, tx);
             }
-                
+        }
+    }
+    else if (strcmp(comando, "source") == 0) {
+        if (strcmp(cmd[1], "NULL") == 0) {
+            printf("Falta argumentos no comando. Veja ajuda.\n");
+        } 
+        else {
+            // le arquivo de comandos
+            le_arquivo(cmd[1]);
         }
     }
     else if (strcmp(comando, "poligon") == 0) {
@@ -158,31 +168,14 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             int n = atoi(cmd[1]) * 4;
             ponto pts[n][2];
             int i=2;
-            //while (i<=14) {
-            //    printf("n=%d => %s\n", i, cmd[i]);
-            //    i++;
-            //}
             int ip=0;
             for (int i=0; i<n; i+=4) {
                 pts[ip][0].x = atoi(cmd[i+2]);
                 pts[ip][0].y = atoi(cmd[i+3]);
                 pts[ip][1].x = atoi(cmd[i+4]);
                 pts[ip][1].y = atoi(cmd[i+5]);
-                //printf("pts[%d][0]=%d\npts[%d][0]=%d\npts[%d][0]=%d\npts[%d][0]=%d\n",
-                //        ip,pts[ip][0].x, 
-                //        ip,pts[ip][0].y, 
-                //        ip,pts[ip][1].x, 
-                //        ip,pts[ip][1].y 
-                //        );
-                //printf("cmd[%d]=%s\ncmd[%d]=%s\ncmd[%d]=%s\ncmd[%d]=%s\n",
-                //        i+2,cmd[i+2], 
-                //        i+3,cmd[i+3], 
-                //        i+4,cmd[i+4], 
-                //        i+5,cmd[i+5] 
-                //        );
                 ip++;
             }
-            //printf("SAIU\n");
             poligon(n, pts);
         }
     }
@@ -205,11 +198,26 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
     }
 }
 
+// abre arquivo de entrada
+void le_arquivo(char arquivo[50]) {
+    modo_leitura = true;
+    arq_ent = fopen(arquivo, "r");
+    if (arq_ent == NULL) {                  // verifica se arquivo existe
+        printf("Arquivo não existe\n");
+        modo_leitura = false;
+        cmd_i = -1;
+    }
+    else {
+        fscanf(arq_ent, "%d", &cmd_tot);    // armazena o numero total de comandos
+        cmd_i = 1;                          // inicializa o numero do comando a ser lido do arquivo de entrada
+    };
+}
+
 void aloca_imagem(int larg, int alt) {
     int new_num_linhas = larg * alt + 3;
     if (isInit) {
         // aloca command_list
-        comand_list = malloc(new_num_linhas * sizeof(char*));      // primeiramente, aloca INC_LINHAS linhas. Adiciona + INC_LINHAS caso necessário.
+        comand_list = malloc(new_num_linhas * sizeof(char*));
         for (int i=0; i<new_num_linhas; i++) {
             comand_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
         }
@@ -237,7 +245,7 @@ void aloca_imagem(int larg, int alt) {
         }
     } else {
         /*** Realoca memória ***/
-        comand_list = realloc(comand_list, new_num_linhas * sizeof(char*));      // primeiramente, aloca INC_LINHAS linhas. Adiciona + INC_LINHAS caso necessário.
+        comand_list = realloc(comand_list, new_num_linhas * sizeof(char*));
         for (int i=0; i<new_num_linhas; i++) {
             // printf("realloc linha=%d\n", i);
             comand_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
@@ -282,6 +290,7 @@ void help() {
     printf("save\tSalva arquivo de image\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
     printf("open\tAbre um arquivo de imagem\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
     printf("list\tMostra conteúdo do arquivo de imagem\n\tParâmetro (opcional): [remove_line_num BOOL]\n");
+    printf("source\tLê comandos de um arquivo\n\tParâmetro: [nome_do_arquivo.in TEXTO]\n");
     printf("quit\tSai do programa\n");
     printf("\n");
 }

@@ -9,7 +9,8 @@
 
 int main() {
     /*** Inicialização ***/
-    isInit = true;
+    isInit = true;          // é inicialização do programa
+    modo_leitura = false;   // programa não está no modo leitura de arquivo 
 
     aloca_imagem(LARG, ALT);
     
@@ -37,8 +38,23 @@ int main() {
         int num_param = 0;
 
         printf(">> ");
-        /** Para ler de um arquivo, basta mudar essa linha e ler do arquivo ao inves do teclado **/
-        scanf(" %[^\n]", &comando);
+        if (modo_leitura) {
+            if (cmd_i > cmd_tot) {
+                modo_leitura = false;
+                fclose(arq_ent);
+                cmd_i = 0;
+                printf("\b\b\b");
+                continue;
+            }
+            else {
+                fscanf(arq_ent, " %[^\n]", &comando);
+                cmd_i++;
+                printf("%s\n", comando);
+            }
+        } 
+        else {
+            scanf(" %[^\n]", &comando);
+        }
         t_comando(comando, cmd, &num_param);
         interpreta(num_param, cmd);
         // print_matriz_tela();

@@ -211,4 +211,5 @@ void save (char nome[]) {
         fprintf(arq, "%s", comand_list[i]);
     }
     fclose(arq);
+    printf("Arquivo salvo!\n");
 }

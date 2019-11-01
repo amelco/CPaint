@@ -9,6 +9,7 @@ void t_comando(char comando[TAM_MAX_CMD], char cmd[NUM_MAX_PRM][TAM_MAX_CMD], in
 void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]);
 void help();
 void quit();
+void le_arquivo(char arquivo[50]);
 void print_matriz_tela(); // para debug
 void aloca_imagem(int larg, int alt);
 void open(char nome[]);
