@@ -38,15 +38,18 @@ int main() {
         int num_param = 0;
 
         printf(">> ");
-        /** Para ler de um arquivo, basta mudar essa linha e ler do arquivo ao inves do teclado **/
         if (modo_leitura) {
-            if (linha_atual_arq_ent == num_linhas_arq_ent) {
+            if (cmd_i > cmd_tot) {
                 modo_leitura = false;
                 fclose(arq_ent);
+                cmd_i = 0;
+                printf("\b\b\b");
+                continue;
             }
             else {
                 fscanf(arq_ent, " %[^\n]", &comando);
-                fprintf("%s\n", comando);
+                cmd_i++;
+                printf("%s\n", comando);
             }
         } 
         else {

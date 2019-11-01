@@ -157,17 +157,7 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
         } 
         else {
             // le arquivo de comandos
-            //le_arquivo(cmd[1]);
-            modo_leitura = true;
-            arq_ent = fopen(cmd[1], "r");
-            if (arq_ent == NULL) {
-                printf("Arquivo não existe");
-            }
-            else {
-                fscanf(arq_ent, "%d", &num_linhas_arq_ent);
-                linha_atual_arq_ent = 2;
-            }
-            
+            le_arquivo(cmd[1]);
         }
     }
     else if (strcmp(comando, "poligon") == 0) {
@@ -201,15 +191,26 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
     }
 }
 
-//void le_arquivo(char arquivo[50]) {
-//    printf("FUNCAO LEITURA COMANDOS: %s\n", arquivo);
-//}
+// abre arquivo de entrada
+void le_arquivo(char arquivo[50]) {
+    modo_leitura = true;
+    arq_ent = fopen(arquivo, "r");
+    if (arq_ent == NULL) {                  // verifica se arquivo existe
+        printf("Arquivo não existe\n");
+        modo_leitura = false;
+        cmd_i = -1;
+    }
+    else {
+        fscanf(arq_ent, "%d", &cmd_tot);    // armazena o numero total de comandos
+        cmd_i = 1;                          // inicializa o numero do comando a ser lido do arquivo de entrada
+    };
+}
 
 void aloca_imagem(int larg, int alt) {
     int new_num_linhas = larg * alt + 3;
     if (isInit) {
         // aloca command_list
-        comand_list = malloc(new_num_linhas * sizeof(char*));      // primeiramente, aloca INC_LINHAS linhas. Adiciona + INC_LINHAS caso necessário.
+        comand_list = malloc(new_num_linhas * sizeof(char*));
         for (int i=0; i<new_num_linhas; i++) {
             comand_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
         }
@@ -282,7 +283,7 @@ void help() {
     printf("save\tSalva arquivo de image\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
     printf("open\tAbre um arquivo de imagem\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
     printf("list\tMostra conteúdo do arquivo de imagem\n\tParâmetro (opcional): [remove_line_num BOOL]\n");
-    printf("source\tLê comandos de um arquivo\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
+    printf("source\tLê comandos de um arquivo\n\tParâmetro: [nome_do_arquivo.in TEXTO]\n");
     printf("quit\tSai do programa\n");
     printf("\n");
 }
