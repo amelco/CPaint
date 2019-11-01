@@ -10,22 +10,27 @@ Para compilar execute os scripts:
 ```
 e execute com `./cpaint`.
 
+# CPaint em ação
+### Função `source`
+![](cpaint_source.gif)
+
 ## TODO
 Funcionalidades (não)implementadas
 * [x] Interpretador de comandos
-* [x] Função help()
-* [x] Função list()
-* [x] Função clear()
-* [x] Função image() com alocação dinâmica
-* [x] Função color()
-* [x] Função point()
-* [x] Função line()
-* [x] Função rect()
-* [ ] Função circle()
-* [x] Função poligon()
-* [ ] Função fill()
-* [x] Função save()
-* [x] Função open()
+* [x] Função help()     => mostra pequena documentação
+* [x] Função list()     => lista conteudo do canvas
+* [x] Função clear()    => limpa o canvas com a cor atual
+* [x] Função image()    => redimensiona o canvas
+* [x] Função color()    => muda cor do pincel
+* [x] Função point()    => desenha um ponto
+* [x] Função line()     => desenha uma linha
+* [x] Função rect()     => desenha um retângulo
+* [ ] Função circle()   => desenha um círculo
+* [x] Função poligon()  => desenha um polígono
+* [ ] Função fill()     => preenche um polígono com a cor atual
+* [x] Função save()     => grava o arquivo de imagem em disco
+* [x] Função open()     => abre um arquivo de imagem anterior
+* [x] Função source()   => executa uma lista de comando de um arquivo externo
 
 ### Opcional
 * [ ] Visualizar primitivas na tela após executar comando
