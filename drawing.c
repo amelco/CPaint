@@ -200,8 +200,6 @@ void open(char nome[]){
 }
 
 
-
-
 void save (char nome[]) {
     FILE* arq;
     arq = fopen(nome, "w");
@@ -213,3 +211,27 @@ void save (char nome[]) {
     fclose(arq);
     printf("Arquivo salvo!\n");
 }
+
+int fill(int x, int y, int r, int g, int b, int rr, int gg, int bb) {
+ 
+    int passo[8][2] = {{-1,0},{0,-1},{0,1},{1,0},{1,1},{-1,1},{1,-1},{-1,-1}};
+    if((tela->rgb[x][y].r == r && tela->rgb[x][y].g == g && tela->rgb[x][y].b == b) || 
+       (tela->rgb[x][y].r == rr && tela->rgb[x][y].g == gg && tela->rgb[x][y].b == bb))
+        return 0;
+ 
+    tela->rgb[x][y].r = r;
+    tela->rgb[x][y].g = g;
+    tela->rgb[x][y].b = b;
+ 
+    for(int k = 0; k < 8; k++ )
+    {
+        int l = x + passo[k][0];
+        int c = y + passo[k][1];
+ 
+        if((l >= 0) && (l < tela->alt) && (c >= 0) && (c < tela->larg))
+           
+            fill(l, c, r, g, b, rr, gg, bb);
+    }
+    return 1;
+}
+ 
