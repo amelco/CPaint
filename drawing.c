@@ -129,6 +129,35 @@ void poligon(int n, ponto pts[n][2]){
     }
 }
 
+void circle(int p, int q, int r) {
+    int x=0, y=r, d;
+
+    d = 3 - 2*r;
+
+    while (x < y) {
+        point( x+p,   y+q);
+        point(-x+p,  y+q );
+        point(-x+p, -y+q );
+        point( x+p,  -y+q);
+        point( y+p,   x+q);
+        point(-y+p,  x+q );
+        point(-y+p, -x+q );
+        point( y+p,  -x+q);
+
+        //encontra localização do próximo pixel a ser escaneado
+        if (d < 0) {
+            d = d + 4*x + 6;
+            x++;
+        }
+        else {
+            d = d + 4*(x - y) + 10;
+            x++;
+            y--;
+        }
+    }
+
+}
+
 // mostra o conteudo da lista de comandos
 void list() {
     for (int i=0; i<num_linhas; i++) {

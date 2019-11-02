@@ -179,6 +179,16 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             poligon(n, pts);
         }
     }
+    else if (strcmp(comando, "circle") == 0) {
+        if (strcmp(cmd[1], "NULL") == 0 || strcmp(cmd[2], "NULL") == 0 || strcmp(cmd[3], "NULL") == 0) {
+            printf("Falta argumentos no comando. Veja ajuda.\n");
+        } else {
+            int x = atoi(cmd[1]);
+            int y = atoi(cmd[2]);
+            int r = atoi(cmd[3]);
+            circle(x, y, r);
+        }
+    }
     else if (strcmp(comando, "save") == 0) {
         if (strcmp(cmd[1], "NULL") == 0) {
             printf("Falta argumentos no comando. Veja ajuda.\n");

@@ -1,4 +1,4 @@
-11
+13
 image 12 12
 clear 255 255 255
 color 0 0 0
@@ -8,5 +8,7 @@ line 5 3 8 5
 line 4 3 7 5
 line 7 5 1 11
 line 7 6 2 11
+color 0 0 255
+circle 5 5 5
 save check.ppm
 quit
