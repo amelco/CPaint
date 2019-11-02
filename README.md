@@ -25,7 +25,7 @@ Funcionalidades (não)implementadas
 * [x] Função point()    => desenha um ponto
 * [x] Função line()     => desenha uma linha
 * [x] Função rect()     => desenha um retângulo
-* [ ] Função circle()   => desenha um círculo
+* [x] Função circle()   => desenha um círculo
 * [x] Função poligon()  => desenha um polígono
 * [ ] Função fill()     => preenche um polígono com a cor atual
 * [x] Função save()     => grava o arquivo de imagem em disco
