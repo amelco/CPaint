@@ -108,7 +108,7 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
         } else {
             int x = atoi(cmd[1]);
             int y = atoi(cmd[2]);
-            if (x>tela->larg || y>tela->alt) {
+            if (x>g_tela->larg || y>g_tela->alt) {
                 printf("Ponto x ou y fora do canvas.\n");
                 printf("Verifique o comando.\n");
             } else {
@@ -124,13 +124,14 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             int y1 = atoi(cmd[2]);
             int x2 = atoi(cmd[3]);
             int y2 = atoi(cmd[4]);
-            if (x1>tela->larg || y1>tela->alt || x2>tela->larg || y2>tela->alt ||
+            if (x1>g_tela->larg || y1>g_tela->alt || x2>g_tela->larg || y2>g_tela->alt ||
                 x1<0          || y1<0         || x2<0          || y2<0           ) {
                 printf("Pontos x ou y fora do canvas.\n");
                 printf("Verifique o comando.\n");
             } else {
                 line(x1, y1, x2, y2);
-                cmd_n++;
+                //adiciona_comando_gfx();
+                g_cmd_n++;
             }
         }
     }
@@ -143,11 +144,11 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             int y  = atoi(cmd[2]);
             int tx = atoi(cmd[3]);
             int ty = atoi(cmd[4]);
-            if (x>tela->larg || y>tela->alt || x+tx>tela->larg || y+ty>tela->alt ||
+            if (x>g_tela->larg || y>g_tela->alt || x+tx>g_tela->larg || y+ty>g_tela->alt ||
                 x<0          || y<0  ) {
                 printf("x: %d y: %d\n", x, y);
                 printf("x+tx: %d y+ty: %d\n", x+tx, y+ty);
-                printf("larg: %d alt: %d\n", tela->larg, tela->alt);
+                printf("larg: %d alt: %d\n", g_tela->larg, g_tela->alt);
                 printf("Retângulo fora do canvas.\n");
                 printf("Verifique o comando.\n");
             } 
@@ -215,80 +216,80 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
 
 // abre arquivo de entrada
 void le_arquivo(char arquivo[50]) {
-    modo_leitura = True;
-    arq_ent = fopen(arquivo, "r");
-    if (arq_ent == NULL) {                  // verifica se arquivo existe
+    g_modo_leitura = True;
+    g_arq_ent = fopen(arquivo, "r");
+    if (g_arq_ent == NULL) {                  // verifica se arquivo existe
         printf("Arquivo não existe\n");
-        modo_leitura = False;
+        g_modo_leitura = False;
         cmd_i = -1;
     }
     else {
-        fscanf(arq_ent, "%d", &cmd_tot);    // armazena o numero total de comandos
+        fscanf(g_arq_ent, "%d", &g_cmd_tot);    // armazena o numero total de comandos
         cmd_i = 1;                          // inicializa o numero do comando a ser lido do arquivo de entrada
     };
 }
 
 void aloca_imagem(int larg, int alt) {
-    int new_num_linhas = larg * alt + 3;
-    if (isInit) {
+    int new_g_num_linhas = larg * alt + 3;
+    if (g_is_init) {
         // aloca command_list
-        ppm_command_list = malloc(new_num_linhas * sizeof(char*));
-        for (int i=0; i<new_num_linhas; i++) {
-            ppm_command_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
+        g_ppm_command_list = malloc(new_g_num_linhas * sizeof(char*));
+        for (int i=0; i<new_g_num_linhas; i++) {
+            g_ppm_command_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
         }
         // inicializa ponteiro
         for (int i=0; i<larg; i++) {
             for (int j=0; j<alt; j++) {
-                ppm_command_list[i][j] = '\0';
+                g_ppm_command_list[i][j] = '\0';
             }
         }
-        // aloca matriz tela
-        tela = malloc(sizeof(matriz));
-        tela->larg = larg;
-        tela->alt = alt;
-        tela->rgb = malloc(larg * sizeof(cor));
+        // aloca matriz g_tela
+        g_tela = malloc(sizeof(matriz));
+        g_tela->larg = larg;
+        g_tela->alt = alt;
+        g_tela->rgb = malloc(larg * sizeof(cor));
         for (int i=0; i<larg; i++) {
-            tela->rgb[i] = malloc(alt * sizeof(cor));
+            g_tela->rgb[i] = malloc(alt * sizeof(cor));
         }
         // inicializa ponteiro
         for (int i=0; i<larg; i++) {
             for (int j=0; j<alt; j++) {
-                tela->rgb[i][j].r = 0;
-                tela->rgb[i][j].g = 0;
-                tela->rgb[i][j].b = 0;
+                g_tela->rgb[i][j].r = 0;
+                g_tela->rgb[i][j].g = 0;
+                g_tela->rgb[i][j].b = 0;
             }
         }
     } else {
         /*** Realoca memória ***/
-        ppm_command_list = realloc(ppm_command_list, new_num_linhas * sizeof(char*));
-        for (int i=0; i<new_num_linhas; i++) {
+        g_ppm_command_list = realloc(g_ppm_command_list, new_g_num_linhas * sizeof(char*));
+        for (int i=0; i<new_g_num_linhas; i++) {
             // printf("realloc linha=%d\n", i);
-            ppm_command_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
+            g_ppm_command_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
         }
         // inicializa ponteiro
-        for (int i=tela->larg; i<larg; i++) {
-            for (int j=tela->alt; j<alt; j++) {
-                ppm_command_list[i][j] = '\0';
+        for (int i=g_tela->larg; i<larg; i++) {
+            for (int j=g_tela->alt; j<alt; j++) {
+                g_ppm_command_list[i][j] = '\0';
             }
         }
-        // aloca matriz tela
-        // tela = realloc(tela, sizeof(matriz));
-        tela->rgb = realloc(tela->rgb, larg * sizeof(cor));
+        // aloca matriz g_tela
+        // g_tela = realloc(g_tela, sizeof(matriz));
+        g_tela->rgb = realloc(g_tela->rgb, larg * sizeof(cor));
         for (int i=0; i<larg; i++) {
-            tela->rgb[i] = malloc(alt * sizeof(cor));
+            g_tela->rgb[i] = malloc(alt * sizeof(cor));
         }
         // inicializa ponteiro
-        for (int i=tela->larg; i<larg; i++) {
-            for (int j=tela->alt; j<alt; j++) {
-                tela->rgb[i][j].r = 0;
-                tela->rgb[i][j].g = 0;
-                tela->rgb[i][j].b = 0;
+        for (int i=g_tela->larg; i<larg; i++) {
+            for (int j=g_tela->alt; j<alt; j++) {
+                g_tela->rgb[i][j].r = 0;
+                g_tela->rgb[i][j].g = 0;
+                g_tela->rgb[i][j].b = 0;
             }
         }
-        tela->larg = larg;
-        tela->alt = alt;
+        g_tela->larg = larg;
+        g_tela->alt = alt;
     }
-    num_linhas = new_num_linhas;
+    g_num_linhas = new_g_num_linhas;
 }
 
 // mostra comandos disponíveis e pequena documentação
@@ -312,29 +313,29 @@ void help() {
 
 // libera memoria alocada e sai do programa
 void quit() {
-    int n = tela->alt * tela->larg;
-    for (int i=0; i<tela->larg; i++) {
-        free(tela->rgb[i]);
+    int n = g_tela->alt * g_tela->larg;
+    for (int i=0; i<g_tela->larg; i++) {
+        free(g_tela->rgb[i]);
     }
-    free(tela->rgb);
-    free(tela);
+    free(g_tela->rgb);
+    free(g_tela);
     
     for (int i=0; i<n; i++) {
         // printf("%d\n", i);
-        free(ppm_command_list[i]);
+        free(g_ppm_command_list[i]);
     }
-    free(ppm_command_list);  
+    free(g_ppm_command_list);  
 
     printf("\nAté!\n\n");
     exit(0);
 }
 
 /** funcoes debug **/
-void print_matriz_tela() {
-    for (int i=0; i<tela->larg; i++) {
+void print_matriz_g_tela() {
+    for (int i=0; i<g_tela->larg; i++) {
         printf("|");
-        for (int j=0; j<tela->alt; j++) {
-            printf("%3d %3d %3d, ", tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
+        for (int j=0; j<g_tela->alt; j++) {
+            printf("%3d %3d %3d, ", g_tela->rgb[i][j].r, g_tela->rgb[i][j].g, g_tela->rgb[i][j].b);
         }
         printf("\b\b|\n");
     }
@@ -359,8 +360,8 @@ void must_init(bool test, const char *descricao)
 void init_allegro(int larg, int alt) {
     int res_x = 640;
     int res_y = 480;
-    escala_x = res_x/larg;
-    escala_y = res_y/alt;
+    g_escala_x = res_x/larg;
+    g_escala_y = res_y/alt;
 
     must_init(al_init(), " allegro");
     must_init(al_install_keyboard(), "teclado");
@@ -393,9 +394,9 @@ void init_allegro(int larg, int alt) {
 // traduzidos para o allegro
 void desenha() {
     int i = 0;
-    // cmd_i -> ultimo comando de ppm_command_list**
-    while (i < cmd_n) {
-        printf("%s\n", ppm_command_list[i+3]);
+    // cmd_i -> ultimo comando de g_ppm_command_list**
+    while (i < g_cmd_n) {
+        printf("%s\n", g_ppm_command_list[i+3]);
         i++;
     }
 }

@@ -7,25 +7,25 @@
 #include "cpaint.h"
 
 // cria o cabeçalho da imagem
-// realoca matriz tela e command list
+// realoca matriz g_tela e command list
 void image(int larg, int alt) {
-    // num_linhas = larg*alt + 3;
+    // g_num_linhas = larg*alt + 3;
     aloca_imagem(larg, alt);
-    strcpy(ppm_command_list[0], "P3\n");
-    sprintf(ppm_command_list[1], "%d %d\n", larg, alt);
-    strcpy(ppm_command_list[2], "255\n");
-    clear(&cor_atual);
+    strcpy(g_ppm_command_list[0], "P3\n");
+    sprintf(g_ppm_command_list[1], "%d %d\n", larg, alt);
+    strcpy(g_ppm_command_list[2], "255\n");
+    clear(&g_cor_atual);
 }
 
-// limpa a tela com uma cor especificada
+// limpa a g_tela com uma cor especificada
 void clear(cor* c) {
-    for (int i=0; i<tela->larg; i++) {
-        for (int j=0; j<tela->alt; j++) {
-            // printf("%d\n", tela->rgb[i][j].r);
-            tela->rgb[i][j].r = c->r; 
-            tela->rgb[i][j].g = c->g;
-            tela->rgb[i][j].b = c->b;
-            // printf("%d %d: %d %d %d\n", i,j, tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
+    for (int i=0; i<g_tela->larg; i++) {
+        for (int j=0; j<g_tela->alt; j++) {
+            // printf("%d\n", g_tela->rgb[i][j].r);
+            g_tela->rgb[i][j].r = c->r; 
+            g_tela->rgb[i][j].g = c->g;
+            g_tela->rgb[i][j].b = c->b;
+            // printf("%d %d: %d %d %d\n", i,j, g_tela->rgb[i][j].r, g_tela->rgb[i][j].g, g_tela->rgb[i][j].b);
         }
     }
     update();
@@ -33,14 +33,14 @@ void clear(cor* c) {
 
 // muda a cor atual
 void color(cor* c) {
-    cor_atual.r = c->r;
-    cor_atual.g = c->g;
-    cor_atual.b = c->b;
+    g_cor_atual.r = c->r;
+    g_cor_atual.g = c->g;
+    g_cor_atual.b = c->b;
 }
 
-// desenha um ponto com a cor cor_atual
+// desenha um ponto com a cor g_cor_atual
 void point(int x, int y) {
-    tela->rgb[x][y] = cor_atual;
+    g_tela->rgb[x][y] = g_cor_atual;
     update();
 }
 
@@ -160,21 +160,21 @@ void circle(int p, int q, int r) {
 
 // mostra o conteudo da lista de comandos
 void list() {
-    for (int i=0; i<num_linhas; i++) {
-        printf("%s", ppm_command_list[i]);
+    for (int i=0; i<g_num_linhas; i++) {
+        printf("%s", g_ppm_command_list[i]);
     }
     printf("\n");
-    printf("Cor atual: [%3d][%3d][%3d]\n\n", cor_atual.r, cor_atual.g, cor_atual.b);
+    printf("Cor atual: [%3d][%3d][%3d]\n\n", g_cor_atual.r, g_cor_atual.g, g_cor_atual.b);
 }
 
-// atualiza os dados do ppm_command_list com o que está na matriz
+// atualiza os dados do g_ppm_command_list com o que está na matriz
 void update() {
     int linha = 3;
     
-    for (int i=0; i<tela->larg; i++) {
-        for (int j=0; j<tela->alt; j++) {
-            // printf("l %d: %d %d: %d %d %d\n", linha, i,j, tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
-            sprintf(ppm_command_list[linha], "%d %d %d\n", tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
+    for (int i=0; i<g_tela->larg; i++) {
+        for (int j=0; j<g_tela->alt; j++) {
+            // printf("l %d: %d %d: %d %d %d\n", linha, i,j, g_tela->rgb[i][j].r, g_tela->rgb[i][j].g, g_tela->rgb[i][j].b);
+            sprintf(g_ppm_command_list[linha], "%d %d %d\n", g_tela->rgb[i][j].r, g_tela->rgb[i][j].g, g_tela->rgb[i][j].b);
             linha++;
         }
     }
@@ -211,7 +211,7 @@ void d_open(char nome[]){
     aloca_imagem(ncol, nlin);
     
     for (int i = 0; i < nlin*ncol+3; i++) {
-        strcpy(ppm_command_list[i], Linha[i]);
+        strcpy(g_ppm_command_list[i], Linha[i]);
     }
 
     fseek( arquivo, 0, SEEK_SET);
@@ -221,7 +221,7 @@ void d_open(char nome[]){
 
     for (int i = 0; i < nlin; i++) {
         for (int j = 0; j < ncol; j++) {
-            fscanf(arquivo, "%d %d %d", &tela->rgb[i][j].r, &tela->rgb[i][j].g, &tela->rgb[i][j].b);
+            fscanf(arquivo, "%d %d %d", &g_tela->rgb[i][j].r, &g_tela->rgb[i][j].g, &g_tela->rgb[i][j].b);
         }
     }
 
@@ -235,9 +235,9 @@ void save (char nome[]) {
     FILE* arq;
     arq = fopen(nome, "w");
 
-    for (int i=0; i<num_linhas; i++) {
-        //printf("%s", ppm_command_list[i]);
-        fprintf(arq, "%s", ppm_command_list[i]);
+    for (int i=0; i<g_num_linhas; i++) {
+        //printf("%s", g_ppm_command_list[i]);
+        fprintf(arq, "%s", g_ppm_command_list[i]);
     }
     fclose(arq);
     printf("Arquivo salvo!\n");

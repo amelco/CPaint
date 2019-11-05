@@ -17,6 +17,6 @@ void fill(int x, int y);
 void save(char nome[]);
 void d_open(char nome[]);
 void list();
-void update();      // atualiza 'arquivo'. Passa as informações da matriz tela para a matriz do arquivo. É chamada sempre que a matriz for alterada
+void update();      // atualiza 'arquivo'. Passa as informações da matriz g_tela para a matriz do arquivo. É chamada sempre que a matriz for alterada
 
 #endif

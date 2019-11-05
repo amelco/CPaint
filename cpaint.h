@@ -13,7 +13,7 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]);
 void help();
 void quit();
 void le_arquivo(char arquivo[50]);
-void print_matriz_tela(); // para debug
+void print_matriz_g_tela(); // para debug
 void aloca_imagem(int larg, int alt);
 void d_open(char nome[]);
 void desenha();

@@ -31,7 +31,7 @@ typedef struct cor_t {
     int b;
  } cor;
 
-// struct tela com a matriz de cores (ex. tela->rgb[0][0].r = 255; tela->rgb[0][0].g = 0; tela->rgb[0][0].b = 0; )
+// struct g_tela com a matriz de cores (ex. g_tela->rgb[0][0].r = 255; g_tela->rgb[0][0].g = 0; g_tela->rgb[0][0].b = 0; )
 typedef struct matriz_t {
     int larg;
     int alt;
@@ -44,18 +44,19 @@ typedef struct ponto_t {
 } ponto;
 
 // variáveis globais - serão utilizadas em praticamente todas as funções
-char** ppm_command_list;         // string contendo todas as linhas do 'arquivo'
-int cmd_n;                  // número do comando atual
-int num_linhas;             // número de linhas do arquivo (larg * alt)
-matriz* tela;
-cor cor_atual;
-d_bool isInit;
-d_bool modo_leitura;          // modo leitura de arquivo (sem interação do usuário)
-FILE* arq_ent;
-int cmd_tot;                // numero total de comandos do arquivo de entrada (deve estar na primeira linha do arquivo)
-int cmd_i;                  // comando atual do cursor de leitura do arquivo
+char** g_ppm_command_list;        // string contendo todas as linhas do 'arquivo'
+char g_gfx_command_list[100][100];// string contendo comandos do allegro
+int g_cmd_n;                      // número do comando atual
+int g_num_linhas;                 // número de linhas do arquivo (larg * alt)
+matriz* g_tela;
+cor g_cor_atual;
+d_bool g_is_init;
+d_bool g_modo_leitura;            // modo leitura de arquivo (sem interação do usuário)
+FILE* g_arq_ent;
+int g_cmd_tot;                    // numero total de comandos do arquivo de entrada (deve estar na primeira linha do arquivo)
+int cmd_i;                      // comando atual do cursor de leitura do arquivo
 
-float escala_x;
-float escala_y;
+float g_escala_x;
+float g_escala_y;
 
 #endif
