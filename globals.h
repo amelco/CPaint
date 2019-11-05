@@ -18,11 +18,11 @@
 #define NUM_MAX_PRM 20          // número máximo de parametros
 #define INC_LINHAS 12           // incremento de linhas do arquivo
 
-// define o tipo booleano
-//typedef enum bool_t {
-//    false=0,
-//    true
-//} bool;
+/* define o tipo booleano */
+typedef enum bool_t {
+    False=0,
+    True
+} d_bool;
 
 // define tipo "cor" com os valores de vermelho (r), verde (g) e azul (b)
 typedef struct cor_t {
@@ -44,14 +44,18 @@ typedef struct ponto_t {
 } ponto;
 
 // variáveis globais - serão utilizadas em praticamente todas as funções
-char** comand_list;         // string contendo todas as linhas do 'arquivo'
+char** ppm_command_list;         // string contendo todas as linhas do 'arquivo'
+int cmd_n;                  // número do comando atual
 int num_linhas;             // número de linhas do arquivo (larg * alt)
 matriz* tela;
 cor cor_atual;
-bool isInit;
-bool modo_leitura;          // modo leitura de arquivo (sem interação do usuário)
+d_bool isInit;
+d_bool modo_leitura;          // modo leitura de arquivo (sem interação do usuário)
 FILE* arq_ent;
 int cmd_tot;                // numero total de comandos do arquivo de entrada (deve estar na primeira linha do arquivo)
-int cmd_i;    // comando atual do cursor de leitura do arquivo
+int cmd_i;                  // comando atual do cursor de leitura do arquivo
+
+float escala_x;
+float escala_y;
 
 #endif

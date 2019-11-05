@@ -3,6 +3,9 @@
 #define cpaint_h
 
 #include "globals.h"
+#include <allegro5/allegro5.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_primitives.h>
 
 void msg_inicial();
 void t_comando(char comando[TAM_MAX_CMD], char cmd[NUM_MAX_PRM][TAM_MAX_CMD], int* np);
@@ -12,11 +15,13 @@ void quit();
 void le_arquivo(char arquivo[50]);
 void print_matriz_tela(); // para debug
 void aloca_imagem(int larg, int alt);
-void open(char nome[]);
+void d_open(char nome[]);
+void desenha();
 
 /* ALLEGRO STUFF */
 
 void init_allegro();
+
 ALLEGRO_TIMER* timer;
 ALLEGRO_EVENT_QUEUE* queue;
 ALLEGRO_DISPLAY* disp;

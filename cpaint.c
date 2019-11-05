@@ -3,7 +3,6 @@
 #include <string.h>
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
-//#include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
 
 #include "cpaint.h"
@@ -59,8 +58,8 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
         help();
     } 
     else if (strcmp(comando, "list") == 0) {
-        bool line_num = true;
-        if (strcmp(cmd[1],"NULL") != 0) line_num = false;
+        bool line_num = True;
+        if (strcmp(cmd[1],"NULL") != 0) line_num = False;
         list();
     }
     else if (strcmp(comando, "image") == 0) {
@@ -131,6 +130,7 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
                 printf("Verifique o comando.\n");
             } else {
                 line(x1, y1, x2, y2);
+                cmd_n++;
             }
         }
     }
@@ -205,7 +205,7 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
         if (strcmp(cmd[1], "NULL") == 0) {
             printf("Falta argumentos no comando. Veja ajuda.\n");
         } else {
-            open(cmd[1]);
+            d_open(cmd[1]);
         }
     }
     else {
@@ -215,11 +215,11 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
 
 // abre arquivo de entrada
 void le_arquivo(char arquivo[50]) {
-    modo_leitura = true;
+    modo_leitura = True;
     arq_ent = fopen(arquivo, "r");
     if (arq_ent == NULL) {                  // verifica se arquivo existe
         printf("Arquivo não existe\n");
-        modo_leitura = false;
+        modo_leitura = False;
         cmd_i = -1;
     }
     else {
@@ -232,14 +232,14 @@ void aloca_imagem(int larg, int alt) {
     int new_num_linhas = larg * alt + 3;
     if (isInit) {
         // aloca command_list
-        comand_list = malloc(new_num_linhas * sizeof(char*));
+        ppm_command_list = malloc(new_num_linhas * sizeof(char*));
         for (int i=0; i<new_num_linhas; i++) {
-            comand_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
+            ppm_command_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
         }
         // inicializa ponteiro
         for (int i=0; i<larg; i++) {
             for (int j=0; j<alt; j++) {
-                comand_list[i][j] = '\0';
+                ppm_command_list[i][j] = '\0';
             }
         }
         // aloca matriz tela
@@ -260,15 +260,15 @@ void aloca_imagem(int larg, int alt) {
         }
     } else {
         /*** Realoca memória ***/
-        comand_list = realloc(comand_list, new_num_linhas * sizeof(char*));
+        ppm_command_list = realloc(ppm_command_list, new_num_linhas * sizeof(char*));
         for (int i=0; i<new_num_linhas; i++) {
             // printf("realloc linha=%d\n", i);
-            comand_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
+            ppm_command_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
         }
         // inicializa ponteiro
         for (int i=tela->larg; i<larg; i++) {
             for (int j=tela->alt; j<alt; j++) {
-                comand_list[i][j] = '\0';
+                ppm_command_list[i][j] = '\0';
             }
         }
         // aloca matriz tela
@@ -321,9 +321,9 @@ void quit() {
     
     for (int i=0; i<n; i++) {
         // printf("%d\n", i);
-        free(comand_list[i]);
+        free(ppm_command_list[i]);
     }
-    free(comand_list);  
+    free(ppm_command_list);  
 
     printf("\nAté!\n\n");
     exit(0);
@@ -356,7 +356,12 @@ void must_init(bool test, const char *descricao)
 // Inicializa janela gráfica
 // Tamanho: 640 x 480. 
 // TODO: Escalonar desenhos.
-void init_allegro() {
+void init_allegro(int larg, int alt) {
+    int res_x = 640;
+    int res_y = 480;
+    escala_x = res_x/larg;
+    escala_y = res_y/alt;
+
     must_init(al_init(), " allegro");
     must_init(al_install_keyboard(), "teclado");
     timer = al_create_timer(1.0 / 30.0);
@@ -365,7 +370,7 @@ void init_allegro() {
     queue = al_create_event_queue();
     must_init(queue, "queue");
 
-    disp = al_create_display(640, 480);
+    disp = al_create_display(res_x, res_y);
     must_init(disp, "display");
 
     font = al_create_builtin_font();
@@ -377,10 +382,20 @@ void init_allegro() {
     al_register_event_source(queue, al_get_display_event_source(disp));
     al_register_event_source(queue, al_get_timer_event_source(timer));
 
-    bool done = false;
-    bool redraw = true;
+    bool done = False;
+    bool redraw = True;
     ALLEGRO_EVENT event;
     
     al_start_timer(timer);
 }
 
+// percorre a lista de comandos e executa os comandos do cpaint
+// traduzidos para o allegro
+void desenha() {
+    int i = 0;
+    // cmd_i -> ultimo comando de ppm_command_list**
+    while (i < cmd_n) {
+        printf("%s\n", ppm_command_list[i+3]);
+        i++;
+    }
+}

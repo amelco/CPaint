@@ -15,7 +15,7 @@ void circle(int x, int y, int r);
 void poligon(int n, ponto pts[n][2]);
 void fill(int x, int y);
 void save(char nome[]);
-void open(char nome[]);
+void d_open(char nome[]);
 void list();
 void update();      // atualiza 'arquivo'. Passa as informações da matriz tela para a matriz do arquivo. É chamada sempre que a matriz for alterada
 

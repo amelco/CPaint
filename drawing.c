@@ -11,9 +11,9 @@
 void image(int larg, int alt) {
     // num_linhas = larg*alt + 3;
     aloca_imagem(larg, alt);
-    strcpy(comand_list[0], "P3\n");
-    sprintf(comand_list[1], "%d %d\n", larg, alt);
-    strcpy(comand_list[2], "255\n");
+    strcpy(ppm_command_list[0], "P3\n");
+    sprintf(ppm_command_list[1], "%d %d\n", larg, alt);
+    strcpy(ppm_command_list[2], "255\n");
     clear(&cor_atual);
 }
 
@@ -161,25 +161,25 @@ void circle(int p, int q, int r) {
 // mostra o conteudo da lista de comandos
 void list() {
     for (int i=0; i<num_linhas; i++) {
-        printf("%s", comand_list[i]);
+        printf("%s", ppm_command_list[i]);
     }
     printf("\n");
     printf("Cor atual: [%3d][%3d][%3d]\n\n", cor_atual.r, cor_atual.g, cor_atual.b);
 }
 
-// atualiza os dados do comand_list com o que está na matriz
+// atualiza os dados do ppm_command_list com o que está na matriz
 void update() {
     int linha = 3;
     
     for (int i=0; i<tela->larg; i++) {
         for (int j=0; j<tela->alt; j++) {
             // printf("l %d: %d %d: %d %d %d\n", linha, i,j, tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
-            sprintf(comand_list[linha], "%d %d %d\n", tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
+            sprintf(ppm_command_list[linha], "%d %d %d\n", tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
             linha++;
         }
     }
 }
-void open(char nome[]){
+void d_open(char nome[]){
     FILE* arquivo;
     arquivo = fopen(nome, "r");
 
@@ -211,7 +211,7 @@ void open(char nome[]){
     aloca_imagem(ncol, nlin);
     
     for (int i = 0; i < nlin*ncol+3; i++) {
-        strcpy(comand_list[i], Linha[i]);
+        strcpy(ppm_command_list[i], Linha[i]);
     }
 
     fseek( arquivo, 0, SEEK_SET);
@@ -236,8 +236,8 @@ void save (char nome[]) {
     arq = fopen(nome, "w");
 
     for (int i=0; i<num_linhas; i++) {
-        //printf("%s", comand_list[i]);
-        fprintf(arq, "%s", comand_list[i]);
+        //printf("%s", ppm_command_list[i]);
+        fprintf(arq, "%s", ppm_command_list[i]);
     }
     fclose(arq);
     printf("Arquivo salvo!\n");
