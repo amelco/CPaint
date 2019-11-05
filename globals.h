@@ -19,10 +19,10 @@
 #define INC_LINHAS 12           // incremento de linhas do arquivo
 
 // define o tipo booleano
-typedef enum bool_t {
-    false=0,
-    true
-} bool;
+//typedef enum bool_t {
+//    false=0,
+//    true
+//} bool;
 
 // define tipo "cor" com os valores de vermelho (r), verde (g) e azul (b)
 typedef struct cor_t {

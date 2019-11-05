@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <allegro5/allegro5.h>
+#include <allegro5/allegro_font.h>
+//#include <allegro5/allegro_image.h>
+#include <allegro5/allegro_primitives.h>
+
 #include "cpaint.h"
 #include "drawing.h"
 #include "globals.h"
@@ -335,3 +340,47 @@ void print_matriz_tela() {
     }
 
 }
+
+// Funcao de inicializacao de partes do allegro. 
+// Sai do programa com messagem de erro se inicialização falhar
+// entrada: teste -> função a inicializar
+//          description -> string com descriçao da função a inicializar
+void must_init(bool test, const char *descricao)
+{
+    if (test) return;
+
+    printf("Não foi possível inicializar %s\n", descricao);
+    exit(1);
+}
+
+// Inicializa janela gráfica
+// Tamanho: 640 x 480. 
+// TODO: Escalonar desenhos.
+void init_allegro() {
+    must_init(al_init(), " allegro");
+    must_init(al_install_keyboard(), "teclado");
+    timer = al_create_timer(1.0 / 30.0);
+    must_init(timer, "timer");
+
+    queue = al_create_event_queue();
+    must_init(queue, "queue");
+
+    disp = al_create_display(640, 480);
+    must_init(disp, "display");
+
+    font = al_create_builtin_font();
+    must_init(font, "font");
+
+    must_init(al_init_primitives_addon(), "primitives addon");
+
+    al_register_event_source(queue, al_get_keyboard_event_source());
+    al_register_event_source(queue, al_get_display_event_source(disp));
+    al_register_event_source(queue, al_get_timer_event_source(timer));
+
+    bool done = false;
+    bool redraw = true;
+    ALLEGRO_EVENT event;
+    
+    al_start_timer(timer);
+}
+

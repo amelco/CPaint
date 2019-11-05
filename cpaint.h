@@ -14,4 +14,12 @@ void print_matriz_tela(); // para debug
 void aloca_imagem(int larg, int alt);
 void open(char nome[]);
 
+/* ALLEGRO STUFF */
+
+void init_allegro();
+ALLEGRO_TIMER* timer;
+ALLEGRO_EVENT_QUEUE* queue;
+ALLEGRO_DISPLAY* disp;
+ALLEGRO_FONT* font;
+
 #endif
