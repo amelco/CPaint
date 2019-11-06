@@ -1,3 +1,4 @@
+#include <allegro5/display.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -325,6 +326,8 @@ void quit() {
     }
     free(g_ppm_command_list);  
 
+    al_destroy_display(disp);
+
     printf("\nAté!\n\n");
     exit(0);
 }
@@ -392,12 +395,7 @@ void init_allegro(int larg, int alt) {
 // percorre a lista de comandos e executa os comandos do cpaint
 // traduzidos para o allegro
 void desenha() {
-    int i = 0;
-    // cmd_i -> ultimo comando de g_ppm_command_list**
-    while (i < g_cmd_n) {
-        printf("%s\n", g_ppm_command_list[i+3]);
-        i++;
-    }
+
 }
 
 // adiciona comando à lista de comandos do allegro
