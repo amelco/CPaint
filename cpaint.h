@@ -21,6 +21,8 @@ void desenha();
 /* ALLEGRO STUFF */
 
 void init_allegro();
+void adiciona_comando_gfx(char comando[NUM_MAX_PRM][TAM_MAX_CMD]);
+
 
 ALLEGRO_TIMER* timer;
 ALLEGRO_EVENT_QUEUE* queue;

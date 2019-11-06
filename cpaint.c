@@ -130,8 +130,7 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
                 printf("Verifique o comando.\n");
             } else {
                 line(x1, y1, x2, y2);
-                //adiciona_comando_gfx();
-                g_cmd_n++;
+                adiciona_comando_gfx(cmd);
             }
         }
     }
@@ -399,4 +398,12 @@ void desenha() {
         printf("%s\n", g_ppm_command_list[i+3]);
         i++;
     }
+}
+
+// adiciona comando à lista de comandos do allegro
+void adiciona_comando_gfx(char comando[NUM_MAX_PRM][TAM_MAX_CMD]) {
+    if (strcmp(comando[1],"line") == 0) {
+        //g_ppm_command_list[g_mmd_n] = 
+    }
+    g_cmd_n++;
 }

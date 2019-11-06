@@ -43,18 +43,18 @@ typedef struct ponto_t {
     int y;
 } ponto;
 
-// variáveis globais - serão utilizadas em praticamente todas as funções
-char** g_ppm_command_list;        // string contendo todas as linhas do 'arquivo'
-char g_gfx_command_list[100][100];// string contendo comandos do allegro
-int g_cmd_n;                      // número do comando atual
-int g_num_linhas;                 // número de linhas do arquivo (larg * alt)
+/* variáveis globais - serão utilizadas em praticamente todas as funções */
+char** g_ppm_command_list;                  // string contendo todas as linhas do 'arquivo'
+char g_gfx_command_list[100][TAM_MAX_CMD];  // string contendo comandos do allegro
+int g_cmd_n;                                // número do comando atual
+int g_num_linhas;                           // número de linhas do arquivo (larg * alt)
 matriz* g_tela;
 cor g_cor_atual;
 d_bool g_is_init;
-d_bool g_modo_leitura;            // modo leitura de arquivo (sem interação do usuário)
+d_bool g_modo_leitura;                      // modo leitura de arquivo (sem interação do usuário)
 FILE* g_arq_ent;
-int g_cmd_tot;                    // numero total de comandos do arquivo de entrada (deve estar na primeira linha do arquivo)
-int cmd_i;                      // comando atual do cursor de leitura do arquivo
+int g_cmd_tot;                              // numero total de comandos do arquivo de entrada (deve estar na primeira linha do arquivo)
+int cmd_i;                                  // comando atual do cursor de leitura do arquivo
 
 float g_escala_x;
 float g_escala_y;
