@@ -395,7 +395,7 @@ void init_allegro(int larg, int alt) {
 // percorre a lista de comandos e executa os comandos do cpaint
 // traduzidos para o allegro
 void desenha() {
-
+// estudar al_set_target_bitmap e al_put_pixel
 }
 
 // adiciona comando à lista de comandos do allegro
