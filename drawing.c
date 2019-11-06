@@ -134,7 +134,7 @@ void circle(int p, int q, int r) {
 
     d = 3 - 2*r;
 
-    while (x < y) {
+    while (x <= y) {
         point( x+p,   y+q);
         point(-x+p,  y+q );
         point(-x+p, -y+q );

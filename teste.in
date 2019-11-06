@@ -6,6 +6,6 @@ circle 20 45 10
 line 65 34 2 56
 poligon 3 45 67 34 12 34 12 2 3 2 3 45 67
 color 255 0 0
-fill 45 2
+fill 15 15
 save testeeee.ppm
 quit
