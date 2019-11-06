@@ -13,7 +13,7 @@ void line(int x1, int y1, int x2, int y2);
 void rect(int x, int y, int tam_x, int tam_y);
 void circle(int x, int y, int r);
 void poligon(int n, ponto pts[n][2]);
-int fill(int x, int y, int r, int g, int b, int rr, int gg, int bb);
+void fill(int x, int y, int r, int g, int b, int rr, int gg, int bb);
 void save(char nome[]);
 void open(char nome[]);
 void list();

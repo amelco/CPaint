@@ -194,15 +194,15 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
         }
     }
     else if(strcmp(comando,"fill") == 0){
-        if(strcmp(cmd[1], "NULL") == 0 || strcmp(cmd[2], "NULL") == 0 || strcmp(cmd[3], "NULL") == 0 || strcmp(cmd[4], "NULL") == 0 || strcmp(cmd[5], "NULL") == 0) {
+        if(strcmp(cmd[1], "NULL") == 0 || strcmp(cmd[2], "NULL") == 0) {
             printf("Falta argumentos no comando. Veja ajuda.\n");
         }
         else{
             int x  = atoi(cmd[1]);
             int y  = atoi(cmd[2]);
-            int r = atoi(cmd[3]);
-            int g = atoi(cmd[4]);
-            int b = atoi(cmd[5]);
+            int r = cor_atual.r;
+            int g = cor_atual.g;
+            int b = cor_atual.b;
             int rr = tela->rgb[x][y].r;
             int gg = tela->rgb[x][y].g;
             int bb = tela->rgb[x][y].b;
@@ -305,7 +305,7 @@ void help() {
     printf("rect\tDesenha um retângulo\n\tParâmetros: [x INT], [y INT], [largura INT], [altura INT]\n");
     printf("circle\tDesenha um círculo\n\tParâmetros: [x INT], [y INT], [raio INT]\n");
     printf("poligon\tDesenha um polígono fechado\n\tParâmetros: [n INT] [x1 INT], [y1 INT], [x2 INT], [y2 INT] ... [xn INT], [yn INT]. (1 < n < 21)\n");
-    printf("fill\tPinta área interna ou externa de um polígono\n\tParâmetros: [x INT], [y INT], [vermelho INT], [verde INT], [azul INT]\n");
+    printf("fill\tPinta área interna ou externa de um polígono\n\tParâmetros: [x INT], [y INT]\n");
     printf("save\tSalva arquivo de image\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
     printf("open\tAbre um arquivo de imagem\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
     printf("list\tMostra conteúdo do arquivo de imagem\n\tParâmetro (opcional): [remove_line_num BOOL]\n");

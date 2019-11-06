@@ -212,7 +212,7 @@ void save (char nome[]) {
     printf("Arquivo salvo!\n");
 }
 
-int fill(int x, int y, int r, int g, int b, int rr, int gg, int bb) {
+void fill(int x, int y, int r, int g, int b, int rr, int gg, int bb) {
  
     int passo[8][2] = {{-1,0},{0,-1},{0,1},{1,0},{1,1},{-1,1},{1,-1},{-1,-1}};
     if(tela->rgb[x][y].r == rr && tela->rgb[x][y].g == gg && tela->rgb[x][y].b == bb) {
@@ -229,9 +229,7 @@ int fill(int x, int y, int r, int g, int b, int rr, int gg, int bb) {
                 fill(l, c, r, g, b, rr, gg, bb);
         } 
     }
-    else{
-        return 0;
-    }
+  
     update();
 }
     
