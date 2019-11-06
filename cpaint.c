@@ -203,6 +203,25 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             open(cmd[1]);
         }
     }
+    else if(strcmp(comando,"fill") == 0){
+        if(strcmp(cmd[1], "NULL") == 0 || strcmp(cmd[2], "NULL") == 0) {
+            printf("Falta argumentos no comando. Veja ajuda.\n");
+        }
+        else{
+            int x  = atoi(cmd[1]);
+            int y  = atoi(cmd[2]);
+            int r = cor_atual.r;
+            int g = cor_atual.g;
+            int b = cor_atual.b;
+            int rr = tela->rgb[x][y].r;
+            int gg = tela->rgb[x][y].g;
+            int bb = tela->rgb[x][y].b;
+
+            fill(x, y, r, g, b, rr, gg, bb);
+            }
+                     
+    }
+    
     else {
         printf("Comando inválido.\n");
     }
