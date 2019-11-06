@@ -243,13 +243,17 @@ void save (char nome[]) {
 
 void fill(int x, int y, int r, int g, int b, int rr, int gg, int bb) {
  
-    int passo[8][2] = {{-1,0},{0,-1},{0,1},{1,0},{1,1},{-1,1},{1,-1},{-1,-1}};
+    //int passo[8][2] = {{-1,0},{0,-1},{0,1},{1,0},{1,1},{-1,1},{1,-1},{-1,-1}};
+    int passo[8][2] = {{-1,0},{0,-1},{0,1},{1,0}};
+    contador++;
+    printf("fill: %d\n", contador);
     if(tela->rgb[x][y].r == rr && tela->rgb[x][y].g == gg && tela->rgb[x][y].b == bb) {
         tela->rgb[x][y].r = r;
         tela->rgb[x][y].g = g;
         tela->rgb[x][y].b = b;
     
-        for(int k = 0; k < 8; k++ )
+        //for(int k = 0; k < 8; k++ )
+        for(int k = 0; k < 4; k++ )
         {
             int l = x + passo[k][0];
             int c = y + passo[k][1];

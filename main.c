@@ -10,6 +10,7 @@
 int main() {
     /*** Inicialização ***/
     isInit = true;          // é inicialização do programa
+    contador = 0;
     modo_leitura = false;   // programa não está no modo leitura de arquivo 
 
     aloca_imagem(LARG, ALT);
