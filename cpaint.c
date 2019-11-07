@@ -246,9 +246,9 @@ void aloca_imagem(int larg, int alt) {
     int new_num_linhas = larg * alt + 3;
     if (isInit) {
         // aloca command_list
-        comand_list = malloc(new_num_linhas * sizeof(char*));
+        comand_list = (char**)malloc(new_num_linhas * sizeof(char*));
         for (int i=0; i<new_num_linhas; i++) {
-            comand_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
+            comand_list[i] = (char*)malloc(TAM_MAX_CMD * sizeof(char));
         }
         // inicializa ponteiro
         for (int i=0; i<larg; i++) {
@@ -257,7 +257,7 @@ void aloca_imagem(int larg, int alt) {
             }
         }
         // aloca matriz tela
-        tela = malloc(sizeof(matriz));
+        tela = (matriz*)malloc(sizeof(matriz));
         tela->larg = larg;
         tela->alt = alt;
         tela->rgb = malloc(larg * sizeof(cor));
@@ -319,7 +319,7 @@ void help() {
     printf("save\tSalva arquivo de image\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
     printf("open\tAbre um arquivo de imagem\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
     printf("list\tMostra conteúdo do arquivo de imagem\n\tParâmetro (opcional): [remove_line_num BOOL]\n");
-    printf("source\tLê comandos de um arquivo\n\tParâmetro: [nome_do_arquivo.in TEXTO]\n");
+    printf("source\tLê comandos de um arquivo\n\tParâmetro: [nome_do_arquivo.in TEXTO]\n\t\tOBS.: O arquivo deve obrigatoriamente ter 'quit' como ultimo comando.\n");
     printf("quit\tSai do programa\n");
     printf("\n");
 }
@@ -338,8 +338,10 @@ void quit() {
         free(comand_list[i]);
     }
     free(comand_list);  
-    modo_leitura = false;
-    fclose(arq_ent);
+    if (modo_leitura) {
+        modo_leitura = false;
+        fclose(arq_ent);
+    }
 
     printf("\nAté!\n\n");
     exit(0);
