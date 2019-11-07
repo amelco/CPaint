@@ -1,0 +1,10 @@
+image 300 300
+color 0 0 0
+rect 0 0 299 299
+rect 1 1 298 298
+circle 100 100 30
+circle 100 100 29
+circle 100 200 30
+circle 100 200 29
+save HD.ppm
+quit

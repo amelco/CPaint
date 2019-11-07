@@ -40,7 +40,7 @@ void color(cor* c) {
 
 // desenha um ponto com a cor cor_atual
 void point(int x, int y) {
-    tela->rgb[x][y] = cor_atual;
+    tela->rgb[y][x] = cor_atual;
     update();
 }
 
