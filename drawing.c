@@ -242,7 +242,6 @@ void save (char nome[]) {
 }
 
 void fill(int x, int y, int r, int g, int b, int rr, int gg, int bb) {
- 
     //int passo[8][2] = {{-1,0},{0,-1},{0,1},{1,0},{1,1},{-1,1},{1,-1},{-1,-1}};
     int passo[8][2] = {{-1,0},{0,-1},{0,1},{1,0}};
     contador++;
@@ -258,11 +257,10 @@ void fill(int x, int y, int r, int g, int b, int rr, int gg, int bb) {
             int l = x + passo[k][0];
             int c = y + passo[k][1];
     
-            if((l >= 0) && (l < tela->alt) && (c >= 0) && (c < tela->larg))
+            if((l >= 0) && (l < tela->alt) && (c >= 0) && (c < tela->larg) && (tela->rgb[l][c].r == rr) && (tela->rgb[l][c].g == gg) && (tela->rgb[l][c].b == bb))
                 fill(l, c, r, g, b, rr, gg, bb);
         } 
     }
-  
     update();
 }
     
