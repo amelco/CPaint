@@ -40,18 +40,21 @@ int main() {
 
         printf(">> ");
         if (modo_leitura) {
-            if (cmd_i > cmd_tot) {
-                modo_leitura = false;
-                fclose(arq_ent);
-                cmd_i = 0;
-                printf("\b\b\b");
-                continue;
-            }
-            else {
-                fscanf(arq_ent, " %[^\n]", &comando);
-                cmd_i++;
-                printf("%s\n", comando);
-            }
+            fscanf(arq_ent, " %[^\n]", &comando);
+            printf("%s\n", comando);
+            printf("\b\b\b");
+            //if (cmd_i > cmd_tot) {
+            //    modo_leitura = false;
+            //    fclose(arq_ent);
+            //    cmd_i = 0;
+            //    printf("\b\b\b");
+            //    continue;
+            //}
+            //else {
+            //    fscanf(arq_ent, " %[^\n]", &comando);
+            //    cmd_i++;
+            //    printf("%s\n", comando);
+            //}
         } 
         else {
             scanf(" %[^\n]", &comando);

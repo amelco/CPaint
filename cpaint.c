@@ -236,10 +236,10 @@ void le_arquivo(char arquivo[50]) {
         modo_leitura = false;
         cmd_i = -1;
     }
-    else {
-        fscanf(arq_ent, "%d", &cmd_tot);    // armazena o numero total de comandos
-        cmd_i = 1;                          // inicializa o numero do comando a ser lido do arquivo de entrada
-    };
+    //else {
+    //    fscanf(arq_ent, "%d", &cmd_tot);    // armazena o numero total de comandos
+    //    cmd_i = 1;                          // inicializa o numero do comando a ser lido do arquivo de entrada
+    //};
 }
 
 void aloca_imagem(int larg, int alt) {
@@ -338,6 +338,8 @@ void quit() {
         free(comand_list[i]);
     }
     free(comand_list);  
+    modo_leitura = false;
+    fclose(arq_ent);
 
     printf("\nAté!\n\n");
     exit(0);
