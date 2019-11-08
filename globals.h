@@ -11,12 +11,12 @@
 #define EMAIL2  "marcellsantana@hotmail.com"
 
 // largua e altura padrao da imagem
-#define LARG 8
-#define ALT 8
+unsigned short int LARG;
+unsigned short int ALT;
 
-#define TAM_MAX_CMD 100         // tamanho maximo do comando (em caracteres)
-#define NUM_MAX_PRM 20          // número máximo de parametros
-#define INC_LINHAS 12           // incremento de linhas do arquivo
+unsigned short int TAM_MAX_CMD;         // tamanho maximo do comando (em caracteres)
+unsigned short int NUM_MAX_PRM;          // número máximo de parametros
+unsigned short int INC_LINHAS;           // incremento de linhas do arquivo
 
 // define o tipo booleano
 typedef enum bool_t {
@@ -35,7 +35,7 @@ typedef struct cor_t {
 typedef struct matriz_t {
     int larg;
     int alt;
-    struct cor_t** rgb;
+    cor** rgb;
 } matriz;
 
 typedef struct ponto_t {
@@ -53,6 +53,9 @@ bool modo_leitura;          // modo leitura de arquivo (sem interação do usuá
 FILE* arq_ent;
 int cmd_tot;                // numero total de comandos do arquivo de entrada (deve estar na primeira linha do arquivo)
 int cmd_i;    // comando atual do cursor de leitura do arquivo
+
+// debug
 int contador;
+long int end_ant;
 
 #endif

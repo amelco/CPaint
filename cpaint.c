@@ -236,10 +236,6 @@ void le_arquivo(char arquivo[50]) {
         modo_leitura = false;
         cmd_i = -1;
     }
-    //else {
-    //    fscanf(arq_ent, "%d", &cmd_tot);    // armazena o numero total de comandos
-    //    cmd_i = 1;                          // inicializa o numero do comando a ser lido do arquivo de entrada
-    //};
 }
 
 void aloca_imagem(int larg, int alt) {
@@ -260,9 +256,9 @@ void aloca_imagem(int larg, int alt) {
         tela = (matriz*)malloc(sizeof(matriz));
         tela->larg = larg;
         tela->alt = alt;
-        tela->rgb = malloc(larg * sizeof(cor));
+        tela->rgb = (cor**)malloc(larg * sizeof(cor*));
         for (int i=0; i<larg; i++) {
-            tela->rgb[i] = malloc(alt * sizeof(cor));
+            tela->rgb[i] = (cor*)malloc(alt * sizeof(cor));
         }
         // inicializa ponteiro
         for (int i=0; i<larg; i++) {
@@ -274,10 +270,13 @@ void aloca_imagem(int larg, int alt) {
         }
     } else {
         /*** Realoca memória ***/
-        comand_list = realloc(comand_list, new_num_linhas * sizeof(char*));
+        //char** pointer;
+        //pointer = (char**)realloc(comand_list, new_num_linhas * sizeof(char*));
+        //if (pointer == NULL) printf("ERRO");
+        //comand_list = pointer;
+        comand_list = (char**)realloc(comand_list, new_num_linhas * sizeof(char*));
         for (int i=0; i<new_num_linhas; i++) {
-            // printf("realloc linha=%d\n", i);
-            comand_list[i] = malloc(TAM_MAX_CMD * sizeof(char));
+            comand_list[i] = (char*)malloc(TAM_MAX_CMD * sizeof(char));
         }
         // inicializa ponteiro
         for (int i=tela->larg; i<larg; i++) {
@@ -286,10 +285,9 @@ void aloca_imagem(int larg, int alt) {
             }
         }
         // aloca matriz tela
-        // tela = realloc(tela, sizeof(matriz));
-        tela->rgb = realloc(tela->rgb, larg * sizeof(cor));
+        tela->rgb = (cor**)realloc(tela->rgb, larg * sizeof(cor*));
         for (int i=0; i<larg; i++) {
-            tela->rgb[i] = malloc(alt * sizeof(cor));
+            tela->rgb[i] = (cor*)malloc(alt * sizeof(cor));
         }
         // inicializa ponteiro
         for (int i=tela->larg; i<larg; i++) {
@@ -326,7 +324,7 @@ void help() {
 
 // libera memoria alocada e sai do programa
 void quit() {
-    int n = tela->alt * tela->larg;
+    int n = tela->alt * tela->larg + 3;
     for (int i=0; i<tela->larg; i++) {
         free(tela->rgb[i]);
     }

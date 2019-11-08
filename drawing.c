@@ -41,6 +41,13 @@ void color(cor* c) {
 // desenha um ponto com a cor cor_atual
 void point(int x, int y) {
     tela->rgb[y][x] = cor_atual;
+
+    // debug
+    printf("%p => %ld bits\n", 
+            &tela->rgb[y][x], 
+            (long int)&tela->rgb[y][x] - end_ant);
+    end_ant = (long int)&tela->rgb[y][x];
+
     update();
 }
 

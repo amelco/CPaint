@@ -10,6 +10,15 @@
 int main() {
     /*** Inicialização ***/
     isInit = true;          // é inicialização do programa
+    
+    // define as constantes
+    LARG = 8;
+    ALT = 8;
+    TAM_MAX_CMD = 200;
+    NUM_MAX_PRM = 20;
+    INC_LINHAS = 12;
+    
+    // inicializa variáveis
     contador = 0;
     modo_leitura = false;   // programa não está no modo leitura de arquivo 
 
