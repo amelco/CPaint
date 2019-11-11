@@ -160,7 +160,7 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             le_arquivo(cmd[1]);
         }
     }
-    else if (strcmp(comando, "poligon") == 0) {
+    else if (strcmp(comando, "polygon") == 0) {
         if (strcmp(cmd[1], "NULL") == 0 || strcmp(cmd[2], "NULL") == 0 || strcmp(cmd[3], "NULL") == 0 || strcmp(cmd[4], "NULL") == 0) {
             printf("Falta argumentos no comando. Veja ajuda.\n");
         } 
@@ -174,7 +174,7 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             pts[1].x = atoi(cmd[4]);
             pts[1].y = atoi(cmd[5]);
 
-            for (int i=6, ip=2; ip<n; i+=2, ip++) {    // O número de lados do poligono deve ser ultiplicado por dois
+            for (int i=6, ip=2; ip<n; i+=2, ip++) {    // O número de lados do polygono deve ser ultiplicado por dois
                                                         // pois cada lado (linha) é formado por dois pontos
                 pts[ip].x = atoi(cmd[i]);
                 pts[ip].y = atoi(cmd[i+1]);
@@ -191,7 +191,7 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             //    pts[ip][1].y = atoi(cmd[i+5]);
             //    ip++;
             //}
-            poligon(n, pts);
+            polygon(n, pts);
         }
     }
     else if (strcmp(comando, "circle") == 0) {
@@ -327,7 +327,7 @@ void help() {
     printf("clear\tLimpa a imagem com a cor especificada\n\tParâmetros (opcional): [vermelho INT], [verde INT], [azul INT]\n");
     printf("rect\tDesenha um retângulo\n\tParâmetros: [x INT], [y INT], [largura INT], [altura INT]\n");
     printf("circle\tDesenha um círculo\n\tParâmetros: [x INT], [y INT], [raio INT]\n");
-    printf("poligon\tDesenha um polígono fechado\n\tParâmetros: [n INT] [x1 INT], [y1 INT], [x2 INT], [y2 INT] ... [xn INT], [yn INT]. (1 < n < 21)\n");
+    printf("polygon\tDesenha um polígono fechado\n\tParâmetros: [n INT] [x1 INT], [y1 INT], [x2 INT], [y2 INT] ... [xn INT], [yn INT]. (1 < n < 21)\n");
     printf("fill\tPinta área interna ou externa de um polígono\n\tParâmetros: [x INT], [y INT]\n");
     printf("save\tSalva arquivo de image\n\tParâmetro: [nome_do_arquivo TEXTO]\n");
     printf("open\tAbre um arquivo de imagem\n\tParâmetro: [nome_do_arquivo TEXTO]\n");

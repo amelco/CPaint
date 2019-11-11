@@ -3,7 +3,7 @@ color 0 0 0
 rect 23 45 3 29
 circle 20 45 10
 line 65 34 2 56
-poligon 3 45 67 34 12 2 3
+polygon 3 45 67 34 12 2 3
 color 0 120 120
 fill 1 1
 save testeeee.ppm

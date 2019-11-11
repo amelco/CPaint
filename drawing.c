@@ -123,7 +123,7 @@ void rect(int x, int y, int tam_x, int tam_y) {
 // desenha um poligono
 //   entradas: n   -> número de lados
 //             pts -> vetor de par de pontos iniciais e finais 
-void poligon(int n, ponto pts[n]){
+void polygon(int n, ponto pts[n]){
     int i = 1;
     ponto p1 = {pts[0].x, pts[0].y};
     // itera por todos os pontos desnhando as linhas
@@ -135,6 +135,7 @@ void poligon(int n, ponto pts[n]){
         i++;
     } while (i<n);
     // desenha ultima linha (retornando para o primeiro ponto)
+    printf("i=%d\nx0: %d, y0: %d\nx1: %d, y1: %d\n\n", i, p1.x, p1.y, pts[0].x, pts[0].y);
     line(p1.x, p1.y, pts[0].x, pts[0].y);
 }
 
