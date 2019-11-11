@@ -43,10 +43,10 @@ void point(int x, int y) {
     tela->rgb[y][x] = cor_atual;
 
     // debug
-    printf("%p => %ld bits\n", 
-            &tela->rgb[y][x], 
-            (long int)&tela->rgb[y][x] - end_ant);
-    end_ant = (long int)&tela->rgb[y][x];
+    //printf("%p => %ld bits\n", 
+    //        &tela->rgb[y][x], 
+    //        (long int)&tela->rgb[y][x] - end_ant);
+    //end_ant = (long int)&tela->rgb[y][x];
 
     update();
 }
@@ -59,15 +59,18 @@ void linha_oct(int x0, int y0, int x1, int y1, char o) {
     dx = x1 - x0;
     dy = y1 - y0;
     
-    if (o == 'b') { // baixo
+    if (o == 'b') { // baixa declividade (anda mais no eixo x)
+        // anda uma unidade no eixo y a cada iteração
         yi = 1;
         if (dy < 0) {
+            // declividade negativa
             yi = -1;
             dy = -dy;
         }
         D = 2*dy - dx;
         y = y0;
         for (x = x0; x<=x1; x++) {
+            // loop de x0 a x1
             point(x, y);
             if (D > 0) {
                 y = y + yi;
@@ -76,7 +79,7 @@ void linha_oct(int x0, int y0, int x1, int y1, char o) {
             D = D + 2*dy;
         }
     }
-    else {         //alto
+    else {         //alta declividade (anda mais no eixo y)
         xi = 1;
         if (dx < 0) {
             xi = -1;
@@ -95,13 +98,18 @@ void linha_oct(int x0, int y0, int x1, int y1, char o) {
     }
 }
 
+// desenha uma linha
+//   entradas: coordenadas dos pontos inicial (0) e final (1)
 void line(int x0, int y0, int x1, int y1) {
-    if (abs(y1 - y0) < abs(x1 - x0)) {
-        if (x0 >  x1) linha_oct(x1, y1, x0, y0, 'b');
-        else          linha_oct(x0, y0, x1, y1, 'b');
-    } else {
-        if (y0 >  y1) linha_oct(x1, y1, x0, y0, 'a');
-        else          linha_oct(x0, y0, x1, y1, 'a');
+    if (abs(y1 - y0) < abs(x1 - x0)) { 
+        // distancia a se percorrer no eixo X é maior
+        if (x0 >  x1) linha_oct(x1, y1, x0, y0, 'b');  // ponto inicial à direita do ponto final
+        else          linha_oct(x0, y0, x1, y1, 'b');  // ponto inicial à esquerda do ponto final
+    } 
+    else {  
+        // distancia a se percorrer no eixo Y é maior
+        if (y0 >  y1) linha_oct(x1, y1, x0, y0, 'a');  // ponto inicial abaixo do ponto final
+        else          linha_oct(x0, y0, x1, y1, 'a');  // ponto inicial acima do ponto final
     }
 }
 
@@ -115,25 +123,19 @@ void rect(int x, int y, int tam_x, int tam_y) {
 // desenha um poligono
 //   entradas: n   -> número de lados
 //             pts -> vetor de par de pontos iniciais e finais 
-void poligon(int n, ponto pts[n][2]){
-    int i;
-    ponto p_ini;
-    p_ini.x = pts[0][0].x;
-    p_ini.y = pts[0][0].y;
-    
-    printf("POLIGON\n");
-    for (i=0; i<n/4; i++) {
-        printf("i=%d\n", i);
-        line(pts[i][0].x, pts[i][0].y, pts[i][1].x, pts[i][1].y);
-        printf("%d %d %d %d\n", pts[i][0].x, pts[i][0].y, pts[i][1].x, pts[i][1].y);
-    }
-    printf("pts[%d][1].x = %d; p_ini.x = %d\n pts[%d][1].y = %d; p_ini.y = %d\n",
-            i-1, pts[i-1][1].x, p_ini.x, i-1, pts[i-1][1].y, p_ini.y);
-    // checa se o ultimoo ponto é igual ao primeiro
-    //  se não for, traca uma linha para fechar o poligono
-    if (pts[i-1][1].x != p_ini.x && pts[i-1][1].y != p_ini.y) {
-        line(pts[i-1][1].x, pts[i-1][1].y, p_ini.x, p_ini.y);
-    }
+void poligon(int n, ponto pts[n]){
+    int i = 1;
+    ponto p1 = {pts[0].x, pts[0].y};
+    // itera por todos os pontos desnhando as linhas
+    do {
+        printf("i=%d\nx0: %d, y0: %d\nx1: %d, y1: %d\n\n", i, p1.x, p1.y, pts[i].x, pts[i].y);
+        line(p1.x, p1.y, pts[i].x, pts[i].y);
+        p1.x = pts[i].x;        // atualiza primeiro ponto da proxima linha
+        p1.y = pts[i].y; 
+        i++;
+    } while (i<n);
+    // desenha ultima linha (retornando para o primeiro ponto)
+    line(p1.x, p1.y, pts[0].x, pts[0].y);
 }
 
 void circle(int p, int q, int r) {
@@ -252,7 +254,7 @@ void fill(int x, int y, int r, int g, int b, int rr, int gg, int bb) {
     //int passo[8][2] = {{-1,0},{0,-1},{0,1},{1,0},{1,1},{-1,1},{1,-1},{-1,-1}};
     int passo[8][2] = {{-1,0},{0,-1},{0,1},{1,0}};
     contador++;
-    printf("fill: %d\n", contador);
+    //printf("fill: %d\n", contador);
     if(tela->rgb[x][y].r == rr && tela->rgb[x][y].g == gg && tela->rgb[x][y].b == bb) {
         tela->rgb[x][y].r = r;
         tela->rgb[x][y].g = g;

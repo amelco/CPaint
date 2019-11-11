@@ -165,17 +165,32 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             printf("Falta argumentos no comando. Veja ajuda.\n");
         } 
         else {
-            int n = atoi(cmd[1]) * 4;
-            ponto pts[n][2];
-            int i=2;
-            int ip=0;
-            for (int i=0; i<n; i+=4) {
-                pts[ip][0].x = atoi(cmd[i+2]);
-                pts[ip][0].y = atoi(cmd[i+3]);
-                pts[ip][1].x = atoi(cmd[i+4]);
-                pts[ip][1].y = atoi(cmd[i+5]);
-                ip++;
+            int n = atoi(cmd[1]);  // número de lados do polígono
+            ponto pts[n];   // Array com n pontos. Os 2 primeiros formam a primeira linha. As linhas
+                            // seguintes tomam o ponto imediatamente anterior como sendo o ponto inicial.
+            // adiciona os 2 primeiros pontos (1a linha)
+            pts[0].x = atoi(cmd[2]);
+            pts[0].y = atoi(cmd[3]);
+            pts[1].x = atoi(cmd[4]);
+            pts[1].y = atoi(cmd[5]);
+
+            for (int i=6, ip=2; ip<n; i+=2, ip++) {    // O número de lados do poligono deve ser ultiplicado por dois
+                                                        // pois cada lado (linha) é formado por dois pontos
+                pts[ip].x = atoi(cmd[i]);
+                pts[ip].y = atoi(cmd[i+1]);
+                printf("ip->%d  x: %d  y: %d\n", ip, pts[ip].x, pts[ip].y);
             }
+
+
+            //int i=2;
+            //int ip=0;
+            //for (int i=0; i<n; i+=4) {
+            //    pts[ip][0].x = atoi(cmd[i+2]);
+            //    pts[ip][0].y = atoi(cmd[i+3]);
+            //    pts[ip][1].x = atoi(cmd[i+4]);
+            //    pts[ip][1].y = atoi(cmd[i+5]);
+            //    ip++;
+            //}
             poligon(n, pts);
         }
     }
