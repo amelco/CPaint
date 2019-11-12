@@ -5,6 +5,38 @@
 #include "drawing.h"
 #include "globals.h"
 
+void init() {
+    isInit = true;          // é inicialização do programa
+    
+    // define as constantes
+    LARG = 8;
+    ALT = 8;
+    TAM_MAX_CMD = 200;
+    NUM_MAX_PRM = 20;
+    INC_LINHAS = 12;
+    
+    // inicializa variáveis
+    contador = 0;
+    modo_leitura = false;   // programa não está no modo leitura de arquivo 
+
+    aloca_imagem(LARG, ALT);
+    
+    // preto
+    cor_atual.r = 0;
+    cor_atual.g = 0;
+    cor_atual.b = 0;
+
+    image(LARG, ALT);       // chama a função para definir um cabeçalho padrão
+    clear(&cor_atual);
+
+    // branco
+    cor_atual.r = 255;
+    cor_atual.g = 255;
+    cor_atual.b = 255;
+
+    isInit = false;
+}
+
 // Apresentação do programa
 void msg_inicial() {
     printf("CPaint %s.\n", VERSION);
@@ -54,8 +86,6 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
         help();
     } 
     else if (strcmp(comando, "list") == 0) {
-        bool line_num = true;
-        if (strcmp(cmd[1],"NULL") != 0) line_num = false;
         list();
     }
     else if (strcmp(comando, "image") == 0) {

@@ -40,7 +40,7 @@ void color(cor* c) {
 
 // desenha um ponto com a cor cor_atual
 void point(int x, int y) {
-    tela->rgb[y][x] = cor_atual;
+    tela->rgb[x][y] = cor_atual;
 
     // debug
     //printf("%p => %ld bits\n", 
@@ -50,7 +50,7 @@ void point(int x, int y) {
 
     update();
 }
-
+/* primeira versao de line
 // desenha uma reta entre 2 pontos
 //retirado de: http://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#Line_equation
 void linha_oct(int x0, int y0, int x1, int y1, char o) {
@@ -100,7 +100,7 @@ void linha_oct(int x0, int y0, int x1, int y1, char o) {
 
 // desenha uma linha
 //   entradas: coordenadas dos pontos inicial (0) e final (1)
-void line(int x0, int y0, int x1, int y1) {
+void line2(int x0, int y0, int x1, int y1) {
     if (abs(y1 - y0) < abs(x1 - x0)) { 
         // distancia a se percorrer no eixo X é maior
         if (x0 >  x1) linha_oct(x1, y1, x0, y0, 'b');  // ponto inicial à direita do ponto final
@@ -111,6 +111,21 @@ void line(int x0, int y0, int x1, int y1) {
         if (y0 >  y1) linha_oct(x1, y1, x0, y0, 'a');  // ponto inicial abaixo do ponto final
         else          linha_oct(x0, y0, x1, y1, 'a');  // ponto inicial acima do ponto final
     }
+}
+*/
+void line(int x0, int y0, int x1, int y1) {
+ 
+  int dx = abs(x1-x0), sx = x0<x1 ? 1 : -1;
+  int dy = abs(y1-y0), sy = y0<y1 ? 1 : -1; 
+  int err = (dx>dy ? dx : -dy)/2, e2;
+ 
+  for(;;){
+    point(x0,y0);
+    if (x0==x1 && y0==y1) break;
+    e2 = err;
+    if (e2 >-dx) { err -= dy; x0 += sx; }
+    if (e2 < dy) { err += dx; y0 += sy; }
+  }
 }
 
 void rect(int x, int y, int tam_x, int tam_y) {

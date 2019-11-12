@@ -4,6 +4,7 @@
 
 #include "globals.h"
 
+void init();        // inicializa as variáveis
 void msg_inicial();
 void t_comando(char comando[TAM_MAX_CMD], char cmd[NUM_MAX_PRM][TAM_MAX_CMD], int* np);
 void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]);
