@@ -11,7 +11,7 @@ Para compilar execute os scripts:
 e execute com `./cpaint`.
 
 ### Documentação
-Para gerar documentação, utilize o (Doxygen)[http://www.doxygen.nl/index.html].
+Para gerar documentação, utilize o [Doxygen](http://www.doxygen.nl/index.html).
 
 # CPaint em ação
 ### Função `source`
