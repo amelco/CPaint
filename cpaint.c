@@ -5,8 +5,6 @@
 #include "drawing.h"
 #include "globals.h"
 
-/// Inicialização.
-/// Apenas inicializa variáveis com seus valores padrâo.
 void init() {
     isInit = true;          // é inicialização do programa
     
