@@ -1,0 +1,23 @@
+digraph "point"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node48 [label="point",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node48 -> Node49 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node49 [label="interpreta",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$cpaint_8h.html#a9572edf4a5712e1f7d18cb1c044a5e23"];
+  Node49 -> Node50 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node50 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4"];
+  Node48 -> Node51 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node51 [label="line",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$drawing_8h.html#a75a4caf1d590da5cf42077cc1e14349f",tooltip="Desenha uma linha. "];
+  Node51 -> Node49 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node51 -> Node52 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node52 [label="rect",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$drawing_8h.html#ad65927499dd1a95e9621b9e7e21712d3",tooltip="Desenha um retângulo. "];
+  Node52 -> Node49 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node51 -> Node53 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node53 [label="polygon",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$drawing_8h.html#a101c7e8b226a8f09fd228e9ce1178c7b",tooltip="Desenha um polígono. "];
+  Node53 -> Node49 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node48 -> Node54 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node54 [label="circle",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$drawing_8h.html#a2eaf855b9e7fcab490a7197ed7dc2d02",tooltip="Desenha um círculo. "];
+  Node54 -> Node49 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}
