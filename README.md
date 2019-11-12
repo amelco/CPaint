@@ -12,6 +12,10 @@ e execute com `./cpaint`.
 
 ### Documentação
 Para gerar documentação, utilize o (Doxygen)[http://www.doxygen.nl/index.html].
+*Opcional*: mude o estilo da documentação com
+```bash
+cp *.css docs/html/.
+```
 
 # CPaint em ação
 ### Função `source`
