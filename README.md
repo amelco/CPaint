@@ -30,7 +30,7 @@ Funcionalidades (não)implementadas
 * [x] Função rect()     => desenha um retângulo
 * [x] Função circle()   => desenha um círculo
 * [x] Função poligon()  => desenha um polígono
-* [ ] Função fill()     => preenche um polígono com a cor atual
+* [x] Função fill()     => preenche um polígono com a cor atual
 * [x] Função save()     => grava o arquivo de imagem em disco
 * [x] Função open()     => abre um arquivo de imagem anterior
 * [x] Função source()   => executa uma lista de comando de um arquivo externo
