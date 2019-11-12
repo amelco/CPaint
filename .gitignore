@@ -6,3 +6,4 @@ cpaint
 *.swo
 .drawing.*
 *.ppm
+/docs
