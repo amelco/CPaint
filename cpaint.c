@@ -9,8 +9,8 @@ void init() {
     isInit = true;          // é inicialização do programa
     
     // define as constantes
-    LARG = 8;
-    ALT = 8;
+    LARG = 600;
+    ALT = 400;
     TAM_MAX_CMD = 200;
     NUM_MAX_PRM = 20;
     INC_LINHAS = 12;
@@ -292,8 +292,8 @@ void aloca_imagem(int larg, int alt) {
             comand_list[i] = (char*)malloc(TAM_MAX_CMD * sizeof(char));
         }
         // inicializa ponteiro
-        for (int i=0; i<larg; i++) {
-            for (int j=0; j<alt; j++) {
+        for (int i=0; i<new_num_linhas; i++) {
+            for (int j=0; j<TAM_MAX_CMD; j++) {
                 comand_list[i][j] = '\0';
             }
         }
@@ -315,10 +315,6 @@ void aloca_imagem(int larg, int alt) {
         }
     } else {
         /*** Realoca memória ***/
-        //char** pointer;
-        //pointer = (char**)realloc(comand_list, new_num_linhas * sizeof(char*));
-        //if (pointer == NULL) printf("ERRO");
-        //comand_list = pointer;
         comand_list = (char**)realloc(comand_list, new_num_linhas * sizeof(char*));
         for (int i=0; i<new_num_linhas; i++) {
             comand_list[i] = (char*)malloc(TAM_MAX_CMD * sizeof(char));
