@@ -10,6 +10,9 @@ Para compilar execute os scripts:
 ```
 e execute com `./cpaint`.
 
+### Documentação
+Para gerar documentação, utilize o (Doxygen)[http://www.doxygen.nl/index.html].
+
 # CPaint em ação
 ### Função `source`
 ![](cpaint_source.gif)
@@ -33,11 +36,13 @@ Funcionalidades (não)implementadas
 * [x] Função source()   => executa uma lista de comando de um arquivo externo
 
 ### Opcional
+* [ ] Criar documentação utilizando Doxygen
 * [ ] Visualizar primitivas na tela após executar comando
 * [x] Utilizar git
 * [x] Utilizar valgrind
 * [ ] Aumentar espessura da linha
 
+---
 *Projeto de ITP 2019.2*.  
 *Professor Júlio César*.  
 *Grupo: Andre Herman e Marcell Santana*
