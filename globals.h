@@ -18,26 +18,27 @@ unsigned short int TAM_MAX_CMD;         // tamanho maximo do comando (em caracte
 unsigned short int NUM_MAX_PRM;          // número máximo de parametros
 unsigned short int INC_LINHAS;           // incremento de linhas do arquivo
 
-// define o tipo booleano
+/// Define o tipo booleano.
 typedef enum bool_t {
     false=0,
     true
 } bool;
 
-// define tipo "cor" com os valores de vermelho (r), verde (g) e azul (b)
+/// Define tipo "cor" com os valores de vermelho (r), verde (g) e azul (b)
 typedef struct cor_t {
     int r;
     int g;
     int b;
  } cor;
 
-// struct tela com a matriz de cores (ex. tela->rgb[0][0].r = 255; tela->rgb[0][0].g = 0; tela->rgb[0][0].b = 0; )
+/// Struct tela com a matriz de cores (ex. tela->rgb[0][0].r = 255; tela->rgb[0][0].g = 0; tela->rgb[0][0].b = 0; )
 typedef struct matriz_t {
     int larg;
     int alt;
     cor** rgb;
 } matriz;
 
+/// Define o tipo ponto, contendo as coordenadas x e y.
 typedef struct ponto_t {
     int x;
     int y;
