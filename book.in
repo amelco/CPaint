@@ -7,5 +7,6 @@ circle 199 99 50
 color 180 30 50 
 fill 299 299 
 color 255 0 0
+fill 0 0
 save test.ppm 
 quit

@@ -262,18 +262,27 @@ void save (char nome[]) {
 }
 
 void fill(int x, int y, int r, int g, int b) {
-    int passo[4][2] = {{-1,0},{0,-1},{1,0},{0,1}};
+    int passo[4][2] = {
+                        {-1, 0},
+                        { 0,-1},
+                        { 1, 0},
+                        { 0, 1}
+                    };
+    
+    // armazena cor do pixel que se deseja pintar (cor anterior)
     int rr = tela->rgb[x][y].r;
     int gg = tela->rgb[x][y].g;
     int bb = tela->rgb[x][y].b;
 
     contador++;
     
+    // verifica se a cor do pixel atual é igual a cor anterior. Se sim, pinta com a cor desejada
     if (tela->rgb[x][y].r == rr && tela->rgb[x][y].g == gg && tela->rgb[x][y].b == bb) {
         tela->rgb[x][y].r = r;
         tela->rgb[x][y].g = g;
         tela->rgb[x][y].b = b;
-    
+        
+        // verifica os vizinhos de cima, baixo, esquerda e direita por cores iguais a anterior. Caso ache, chama a função novamente.
         for(int k = 0; k < 4; k++ )
         {
             int l = x + passo[k][0];
