@@ -23,7 +23,6 @@ cp *.css docs/html/.
 
 ## TODO
 Funcionalidades (não)implementadas
-* [x] Interpretador de comandos
 * [x] Função help()     => mostra pequena documentação
 * [x] Função list()     => lista conteudo do canvas
 * [x] Função clear()    => limpa o canvas com a cor atual
@@ -40,7 +39,8 @@ Funcionalidades (não)implementadas
 * [x] Função source()   => executa uma lista de comando de um arquivo externo
 
 ### Opcional
-* [ ] Criar documentação utilizando Doxygen
+* [x] Interpretador de comandos
+* [x] Criar documentação utilizando Doxygen
 * [ ] Visualizar primitivas na tela após executar comando
 * [x] Utilizar git
 * [x] Utilizar valgrind
