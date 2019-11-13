@@ -45,7 +45,7 @@ Funcionalidades (não)implementadas
 * [x] Utilizar git
 * [x] Utilizar valgrind
 * [ ] Aumentar espessura da linha
-* [ ] Copiar/recortar e colar
+* [ ] Copiar/recortar e colar (com escala)
 * [ ] Desenhar primitivas mesmo que saa da tela (mudar verificação de limites para a função point)
 
 ---
