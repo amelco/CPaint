@@ -42,14 +42,9 @@ void point(int x, int y, bool isPoint) {
     //printf("n linhas   (alt)[y][i]: %d\ty: %d\n", tela->alt , y);
     tela->rgb[y][x] = cor_atual;
 
-    // debug
-    //printf("%p => %ld bits\n", 
-    //        &tela->rgb[y][x], 
-    //        (long int)&tela->rgb[y][x] - end_ant);
-    //end_ant = (long int)&tela->rgb[y][x];
-
     if (isPoint) update();
 }
+
 /* primeira versao de line
 // desenha uma reta entre 2 pontos
 //retirado de: http://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#Line_equation
@@ -144,14 +139,14 @@ void polygon(int n, ponto pts[n]){
     ponto p1 = {pts[0].x, pts[0].y};
     // itera por todos os pontos desnhando as linhas
     do {
-        printf("i=%d\nx0: %d, y0: %d\nx1: %d, y1: %d\n\n", i, p1.x, p1.y, pts[i].x, pts[i].y);
+        //printf("i=%d\nx0: %d, y0: %d\nx1: %d, y1: %d\n\n", i, p1.x, p1.y, pts[i].x, pts[i].y);
         line(p1.x, p1.y, pts[i].x, pts[i].y);
         p1.x = pts[i].x;        // atualiza primeiro ponto da proxima linha
         p1.y = pts[i].y; 
         i++;
     } while (i<n);
     // desenha ultima linha (retornando para o primeiro ponto)
-    printf("i=%d\nx0: %d, y0: %d\nx1: %d, y1: %d\n\n", i, p1.x, p1.y, pts[0].x, pts[0].y);
+    //printf("i=%d\nx0: %d, y0: %d\nx1: %d, y1: %d\n\n", i, p1.x, p1.y, pts[0].x, pts[0].y);
     line(p1.x, p1.y, pts[0].x, pts[0].y);
 }
 
@@ -266,24 +261,32 @@ void save (char nome[]) {
     printf("Arquivo salvo!\n");
 }
 
-void fill(int x, int y, int r, int g, int b, int rr, int gg, int bb) {
-    //int passo[8][2] = {{-1,0},{0,-1},{0,1},{1,0},{1,1},{-1,1},{1,-1},{-1,-1}};
-    int passo[8][2] = {{-1,0},{0,-1},{0,1},{1,0}};
+void fill(int x, int y, int r, int g, int b) {
+    int passo[4][2] = {{-1,0},{0,-1},{1,0},{0,1}};
+    int rr = tela->rgb[x][y].r;
+    int gg = tela->rgb[x][y].g;
+    int bb = tela->rgb[x][y].b;
+
     contador++;
-    //printf("fill: %d\n", contador);
-    if(tela->rgb[x][y].r == rr && tela->rgb[x][y].g == gg && tela->rgb[x][y].b == bb) {
+    
+    if (tela->rgb[x][y].r == rr && tela->rgb[x][y].g == gg && tela->rgb[x][y].b == bb) {
         tela->rgb[x][y].r = r;
         tela->rgb[x][y].g = g;
         tela->rgb[x][y].b = b;
     
-        //for(int k = 0; k < 8; k++ )
         for(int k = 0; k < 4; k++ )
         {
             int l = x + passo[k][0];
             int c = y + passo[k][1];
     
-            if((l >= 0) && (l < tela->alt) && (c >= 0) && (c < tela->larg) && (tela->rgb[l][c].r == rr) && (tela->rgb[l][c].g == gg) && (tela->rgb[l][c].b == bb))
-                fill(l, c, r, g, b, rr, gg, bb);
+            if( (l >= 0) && 
+                (l < tela->alt) && 
+                (c >= 0) && 
+                (c < tela->larg) && 
+                (tela->rgb[l][c].r == rr) && 
+                (tela->rgb[l][c].g == gg) && 
+                (tela->rgb[l][c].b == bb))
+                    fill(l, c, r, g, b);
         } 
     }
     update();

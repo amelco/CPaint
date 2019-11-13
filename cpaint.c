@@ -208,7 +208,7 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
                                                         // pois cada lado (linha) é formado por dois pontos
                 pts[ip].x = atoi(cmd[i]);
                 pts[ip].y = atoi(cmd[i+1]);
-                printf("ip->%d  x: %d  y: %d\n", ip, pts[ip].x, pts[ip].y);
+                //printf("ip->%d  x: %d  y: %d\n", ip, pts[ip].x, pts[ip].y);
             }
 
 
@@ -258,11 +258,8 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             int r = cor_atual.r;
             int g = cor_atual.g;
             int b = cor_atual.b;
-            int rr = tela->rgb[x][y].r;
-            int gg = tela->rgb[x][y].g;
-            int bb = tela->rgb[x][y].b;
 
-            fill(x, y, r, g, b, rr, gg, bb);
+            fill(x, y, r, g, b);
             }
                      
     }

@@ -106,7 +106,7 @@ void polygon(int n, ponto pts[n]);
 /// ~~~~~~~~~~~~~~~~
 /// fill 2 2 255 0 0
 /// ~~~~~~~~~~~~~~~~
-void fill(int x, int y, int r, int g, int b, int rr, int gg, int bb);
+void fill(int x, int y, int r, int g, int b);
 
 /// ### Salva imagem.
 /// Salva a imagem em um arquivo PPM.
