@@ -19,13 +19,11 @@ void image(int larg, int alt) {
 
 // limpa a tela com uma cor especificada
 void clear(cor* c) {
-    for (int i=0; i<tela->larg; i++) {
-        for (int j=0; j<tela->alt; j++) {
-            // printf("%d\n", tela->rgb[i][j].r);
+    for (int i=0; i<tela->alt; i++) {
+        for (int j=0; j<tela->larg; j++) {
             tela->rgb[i][j].r = c->r; 
             tela->rgb[i][j].g = c->g;
             tela->rgb[i][j].b = c->b;
-            // printf("%d %d: %d %d %d\n", i,j, tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
         }
     }
     update();
@@ -40,7 +38,9 @@ void color(cor* c) {
 
 // desenha um ponto com a cor cor_atual
 void point(int x, int y) {
-    tela->rgb[x][y] = cor_atual;
+    //printf("n colunas (larg)[x][j]: %d\tx: %d\n", tela->larg, x);
+    //printf("n linhas   (alt)[y][i]: %d\ty: %d\n", tela->alt , y);
+    tela->rgb[y][x] = cor_atual;
 
     // debug
     //printf("%p => %ld bits\n", 
@@ -196,9 +196,8 @@ void list() {
 void update() {
     int linha = 3;
     
-    for (int i=0; i<tela->larg; i++) {
-        for (int j=0; j<tela->alt; j++) {
-            // printf("l %d: %d %d: %d %d %d\n", linha, i,j, tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
+    for (int i=0; i<tela->alt; i++) {
+        for (int j=0; j<tela->larg; j++) {
             sprintf(comand_list[linha], "%d %d %d\n", tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
             linha++;
         }

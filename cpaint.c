@@ -301,13 +301,13 @@ void aloca_imagem(int larg, int alt) {
         tela = (matriz*)malloc(sizeof(matriz));
         tela->larg = larg;
         tela->alt = alt;
-        tela->rgb = (cor**)malloc(larg * sizeof(cor*));
-        for (int i=0; i<larg; i++) {
-            tela->rgb[i] = (cor*)malloc(alt * sizeof(cor));
+        tela->rgb = (cor**)malloc(alt * sizeof(cor*));
+        for (int i=0; i<alt; i++) {
+            tela->rgb[i] = (cor*)malloc(larg * sizeof(cor));
         }
         // inicializa ponteiro
-        for (int i=0; i<larg; i++) {
-            for (int j=0; j<alt; j++) {
+        for (int i=0; i<alt; i++) {
+            for (int j=0; j<larg; j++) {
                 tela->rgb[i][j].r = 0;
                 tela->rgb[i][j].g = 0;
                 tela->rgb[i][j].b = 0;
@@ -319,20 +319,20 @@ void aloca_imagem(int larg, int alt) {
         for (int i=0; i<new_num_linhas; i++) {
             comand_list[i] = (char*)malloc(TAM_MAX_CMD * sizeof(char));
         }
-        // inicializa ponteiro
-        for (int i=tela->larg; i<larg; i++) {
-            for (int j=tela->alt; j<alt; j++) {
+        // inicializa ponteiro não incializados anteriormente
+        for (int i=tela->larg * tela->alt + 3; i<new_num_linhas; i++) {
+            for (int j=0; j<TAM_MAX_CMD; j++) {
                 comand_list[i][j] = '\0';
             }
         }
-        // aloca matriz tela
-        tela->rgb = (cor**)realloc(tela->rgb, larg * sizeof(cor*));
-        for (int i=0; i<larg; i++) {
-            tela->rgb[i] = (cor*)malloc(alt * sizeof(cor));
+        // realoca matriz tela
+        tela->rgb = (cor**)realloc(tela->rgb, alt * sizeof(cor*));
+        for (int i=0; i<alt; i++) {
+            tela->rgb[i] = (cor*)malloc(larg * sizeof(cor));
         }
         // inicializa ponteiro
-        for (int i=tela->larg; i<larg; i++) {
-            for (int j=tela->alt; j<alt; j++) {
+        for (int i=tela->alt; i<alt; i++) {
+            for (int j=tela->larg; j<larg; j++) {
                 tela->rgb[i][j].r = 0;
                 tela->rgb[i][j].g = 0;
                 tela->rgb[i][j].b = 0;
@@ -366,7 +366,7 @@ void help() {
 // libera memoria alocada e sai do programa
 void quit() {
     int n = tela->alt * tela->larg + 3;
-    for (int i=0; i<tela->larg; i++) {
+    for (int i=0; i<tela->alt; i++) {
         free(tela->rgb[i]);
     }
     free(tela->rgb);
@@ -388,9 +388,9 @@ void quit() {
 
 /** funcoes debug **/
 void print_matriz_tela() {
-    for (int i=0; i<tela->larg; i++) {
+    for (int i=0; i<tela->alt; i++) {
         printf("|");
-        for (int j=0; j<tela->alt; j++) {
+        for (int j=0; j<tela->larg; j++) {
             printf("%3d %3d %3d, ", tela->rgb[i][j].r, tela->rgb[i][j].g, tela->rgb[i][j].b);
         }
         printf("\b\b|\n");
