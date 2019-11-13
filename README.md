@@ -45,6 +45,8 @@ Funcionalidades (não)implementadas
 * [x] Utilizar git
 * [x] Utilizar valgrind
 * [ ] Aumentar espessura da linha
+* [ ] Copiar/recortar e colar
+* [ ] Desenhar primitivas mesmo que saa da tela (mudar verificação de limites para a função point)
 
 ---
 *Projeto de ITP 2019.2*.  
