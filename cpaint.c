@@ -138,7 +138,7 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
                 printf("Ponto x ou y fora do canvas.\n");
                 printf("Verifique o comando.\n");
             } else {
-                point(x, y);
+                point(x, y, true);
             }
         }
     }

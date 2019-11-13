@@ -37,7 +37,7 @@ void color(cor* c) {
 }
 
 // desenha um ponto com a cor cor_atual
-void point(int x, int y) {
+void point(int x, int y, bool isPoint) {
     //printf("n colunas (larg)[x][j]: %d\tx: %d\n", tela->larg, x);
     //printf("n linhas   (alt)[y][i]: %d\ty: %d\n", tela->alt , y);
     tela->rgb[y][x] = cor_atual;
@@ -48,7 +48,7 @@ void point(int x, int y) {
     //        (long int)&tela->rgb[y][x] - end_ant);
     //end_ant = (long int)&tela->rgb[y][x];
 
-    update();
+    if (isPoint) update();
 }
 /* primeira versao de line
 // desenha uma reta entre 2 pontos
@@ -120,12 +120,13 @@ void line(int x0, int y0, int x1, int y1) {
   int err = (dx>dy ? dx : -dy)/2, e2;
  
   for(;;){
-    point(x0,y0);
+    point(x0,y0, false);
     if (x0==x1 && y0==y1) break;
     e2 = err;
     if (e2 >-dx) { err -= dy; x0 += sx; }
     if (e2 < dy) { err += dx; y0 += sy; }
   }
+  update();
 }
 
 void rect(int x, int y, int tam_x, int tam_y) {
@@ -160,14 +161,14 @@ void circle(int p, int q, int r) {
     d = 3 - 2*r;
 
     while (x <= y) {
-        point( x+p,   y+q);
-        point(-x+p,  y+q );
-        point(-x+p, -y+q );
-        point( x+p,  -y+q);
-        point( y+p,   x+q);
-        point(-y+p,  x+q );
-        point(-y+p, -x+q );
-        point( y+p,  -x+q);
+        point( x+p,   y+q, false);
+        point(-x+p,  y+q , false);
+        point(-x+p, -y+q , false);
+        point( x+p,  -y+q, false);
+        point( y+p,   x+q, false);
+        point(-y+p,  x+q , false);
+        point(-y+p, -x+q , false);
+        point( y+p,  -x+q, false);
 
         //encontra localização do próximo pixel a ser escaneado
         if (d < 0) {

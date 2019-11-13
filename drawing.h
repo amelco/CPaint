@@ -39,11 +39,13 @@ void clear(cor* c);
 /// Desenha um ponto na tela nas coordenadas *x* e *y*.
 /// @param[in] x  coordenada x.
 /// @param[in] y  coordenada y.
-/// ### Exemplo
+/// @param[in] isPoint  boolean caso se desenha um ponto (não disponível ao usuário)
+/// @note isPoint é VERDADEIRO apenas se o usuário tiver chamado a função ponto
+///// ### Exemplo
 /// ~~~~~~~~~~~~~~~~
 /// point 5 25
 /// ~~~~~~~~~~~~~~~~
-void point(int x, int y);
+void point(int x, int y, bool isPoint);
 
 /// ### Desenha uma linha.
 /// Desenha uma linha na tela, de um ponto a outro.
