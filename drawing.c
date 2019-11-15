@@ -185,7 +185,8 @@ void list() {
         printf("%s", comand_list[i]);
     }
     printf("\n");
-    printf("Cor atual: [%3d][%3d][%3d]\n\n", cor_atual.r, cor_atual.g, cor_atual.b);
+    printf("Cor atual: [%3d][%3d][%3d]\n", cor_atual.r, cor_atual.g, cor_atual.b);
+    printf("Tamanho da imagem: %d x %d\n\n", tela->larg, tela->alt);
 }
 
 // atualiza os dados do comand_list com o que está na matriz
