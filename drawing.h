@@ -142,4 +142,43 @@ void list();
 /// @note        Esta é uma função não disponível ao usuário final.
 void update();      // atualiza 'arquivo'. Passa as informações da matriz tela para a matriz do arquivo. É chamada sempre que a matriz for alterada
 
+
+/// ### Copiar.
+/// Copia uma área retangular da figura.
+/// @param[in] x      coordenada x do início da área retângular.
+/// @param[in] y      coordenada y do início da área retângular.
+/// @param[in] tam_x  tamanho da área retângular na direção x.
+/// @param[in] tam_y  tamanho da área retângular na direção y.
+/// ### Exemplo
+/// ~~~~~~~~~~~~~~~~
+/// copy 3 4 25 35
+/// ~~~~~~~~~~~~~~~~
+
+void copy(int x, int y, int tam_x, int tam_y);
+
+
+/// ### Recortar.
+/// Recorta uma determinada área retangular da imagem. 
+/// @param[in] x      coordenada x do início da área retângular.
+/// @param[in] y      coordenada y do início da área retângular.
+/// @param[in] tam_x  tamanho da área retângular na direção x.
+/// @param[in] tam_y  tamanho da área retângular na direção y.
+/// ### Exemplo
+/// ~~~~~~~~~~~~~~~~
+/// cut 3 4 25 35
+/// ~~~~~~~~~~~~~~~~
+
+void cut(int x, int y, int tam_x, int tam_y);
+
+/// ### Colar.
+/// Cola uma área copiada ou recortada anteriormente.
+/// @param[in] x      coordenada x do início da área a ser colada.
+/// @param[in] y      coordenada y do início da área a ser colada.
+/// ### Exemplo
+/// ~~~~~~~~~~~~~~~~
+/// paste 4 6
+/// ~~~~~~~~~~~~~~~~
+
+void paste(int x, int y);
+
 #endif
