@@ -36,78 +36,38 @@ void color(cor* c) {
     cor_atual.b = c->b;
 }
 
+void brush_width(int n) {
+    espessura = n;
+}
+
 // desenha um ponto com a cor cor_atual
 void point(int x, int y, bool isPoint) {
-    //printf("n colunas (larg)[x][j]: %d\tx: %d\n", tela->larg, x);
-    //printf("n linhas   (alt)[y][i]: %d\ty: %d\n", tela->alt , y);
-    tela->rgb[y][x] = cor_atual;
-
-    if (isPoint) update();
+    if (x>=0 && x<tela->larg && y>=0 && y<tela->alt) {
+        if (espessura == 1)
+            tela->rgb[y][x] = cor_atual;
+        else {
+            for (int i=0; i<espessura; i++) {
+                // eixos principais, cor cheia
+                tela->rgb[y  ][x  ] = cor_atual;
+                tela->rgb[y+i][x  ] = cor_atual;
+                tela->rgb[y-i][x  ] = cor_atual;
+                tela->rgb[y  ][x+i] = cor_atual;
+                tela->rgb[y  ][x-i] = cor_atual;
+                // eixos secundários, cor suavizada
+                //cor suave = {(int)(cor_atual.r*1.2),(int)(cor_atual.g*1.2), (int)(cor_atual.b*1.2)};
+                cor suave = {30, 30, 30};
+                tela->rgb[y+i][x+i] = suave;
+                tela->rgb[y+i][x-i] = suave;
+                tela->rgb[y-i][x-i] = suave;
+                tela->rgb[y-i][x+i] = suave;
+            }
+        }
+        if (isPoint) update();
+    }
 }
 
-/* primeira versao de line
 // desenha uma reta entre 2 pontos
-//retirado de: http://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#Line_equation
-void linha_oct(int x0, int y0, int x1, int y1, char o) {
-    int dx, dy, xi, yi, x, y, D;
-
-    dx = x1 - x0;
-    dy = y1 - y0;
-    
-    if (o == 'b') { // baixa declividade (anda mais no eixo x)
-        // anda uma unidade no eixo y a cada iteração
-        yi = 1;
-        if (dy < 0) {
-            // declividade negativa
-            yi = -1;
-            dy = -dy;
-        }
-        D = 2*dy - dx;
-        y = y0;
-        for (x = x0; x<=x1; x++) {
-            // loop de x0 a x1
-            point(x, y);
-            if (D > 0) {
-                y = y + yi;
-                D = D - 2*dx;
-            }
-            D = D + 2*dy;
-        }
-    }
-    else {         //alta declividade (anda mais no eixo y)
-        xi = 1;
-        if (dx < 0) {
-            xi = -1;
-            dx = -dx;
-        }
-        D = 2*dx - dy;
-        x = x0;
-        for (y = y0; y<=y1; y++) {
-            point(x, y);
-            if (D > 0) {
-                x = x + xi;
-                D = D - 2*dy;
-            }
-            D = D + 2*dx;
-        }
-    }
-}
-
-// desenha uma linha
-//   entradas: coordenadas dos pontos inicial (0) e final (1)
-void line2(int x0, int y0, int x1, int y1) {
-    if (abs(y1 - y0) < abs(x1 - x0)) { 
-        // distancia a se percorrer no eixo X é maior
-        if (x0 >  x1) linha_oct(x1, y1, x0, y0, 'b');  // ponto inicial à direita do ponto final
-        else          linha_oct(x0, y0, x1, y1, 'b');  // ponto inicial à esquerda do ponto final
-    } 
-    else {  
-        // distancia a se percorrer no eixo Y é maior
-        if (y0 >  y1) linha_oct(x1, y1, x0, y0, 'a');  // ponto inicial abaixo do ponto final
-        else          linha_oct(x0, y0, x1, y1, 'a');  // ponto inicial acima do ponto final
-    }
-}
-*/
+// http://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#Line_equation
 void line(int x0, int y0, int x1, int y1) {
  
   int dx = abs(x1-x0), sx = x0<x1 ? 1 : -1;
@@ -176,7 +136,7 @@ void circle(int p, int q, int r) {
             y--;
         }
     }
-
+    update();
 }
 
 // mostra o conteudo da lista de comandos
@@ -186,6 +146,7 @@ void list() {
     }
     printf("\n");
     printf("Cor atual: [%3d][%3d][%3d]\n", cor_atual.r, cor_atual.g, cor_atual.b);
+    printf("Espessura do pincel: %d\n", espessura);
     printf("Tamanho da imagem: %d x %d\n\n", tela->larg, tela->alt);
 }
 

@@ -1,0 +1,15 @@
+image 640 480
+color 0 0 0
+point 10 10
+line 50 10 100 10
+brush 2
+point 10 30
+line 50 30 100 30
+brush 3
+point 10 50
+line 50 50 100 50
+brush 4
+point 10 70
+line 50 70 100 70
+save esp.ppm
+quit

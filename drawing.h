@@ -24,6 +24,14 @@ void image(int larg, int alt);
 /// ~~~~~~~~~~~~~~~~
 void color(cor* c);
 
+/// ### Altera espessura do pincel.
+/// @param[in] n  espessura do pincel (padrão `1`).
+/// ### Exemplo
+/// ~~~~~~~~~~~~~~~~
+/// brush 2
+/// ~~~~~~~~~~~~~~~~
+void brush_width(int n);
+
 /// ### Limpa tela.
 /// Limpa a tela com uma cor especificada.
 /// @param[in] c  cor especificada.

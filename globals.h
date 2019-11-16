@@ -48,7 +48,10 @@ typedef struct ponto_t {
 char** comand_list;         // string contendo todas as linhas do 'arquivo'
 int num_linhas;             // número de linhas do arquivo (larg * alt)
 matriz* tela;
-cor cor_atual;
+
+cor cor_atual;              // cor atual do pincel
+int espessura;              // espessura do pincel (largura do traço)
+
 bool isInit;
 bool modo_leitura;          // modo leitura de arquivo (sem interação do usuário)
 FILE* arq_ent;

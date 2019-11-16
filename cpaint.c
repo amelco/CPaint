@@ -9,9 +9,9 @@ void init() {
     isInit = true;          // é inicialização do programa
     
     // define as constantes
-    LARG = 600;
-    ALT = 400;
-    TAM_MAX_CMD = 200;
+    LARG = 60;
+    ALT = 40;
+    TAM_MAX_CMD = 100;
     NUM_MAX_PRM = 20;
     INC_LINHAS = 12;
     
@@ -25,6 +25,7 @@ void init() {
     cor_atual.r = 0;
     cor_atual.g = 0;
     cor_atual.b = 0;
+    espessura = 1;
 
     image(LARG, ALT);       // chama a função para definir um cabeçalho padrão
     clear(&cor_atual);
@@ -128,18 +129,29 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             printf("Cor alterada\n");
         }
     }
+    else if (strcmp(comando, "brush") == 0) {
+        if (strcmp(cmd[1], "NULL") == 0 ) {
+            printf("Falta argumentos no comando. Veja ajuda.\n");
+        } else {
+            int n;
+            n = atoi(cmd[1]);
+            brush_width(n);
+            printf("Espessura do pincel alterada!\n");
+        }
+    }
     else if (strcmp(comando, "point") == 0) {
         if (strcmp(cmd[1], "NULL") == 0 || strcmp(cmd[2], "NULL") == 0) {
             printf("Falta argumentos no comando. Veja ajuda.\n");
         } else {
             int x = atoi(cmd[1]);
             int y = atoi(cmd[2]);
-            if (x>tela->larg || y>tela->alt) {
-                printf("Ponto x ou y fora do canvas.\n");
-                printf("Verifique o comando.\n");
-            } else {
-                point(x, y, true);
-            }
+            point(x, y, true);
+            //if (x>tela->larg || y>tela->alt) {
+            //    printf("Ponto x ou y fora do canvas.\n");
+            //    printf("Verifique o comando.\n");
+            //} else {
+            //    point(x, y, true);
+            //}
         }
     }
     else if (strcmp(comando, "line") == 0) {
@@ -150,13 +162,14 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             int y1 = atoi(cmd[2]);
             int x2 = atoi(cmd[3]);
             int y2 = atoi(cmd[4]);
-            if (x1>tela->larg || y1>tela->alt || x2>tela->larg || y2>tela->alt ||
-                x1<0          || y1<0         || x2<0          || y2<0           ) {
-                printf("Pontos x ou y fora do canvas.\n");
-                printf("Verifique o comando.\n");
-            } else {
-                line(x1, y1, x2, y2);
-            }
+            line(x1, y1, x2, y2);
+            //if (x1>tela->larg || y1>tela->alt || x2>tela->larg || y2>tela->alt ||
+            //    x1<0          || y1<0         || x2<0          || y2<0           ) {
+            //    printf("Pontos x ou y fora do canvas.\n");
+            //    printf("Verifique o comando.\n");
+            //} else {
+            //    line(x1, y1, x2, y2);
+            //}
         }
     }
     else if (strcmp(comando, "rect") == 0) {
@@ -168,17 +181,18 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
             int y  = atoi(cmd[2]);
             int tx = atoi(cmd[3]);
             int ty = atoi(cmd[4]);
-            if (x>tela->larg || y>tela->alt || x+tx>tela->larg || y+ty>tela->alt ||
-                x<0          || y<0  ) {
-                printf("x: %d y: %d\n", x, y);
-                printf("x+tx: %d y+ty: %d\n", x+tx, y+ty);
-                printf("larg: %d alt: %d\n", tela->larg, tela->alt);
-                printf("Retângulo fora do canvas.\n");
-                printf("Verifique o comando.\n");
-            } 
-            else {
-                rect(x, y, ty, tx);
-            }
+            rect(x, y, ty, tx);
+            //if (x>tela->larg || y>tela->alt || x+tx>tela->larg || y+ty>tela->alt ||
+            //    x<0          || y<0  ) {
+            //    printf("x: %d y: %d\n", x, y);
+            //    printf("x+tx: %d y+ty: %d\n", x+tx, y+ty);
+            //    printf("larg: %d alt: %d\n", tela->larg, tela->alt);
+            //    printf("Retângulo fora do canvas.\n");
+            //    printf("Verifique o comando.\n");
+            //} 
+            //else {
+            //    rect(x, y, ty, tx);
+            //}
         }
     }
     else if (strcmp(comando, "source") == 0) {
@@ -347,6 +361,7 @@ void help() {
     printf("COMANDO [parâmetro_1 parâmetro_2 ...]\n\nCOMANDOS:\n");
     printf("image\tCria uma nova imagem em branco\n\tParâmetros: [largura INT], [altura INT]\n");
     printf("color\tMuda a cor atual\n\tParâmetros: [vermelho INT], [verde INT], [azul INT]\n");
+    printf("brush\tMuda a espessura do pincel\n\tParâmetros: [espessura INT]\n");
     printf("clear\tLimpa a imagem com a cor especificada\n\tParâmetros (opcional): [vermelho INT], [verde INT], [azul INT]\n");
     printf("rect\tDesenha um retângulo\n\tParâmetros: [x INT], [y INT], [largura INT], [altura INT]\n");
     printf("circle\tDesenha um círculo\n\tParâmetros: [x INT], [y INT], [raio INT]\n");
