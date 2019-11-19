@@ -239,25 +239,22 @@ void fill(int x, int y, int r, int g, int b) {
     contador++;
     
     // verifica se a cor do pixel atual é igual a cor anterior. Se sim, pinta com a cor desejada
-    if (tela->rgb[x][y].r == rr && tela->rgb[x][y].g == gg && tela->rgb[x][y].b == bb) {
-        tela->rgb[x][y].r = r;
-        tela->rgb[x][y].g = g;
-        tela->rgb[x][y].b = b;
-        
+    if (tela->rgb[y][x].r == rr && tela->rgb[y][x].g == gg && tela->rgb[y][x].b == bb) {
+        point(x, y, false);
         // verifica os vizinhos de cima, baixo, esquerda e direita por cores iguais a anterior. Caso ache, chama a função novamente.
-        for(int k = 0; k < 4; k++ )
-        {
+        for(int k = 0; k < 4; k++ ) {
             int l = x + passo[k][0];
             int c = y + passo[k][1];
     
-            if( (l >= 0) && 
-                (l < tela->alt) && 
-                (c >= 0) && 
-                (c < tela->larg) && 
-                (tela->rgb[l][c].r == rr) && 
-                (tela->rgb[l][c].g == gg) && 
-                (tela->rgb[l][c].b == bb))
-                    fill(l, c, r, g, b);
+            if ( 
+                (l >= 0) && (l < tela->alt) && 
+                (c >= 0) && (c < tela->larg) && 
+                (tela->rgb[c][l].r == rr) && 
+                (tela->rgb[c][l].g == gg) && 
+                (tela->rgb[c][l].b == bb)
+               ) {
+                fill(l, c, r, g, b);
+            }
         } 
     }
     update();
