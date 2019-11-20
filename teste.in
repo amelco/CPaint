@@ -5,6 +5,8 @@ circle 20 45 10
 line 65 34 2 56
 polygon 3 45 67 34 12 2 3
 color 0 120 120
-fill 1 1
+fill 25 25
+color 120 120 120
+fill 20 45
 save testeeee.ppm
 quit

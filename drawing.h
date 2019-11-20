@@ -106,7 +106,7 @@ void polygon(int n, ponto pts[n]);
 /// ~~~~~~~~~~~~~~~~
 /// fill 2 2 255 0 0
 /// ~~~~~~~~~~~~~~~~
-void fill(int x, int y, int r, int g, int b);
+void fill(int x, int y, int r, int g, int b, int rr, int gg, int bb);
 
 /// ### Salva imagem.
 /// Salva a imagem em um arquivo PPM.
@@ -149,6 +149,7 @@ void update();      // atualiza 'arquivo'. Passa as informações da matriz tela
 /// @param[in] y      coordenada y do início da área retângular.
 /// @param[in] tam_x  tamanho da área retângular na direção x.
 /// @param[in] tam_y  tamanho da área retângular na direção y.
+/// @param[out] icopy matriz com os valores copiados.
 /// ### Exemplo
 /// ~~~~~~~~~~~~~~~~
 /// copy 3 4 25 35
@@ -156,13 +157,13 @@ void update();      // atualiza 'arquivo'. Passa as informações da matriz tela
 
 void copy(int x, int y, int tam_x, int tam_y);
 
-
 /// ### Recortar.
 /// Recorta uma determinada área retangular da imagem. 
 /// @param[in] x      coordenada x do início da área retângular.
 /// @param[in] y      coordenada y do início da área retângular.
 /// @param[in] tam_x  tamanho da área retângular na direção x.
 /// @param[in] tam_y  tamanho da área retângular na direção y.
+/// @param[out] imcopy matriz com os valores copiados.
 /// ### Exemplo
 /// ~~~~~~~~~~~~~~~~
 /// cut 3 4 25 35

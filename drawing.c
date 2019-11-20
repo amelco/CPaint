@@ -40,9 +40,13 @@ void color(cor* c) {
 void point(int x, int y, bool isPoint) {
     //printf("n colunas (larg)[x][j]: %d\tx: %d\n", tela->larg, x);
     //printf("n linhas   (alt)[y][i]: %d\ty: %d\n", tela->alt , y);
-    tela->rgb[y][x] = cor_atual;
+    if (x>=0 && x<tela->larg && y>=0 && y<tela->alt) {
+        tela->rgb[y][x] = cor_atual;
 
     if (isPoint) update();
+    }
+    
+    
 }
 
 /* primeira versao de line
@@ -176,7 +180,7 @@ void circle(int p, int q, int r) {
             y--;
         }
     }
-
+    update();
 }
 
 // mostra o conteudo da lista de comandos
@@ -249,7 +253,6 @@ void open(char nome[]){
     fclose(arquivo);
 }
 
-
 void save (char nome[]) {
     FILE* arq;
     arq = fopen(nome, "w");
@@ -262,7 +265,7 @@ void save (char nome[]) {
     printf("Arquivo salvo!\n");
 }
 
-void fill(int x, int y, int r, int g, int b) {
+void fill(int x, int y, int r, int g, int b, int rr, int gg, int bb) {
     int passo[4][2] = {
                         {-1, 0},
                         { 0,-1},
@@ -271,18 +274,16 @@ void fill(int x, int y, int r, int g, int b) {
                     };
     
     // armazena cor do pixel que se deseja pintar (cor anterior)
-    int rr = tela->rgb[x][y].r;
-    int gg = tela->rgb[x][y].g;
-    int bb = tela->rgb[x][y].b;
-
+    
     contador++;
     
     // verifica se a cor do pixel atual é igual a cor anterior. Se sim, pinta com a cor desejada
-    if (tela->rgb[x][y].r == rr && tela->rgb[x][y].g == gg && tela->rgb[x][y].b == bb) {
-        tela->rgb[x][y].r = r;
-        tela->rgb[x][y].g = g;
-        tela->rgb[x][y].b = b;
-        
+    if (tela->rgb[y][x].r == rr && tela->rgb[y][x].g == gg && tela->rgb[y][x].b == bb) {
+        //tela->rgb[y][x].r = r;
+        //tela->rgb[y][x].g = g;
+        //tela->rgb[y][x].b = b;
+        point(x,y,false);
+        printf("%d %d\n", x, y);
         // verifica os vizinhos de cima, baixo, esquerda e direita por cores iguais a anterior. Caso ache, chama a função novamente.
         for(int k = 0; k < 4; k++ )
         {
@@ -290,19 +291,62 @@ void fill(int x, int y, int r, int g, int b) {
             int c = y + passo[k][1];
     
             if( (l >= 0) && 
-                (l < tela->alt) && 
+                (l < tela->larg) && 
                 (c >= 0) && 
-                (c < tela->larg) && 
-                (tela->rgb[l][c].r == rr) && 
-                (tela->rgb[l][c].g == gg) && 
-                (tela->rgb[l][c].b == bb))
-                    fill(l, c, r, g, b);
+                (c < tela->alt) && 
+                (tela->rgb[c][l].r == rr) && 
+                (tela->rgb[c][l].g == gg) && 
+                (tela->rgb[c][l].b == bb))
+                    fill(l, c, r, g, b, rr, gg, bb);
         } 
     }
     update();
 }
-    
-   
- 
-    
- 
+/*
+void copy(int x, int y, int tam_x, int tam_y) {
+
+    for (int i = 0; i < tela->alt; i++) {
+        for (int j = 0; j < tela->larg; j++) {
+            if (i>=x && i<=x+tam_x
+                && j>=y && j<=y+tam_y) {
+                imcopy->rgb[i][j].r = tela->rgb[i][j].r;
+                imcopy->rgb[i][j].g = tela->rgb[i][j].g;
+                imcopy->rgb[i][j].b = tela->rgb[i][j].b;
+            }
+            else {
+                imcopy->rgb[i][j].r = -1;
+                imcopy->rgb[i][j].g = -1;
+                imcopy->rgb[i][j].b = -1;
+            }   
+        }
+    }
+}
+
+void cut(int x, int y, int tam_x, int tam_y) {
+
+    for (int i = x; i < x + tam_x; i++) {
+        for (int j = y; j < y + tam_y; j++) {
+             if (i>=x && i<=x+tam_x
+                && j>=y && j<=y+tam_y) {
+                imcopy->rgb[i][j].r = tela->rgb[i][j].r;
+                imcopy->rgb[i][j].g = tela->rgb[i][j].g;
+                imcopy->rgb[i][j].b = tela->rgb[i][j].b;
+                tela->rgb[i][j].r = 255;
+                tela->rgb[i][j].g = 255;
+                tela->rgb[i][j].b = 255;
+            }
+        }
+    }
+}
+
+void paste(int x, int y){
+
+    for (int i = x; i < x + imcopy->alt; i++) {
+        for (int j = y; j < y + imcopy->larg; j++) {
+            tela->rgb[i][j].r = imcopy->rgb[i][j].r;
+            tela->rgb[i][j].g = imcopy->rgb[i][j].g;
+            tela->rgb[i][j].b = imcopy->rgb[i][j].b;
+        }
+    }
+}
+*/
