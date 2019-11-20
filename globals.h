@@ -48,9 +48,11 @@ typedef struct ponto_t {
 char** comand_list;         // string contendo todas as linhas do 'arquivo'
 int num_linhas;             // número de linhas do arquivo (larg * alt)
 matriz* tela;
+matriz* imcopy;
 cor cor_atual;
 bool isInit;
 bool modo_leitura;          // modo leitura de arquivo (sem interação do usuário)
+bool foi_alocado;
 FILE* arq_ent;
 int cmd_tot;                // numero total de comandos do arquivo de entrada (deve estar na primeira linha do arquivo)
 int cmd_i;    // comando atual do cursor de leitura do arquivo
