@@ -1,0 +1,12 @@
+image 60 40
+clear 255 255 255
+color 0 0 0
+circle 30 20 10
+circle 30 20 15
+fill 30 20
+color 255 130 130
+fill 19 20
+color 130 130 255
+fill 0 0
+save fill.ppm
+quit

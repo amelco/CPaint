@@ -9,7 +9,6 @@
 // cria o cabeçalho da imagem
 // realoca matriz tela e command list
 void image(int larg, int alt) {
-    // num_linhas = larg*alt + 3;
     aloca_imagem(larg, alt);
     strcpy(comand_list[0], "P3\n");
     sprintf(comand_list[1], "%d %d\n", larg, alt);
@@ -232,27 +231,30 @@ void fill(int x, int y, int r, int g, int b) {
                     };
     
     // armazena cor do pixel que se deseja pintar (cor anterior)
-    int rr = tela->rgb[x][y].r;
-    int gg = tela->rgb[x][y].g;
-    int bb = tela->rgb[x][y].b;
+    int rr = tela->rgb[y][x].r;
+    int gg = tela->rgb[y][x].g;
+    int bb = tela->rgb[y][x].b;
 
     contador++;
     
     // verifica se a cor do pixel atual é igual a cor anterior. Se sim, pinta com a cor desejada
     if (tela->rgb[y][x].r == rr && tela->rgb[y][x].g == gg && tela->rgb[y][x].b == bb) {
         point(x, y, false);
-        // verifica os vizinhos de cima, baixo, esquerda e direita por cores iguais a anterior. Caso ache, chama a função novamente.
-        for(int k = 0; k < 4; k++ ) {
+        // Verifica os vizinhos de cima, baixo, esquerda e direita por cores iguais a anterior. 
+        //   Caso ache, chama a função novamente.
+        for (int k = 0; k < 4; k++ ) {
             int l = x + passo[k][0];
             int c = y + passo[k][1];
+
+            if      (c < 0)           c = 0;
+            else if (c >= tela->alt)  c = tela->alt-1;
+            if      (l < 0)           l = 0;
+            else if (l >= tela->larg) l = tela->larg-1;
     
-            if ( 
-                (l >= 0) && (l < tela->alt) && 
-                (c >= 0) && (c < tela->larg) && 
-                (tela->rgb[c][l].r == rr) && 
-                (tela->rgb[c][l].g == gg) && 
-                (tela->rgb[c][l].b == bb)
-               ) {
+            if ( (tela->rgb[c][l].r == rr) && 
+                 (tela->rgb[c][l].g == gg) && 
+                 (tela->rgb[c][l].b == bb)    ) 
+            {
                 fill(l, c, r, g, b);
             }
         } 
