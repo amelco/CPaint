@@ -45,20 +45,10 @@ void point(int x, int y, bool isPoint) {
         if (espessura == 1)
             tela->rgb[y][x] = cor_atual;
         else {
-            for (int i=0; i<espessura; i++) {
-                // eixos principais, cor cheia
-                tela->rgb[y  ][x  ] = cor_atual;
-                tela->rgb[y+i][x  ] = cor_atual;
-                tela->rgb[y-i][x  ] = cor_atual;
-                tela->rgb[y  ][x+i] = cor_atual;
-                tela->rgb[y  ][x-i] = cor_atual;
-                // eixos secundários, cor suavizada
-                //cor suave = {(int)(cor_atual.r*1.2),(int)(cor_atual.g*1.2), (int)(cor_atual.b*1.2)};
-                cor suave = {30, 30, 30};
-                tela->rgb[y+i][x+i] = suave;
-                tela->rgb[y+i][x-i] = suave;
-                tela->rgb[y-i][x-i] = suave;
-                tela->rgb[y-i][x+i] = suave;
+            for (int i=-(espessura-1); i<espessura; i++) {
+                for (int j=-(espessura-1); j<espessura; j++) {
+                    tela->rgb[y+j][x+i] = cor_atual;
+                }
             }
         }
         if (isPoint) update();

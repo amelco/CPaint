@@ -1,0 +1,14 @@
+image 600 400
+color 0 0 0
+circle 300 200 10
+circle 300 200 11
+circle 300 200 12
+circle 300 200 13
+circle 300 200 14
+circle 300 200 15
+circle 300 200 16
+circle 300 200 17
+circle 300 200 18
+circle 300 200 19
+save circle.ppm
+quit

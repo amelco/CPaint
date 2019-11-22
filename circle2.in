@@ -1,0 +1,11 @@
+image 600 400
+color 0 0 0
+brush 2
+circle 300 200 10
+
+circle 300 200 11
+
+circle 300 200 12
+
+save circle.ppm
+quit

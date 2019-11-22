@@ -1,4 +1,4 @@
-image 640 480
+image 320 240
 color 0 0 0
 point 10 10
 line 50 10 100 10
@@ -11,5 +11,8 @@ line 50 50 100 50
 brush 4
 point 10 70
 line 50 70 100 70
+brush 6
+point 10 70
+line 50 100 200 230
 save esp.ppm
 quit
