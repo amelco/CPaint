@@ -273,18 +273,11 @@ void fill(int x, int y, int r, int g, int b, int rr, int gg, int bb) {
                         { 0, 1}
                     };
     
-    // armazena cor do pixel que se deseja pintar (cor anterior)
-    
-    contador++;
-    
     // verifica se a cor do pixel atual é igual a cor anterior. Se sim, pinta com a cor desejada
     if (tela->rgb[y][x].r == rr && tela->rgb[y][x].g == gg && tela->rgb[y][x].b == bb) {
-        //tela->rgb[y][x].r = r;
-        //tela->rgb[y][x].g = g;
-        //tela->rgb[y][x].b = b;
         point(x,y,false);
-        printf("%d %d\n", x, y);
-        // verifica os vizinhos de cima, baixo, esquerda e direita por cores iguais a anterior. Caso ache, chama a função novamente.
+        // Verifica os vizinhos de cima, baixo, esquerda e direita por cores iguais a anterior.
+        // Caso ache, chama a função novamente.
         for(int k = 0; k < 4; k++ )
         {
             int l = x + passo[k][0];
@@ -303,13 +296,48 @@ void fill(int x, int y, int r, int g, int b, int rr, int gg, int bb) {
     update();
 }
 
+/* Inicio da funcao fill iterativa*/
+/*
+int fila_MAX = tela->alt * tela->larg;  // numero maximo de elementos da fila
+ponto fila[fila_MAX];                   // fila de tamanho maximo igual a area de desenho
+int frente = 0;                         // indica índice está na frente da fila
+int tras = -1;                          // indica índice que está atrás da fila
+int numElementos = 0;                   // quantidade de elementos presentes na fila
+
+// insere um ponto no fim da fila
+void insere(ponto p) {
+    if (numElementos != fila_MAX) {     // verifica se fila não está cheia
+        fila[tras++] = p;               // adiciona elemento na fila e incrementa tras
+        numElementos++;
+    }
+    else {
+        printf("Fila está cheia!\n");
+    }
+}
+
+// remove o primeiro ponto da fila e retorna seu valor
+ponto remove() {
+    ponto p = fila[frente];
+    numElementos--;
+}
+
+
+void fill_it(int x, int y, int cor_antiga) {
+    fila Q;
+    if (cor_antiga == cor_atual) return;
+    point(x, y, false);     // pinta pixel coma cor atual
+
+}
+*/
+/* Inicio da funcao fill iterativa*/
+
 void copy(int x, int y, int tam_x, int tam_y) {
 
     for (int i = 0; i < tela->alt; i++) {
         for (int j = 0; j < tela->larg; j++) {
             if (i>=y && i<=y+tam_y
                 && j>=x && j<=x+tam_x) {
-                printf("entrou");
+                printf("entrou\n");
                 imcopy->rgb[i][j].r = tela->rgb[i][j].r;
                 imcopy->rgb[i][j].g = tela->rgb[i][j].g;
                 imcopy->rgb[i][j].b = tela->rgb[i][j].b;

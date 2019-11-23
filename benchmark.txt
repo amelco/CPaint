@@ -1,0 +1,11 @@
+Fill rescursivo
+./cpaint < teste.in >> /dev/null  3.20s user 0.06s system 99% cpu 3.275 total
+./cpaint < teste.in >> /dev/null  3.21s user 0.07s system 99% cpu 3.294 total
+./cpaint < teste.in >> /dev/null  3.22s user 0.07s system 99% cpu 3.303 total
+./cpaint < teste.in >> /dev/null  3.21s user 0.06s system 99% cpu 3.284 total
+./cpaint < teste.in >> /dev/null  3.21s user 0.07s system 99% cpu 3.299 total
+./cpaint < teste.in >> /dev/null  3.21s user 0.07s system 99% cpu 3.293 total
+./cpaint < teste.in >> /dev/null  3.21s user 0.06s system 99% cpu 3.279 total
+./cpaint < teste.in >> /dev/null  3.20s user 0.06s system 99% cpu 3.278 total
+./cpaint < teste.in >> /dev/null  3.20s user 0.06s system 99% cpu 3.278 total
+./cpaint < teste.in >> /dev/null  3.23s user 0.07s system 99% cpu 3.322 total
