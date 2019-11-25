@@ -32,7 +32,7 @@ Funcionalidades (não)implementadas
 * [x] Função line()     => desenha uma linha
 * [x] Função rect()     => desenha um retângulo
 * [x] Função circle()   => desenha um círculo
-* [x] Função poligon()  => desenha um polígono
+* [x] Função polygon()  => desenha um polígono
 * [x] Função fill()     => preenche um polígono com a cor atual
 * [x] Função save()     => grava o arquivo de imagem em disco
 * [x] Função open()     => abre um arquivo de imagem anterior
@@ -44,9 +44,8 @@ Funcionalidades (não)implementadas
 * [ ] Visualizar primitivas na tela após executar comando
 * [x] Utilizar git
 * [x] Utilizar valgrind
-* [ ] Aumentar espessura da linha
-* [ ] Copiar/recortar e colar (com escala)
-* [ ] Desenhar primitivas mesmo que saa da tela (mudar verificação de limites para a função point)
+* [x] Aumentar espessura da linha (funçãoo brush())
+* [x] Copiar/recortar e colar (com escala) (funçôes copy(), cut(), paste())
 
 ---
 *Projeto de ITP 2019.2*.  

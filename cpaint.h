@@ -45,7 +45,7 @@ void quit();
 /// @param[in]   arquivo  nome do arquivo de entrada.
 /// @attention   O último comando presente no arquivo de entrada deve **obrigatoriamente** ser `quit`.
 /// @note        Esta é uma função não disponível ao usuário final.
-void le_arquivo(char arquivo[50]);
+void source(char arquivo[50]);
 
 /// ### Imprime a matriz na tela.
 /// Imprime a matriz que contém os pontos RGB na tela. É utilizada para debug do software.

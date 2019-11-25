@@ -201,7 +201,7 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
         } 
         else {
             // le arquivo de comandos
-            le_arquivo(cmd[1]);
+            source(cmd[1]);
         }
     }
     else if (strcmp(comando, "polygon") == 0) {
@@ -284,7 +284,7 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
 }
 
 // abre arquivo de entrada
-void le_arquivo(char arquivo[50]) {
+void source(char arquivo[50]) {
     modo_leitura = true;
     arq_ent = fopen(arquivo, "r");
     if (arq_ent == NULL) {                  // verifica se arquivo existe
