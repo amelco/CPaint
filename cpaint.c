@@ -7,6 +7,7 @@
 
 void init() {
     isInit = true;          // é inicialização do programa
+    foi_alocado = false;
     
     // define as constantes
     LARG = 60;
@@ -278,6 +279,45 @@ void interpreta(int np, char cmd[NUM_MAX_PRM][TAM_MAX_CMD]) {
                      
     }
     
+    else if(strcmp(comando,"copy") == 0){
+        if(strcmp(cmd[1], "NULL") == 0 || strcmp(cmd[2], "NULL") == 0 || strcmp(cmd[3], "NULL") == 0 || strcmp(cmd[4], "NULL") == 0) {
+            printf("Falta argumentos no comando. Veja ajuda.\n");
+        }
+        else{
+            int x  = atoi(cmd[1]);
+            int y  = atoi(cmd[2]);
+            int tam_x = atoi(cmd[3]);
+            int tam_y = atoi(cmd[4]);
+            aloca_imcopy(tela->larg, tela->alt);   
+            copy(x,y,tam_x,tam_y);
+            }                
+    }
+    
+    else if(strcmp(comando,"cut") == 0){
+        if(strcmp(cmd[1], "NULL") == 0 || strcmp(cmd[2], "NULL") == 0 || strcmp(cmd[3], "NULL") == 0 || strcmp(cmd[4], "NULL") == 0) {
+            printf("Falta argumentos no comando. Veja ajuda.\n");
+        }
+        else{
+            int x  = atoi(cmd[1]);
+            int y  = atoi(cmd[2]);
+            int tam_x = atoi(cmd[3]);
+            int tam_y = atoi(cmd[4]);
+            aloca_imcopy(tela->larg, tela->alt);   
+            cut(x,y,tam_x,tam_y);
+            }                
+    }
+
+    else if(strcmp(comando,"paste") == 0){
+        if(strcmp(cmd[1], "NULL") == 0 || strcmp(cmd[2], "NULL") == 0) {
+            printf("Falta argumentos no comando. Veja ajuda.\n");
+        }
+        else{
+            int x  = atoi(cmd[1]);
+            int y  = atoi(cmd[2]);  
+            paste(x,y);
+            }                
+    }
+
     else {
         printf("Comando inválido.\n");
     }
@@ -353,6 +393,28 @@ void aloca_imagem(int larg, int alt) {
         tela->alt = alt;
     }
     num_linhas = new_num_linhas;
+}
+
+void aloca_imcopy(int larg, int alt) {
+    if (!foi_alocado) {
+       // aloca matriz tela
+            imcopy = (matriz*)malloc(sizeof(matriz));
+            imcopy->larg = larg;
+            imcopy->alt = alt;
+            imcopy->rgb = (cor**)malloc(alt * sizeof(cor*));
+            for (int i=0; i<alt; i++) {
+                imcopy->rgb[i] = (cor*)malloc(larg * sizeof(cor));
+            }
+            // inicializa ponteiro
+            for (int i=0; i<alt; i++) {
+                for (int j=0; j<larg; j++) {
+                    imcopy->rgb[i][j].r = 0;
+                    imcopy->rgb[i][j].g = 0;
+                    imcopy->rgb[i][j].b = 0;
+                }
+            }
+            foi_alocado = true;
+    }   
 }
 
 // mostra comandos disponíveis e pequena documentação

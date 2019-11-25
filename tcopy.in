@@ -1,0 +1,11 @@
+image 60 40
+color 0 0 0
+circle 5 5 5
+copy 0 0 11 11
+paste 40 30
+save copy.ppm
+cut 0 0 11 11
+paste 40 5
+save cut.ppm
+quit
+

@@ -1,0 +1,9 @@
+digraph "matriz_t"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="matriz_t",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Struct tela com a matriz de cores (ex. tela->rgb[0][0].r = 255; tela->rgb[0][0].g = 0; tela->rgb[0][0..."];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" rgb" ,fontname="Helvetica"];
+  Node2 [label="cor_t",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structcor__t.html",tooltip="Define tipo \"cor\" com os valores de vermelho (r), verde (g) e azul (b)"];
+}

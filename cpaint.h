@@ -64,6 +64,12 @@ void print_matriz_tela();
 /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void aloca_imagem(int larg, int alt);
 
+/// ### Aloca imagem a ser copiada.
+/// Aloca uma posição de memória destinada para armazenar a matriz da imagem a ser copiada.
+/// @param[in] larg  largura da imagem.
+/// @param[in] alt    altura da imagem.
+void aloca_imcopy(int larg, int alt);
+
 /// ### Abre arquivo de imagem.
 /// Abre um arquivo de imagem previamente criado para a edição.
 /// @param[in] nome  nome do arquivo PPM.

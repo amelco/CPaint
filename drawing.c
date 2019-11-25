@@ -252,7 +252,60 @@ void fill(int x, int y, int r, int g, int b) {
     update();
 }
     
-   
+void copy(int x, int y, int tam_x, int tam_y) {
+
+    for (int i = 0; i < tela->alt; i++) {
+        for (int j = 0; j < tela->larg; j++) {
+            if (i>=y && i<=y+tam_y
+                && j>=x && j<=x+tam_x) {
+                imcopy->rgb[i][j].r = tela->rgb[i][j].r;
+                imcopy->rgb[i][j].g = tela->rgb[i][j].g;
+                imcopy->rgb[i][j].b = tela->rgb[i][j].b;
+            }
+            else {
+                imcopy->rgb[i][j].r = -1;
+                imcopy->rgb[i][j].g = -1;
+                imcopy->rgb[i][j].b = -1;
+            }   
+        }
+    }
+}
+
+void cut(int x, int y, int tam_x, int tam_y) {
+
+    for (int i = x; i < x + tam_x; i++) {
+        for (int j = y; j < y + tam_y; j++) {
+             if (i>=y && i<=y+tam_y
+                && j>=x && j<=x+tam_x) {
+                imcopy->rgb[i][j].r = tela->rgb[i][j].r;
+                imcopy->rgb[i][j].g = tela->rgb[i][j].g;
+                imcopy->rgb[i][j].b = tela->rgb[i][j].b;
+                tela->rgb[i][j].r = 255;
+                tela->rgb[i][j].g = 255;
+                tela->rgb[i][j].b = 255;
+            }
+             else {
+                imcopy->rgb[i][j].r = -1;
+                imcopy->rgb[i][j].g = -1;
+                imcopy->rgb[i][j].b = -1;
+            }
+        }
+    }
+	update();
+}
+
+void paste(int x, int y) {
+    for (int i = 0; i < imcopy->alt; i++) {
+        for (int j = 0; j < imcopy->larg; j++) {
+           if (imcopy->rgb[i][j].r != -1 && x+j<tela->larg && y+i<tela->alt) {
+                tela->rgb[i+y][j+x].r = imcopy->rgb[i][j].r;
+                tela->rgb[i+y][j+x].g = imcopy->rgb[i][j].g;
+                tela->rgb[i+y][j+x].b = imcopy->rgb[i][j].b;
+           }    
+        }
+    }
+	update();
+}  
  
     
  
